@@ -232,7 +232,7 @@ section{scroll-margin-top:88px}
 .hero::before{content:"";position:absolute;top:-140px;right:-80px;width:560px;height:560px;background:radial-gradient(circle,rgba(201,162,39,.22),transparent 65%);pointer-events:none}
 .hero-grid{position:relative;z-index:1}
 /* CTA band: navy gradient + gold glow */
-.cta-band{background:var(--navy-grad);position:relative;overflow:hidden}
+.cta-band{background:linear-gradient(120deg,rgba(10,22,51,.85),rgba(5,7,12,.80)),url("https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;position:relative;overflow:hidden}
 .cta-band::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:640px;height:320px;background:radial-gradient(ellipse,rgba(201,162,39,.20),transparent 70%);pointer-events:none}
 .cta-band h2,.cta-band p,.cta-band .btn{position:relative;z-index:1}
 
