@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.querySelector("[data-symbol]") || document.getElementById("hero-xau")) {
     renderPrices();
     pollLive();
-    setInterval(jitter, 3000);
+    setInterval(jitter, 15000); /* simulated symbols tick at the same 15s cadence as the live feeds */
   }
 
   /* ---------- FAQ accordion ---------- */
