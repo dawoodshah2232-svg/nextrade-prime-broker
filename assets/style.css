@@ -90,6 +90,9 @@ p.lead{font-size:1.15rem;color:var(--body)}
 .main-nav .caret{font-size:.65rem;color:var(--muted)}
 .mega{position:absolute;left:50%;transform:translate(-50%,8px);top:100%;width:640px;max-width:90vw;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 30px 60px rgba(0,0,0,.55);padding:22px;display:none;grid-template-columns:1fr 1fr;gap:4px 28px;z-index:120}
 .main-nav>li:hover .mega,.main-nav>li:focus-within .mega{display:grid}
+/* Escape closes mega-menus: JS adds this class, which suppresses the
+   :hover/:focus-within menus until the pointer or focus re-enters the nav. */
+body.menus-esc-closed .main-nav>li .mega{display:none !important}
 .mega a{display:block;padding:9px 10px;border-radius:8px}
 .mega a:hover{background:rgba(255,255,255,.05)}
 .mega a b{display:block;color:var(--ink);font-size:.98rem}
@@ -247,6 +250,10 @@ td b{color:var(--ink)}
 .cta-band .btn{margin-top:22px}
 .cta-band h2,.cta-band p,.cta-band .btn{position:relative;z-index:1}
 .page-hero{background:radial-gradient(90% 70% at 70% 0%,rgba(201,162,39,.10),transparent 55%),var(--black);color:#d0d5dd;padding:64px 0}
+/* First section after a page hero (e.g. the market-tabs on markets pages):
+   the hero's 64px bottom + .section's 96px top stacked to a 160px empty
+   dark gap. Tighten it so the pills sit a normal distance below the intro. */
+.page-hero + .section{padding-top:32px}
 .page-hero h1{color:#fff;margin-bottom:12px}
 .page-hero p{max-width:640px;color:var(--muted)}
 .breadcrumb{font-size:.88rem;color:#9aa7bf;margin-bottom:14px}

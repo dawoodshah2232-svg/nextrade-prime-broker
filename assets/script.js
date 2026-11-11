@@ -20,6 +20,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* Escape closes any open mega-menu (and the mobile nav).
+     Desktop menus open on :hover/:focus-within, which Escape cannot
+     un-hover, so blur the focused item and suppress the menus via the
+     .menus-esc-closed body class (see style.css) until the pointer or
+     focus re-enters the nav. */
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape") return;
+    document.querySelectorAll(".main-nav>li.open").forEach(li => li.classList.remove("open"));
+    if (nav) nav.classList.remove("open");
+    if (document.activeElement) document.activeElement.blur();
+    document.body.classList.add("menus-esc-closed");
+  });
+  if (nav) {
+    nav.addEventListener("mouseenter", () => document.body.classList.remove("menus-esc-closed"));
+    nav.addEventListener("focusin", () => document.body.classList.remove("menus-esc-closed"));
+  }
+
   /* ---------- scroll reveal (site-wide: every section & card) ---------- */
   /* Sections/cards without .reveal get it here, so the whole site animates.
      The .js gate in CSS keeps content visible if this script never runs. */
