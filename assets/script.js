@@ -51,31 +51,49 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-count]").forEach(el => cio.observe(el));
 
   /* ---------- live prices (real public APIs, no key) ---------- */
-  /* Sources (all free, no key, CORS-enabled unless noted):
+  /* Sources (all free, no key):
      - BTC/USD + ETH/USD: CoinGecko simple price (real 24h % change)
-     - EUR/USD, GBP/USD, USD/JPY: exchangerate-api v4 latest USD base
-       (% change vs previous business-day close from Frankfurter)
-     - XAU/USD: api.metals.live spot gold (% vs session-open price)
+     - EUR/USD, GBP/USD, USD/JPY: exchangerate-api v4 latest USD base.
+       % change vs the previous business-day close from Frankfurter
+       (api.frankfurter.dev/v1 — the old api.frankfurter.app host now
+       301-redirects there, which is why the previous-close fetch used
+       to fail silently in the browser).
+     - XAU/USD: api.metals.live spot gold (no previous close published,
+       so gold shows NO % change — never a fabricated one)
      - US30: Yahoo Finance chart API — Yahoo sends no CORS headers, so a
-       browser fetch is blocked; US30 stays on the simulated feed and the
-       strip only claims "Live prices" for the sources that actually load.
-     Any symbol whose fetch fails keeps the simulated jitter and never
-     pretends to be live. Only if EVERY fetch fails does the strip fall
-     back to fully simulated prices and the "Simulated prices" label. */
+       browser fetch is blocked; US30 stays simulated.
+     HONESTY RULES (fixed 2026-11-11 after QA caught fake daily moves):
+     - % change is computed ONLY from a real previous close, on the SAME
+       basis as the price: EUR/USD price = 1 / (EUR per USD), and its %
+       = change in that inverted value vs the previous close's inverted
+       value. The old code fell back to % vs a hard-coded session-open
+       price from days earlier, which is how EUR/USD showed -3.56% and
+       USD/JPY +3.03% in a single day. That fallback is gone: if no
+       previous close is available, the % slot shows an em dash.
+     - A symbol whose feed fails keeps the simulated jitter and a
+       "Simulated" tag (data-live="sim") and never pretends to be live.
+     - The strip reads "Live prices" ONLY when BOTH CoinGecko and
+       ExchangeRate-API have actually loaded in this session; otherwise
+       it reads "Simulated prices". Gold & US30 are simulated until
+       their feeds connect.
+     - Poll is every 15s so live prices visibly move; if any fetch is
+       rate-limited (HTTP 429) the poll backs off to 60s until a clean
+       poll succeeds. */
   const PRICES = {
-    "EUR/USD": { p: 1.1637, d: 4, o: 1.1598, live: false, pct: null },
-    "GBP/USD": { p: 1.3248, d: 4, o: 1.3180, live: false, pct: null },
-    "XAU/USD": { p: 4231.40, d: 2, o: 4210.00, live: false, pct: null },
-    "BTC/USD": { p: 97419, d: 0, o: 96800, live: false, pct: null },
-    "ETH/USD": { p: 3420, d: 2, o: 3380, live: false, pct: null },
-    "US30": { p: 44210, d: 0, o: 43950, live: false, pct: null },
-    "USD/JPY": { p: 154.32, d: 2, o: 153.90, live: false, pct: null }
+    "EUR/USD": { p: 1.1637, d: 4, live: false, pct: null },
+    "GBP/USD": { p: 1.3248, d: 4, live: false, pct: null },
+    "XAU/USD": { p: 4231.40, d: 2, live: false, pct: null },
+    "BTC/USD": { p: 97419, d: 0, live: false, pct: null },
+    "ETH/USD": { p: 3420, d: 2, live: false, pct: null },
+    "US30": { p: 44210, d: 0, live: false, pct: null },
+    "USD/JPY": { p: 154.32, d: 2, live: false, pct: null }
   };
   const NOTE = document.getElementById("strip-note");
   const LIVE_SOURCES = [];
   function setNote() {
     if (!NOTE) return;
-    if (LIVE_SOURCES.length) {
+    const hasLive = LIVE_SOURCES.indexOf("CoinGecko") !== -1 && LIVE_SOURCES.indexOf("ExchangeRate-API") !== -1;
+    if (hasLive) {
       NOTE.textContent = "Live prices";
       NOTE.title = "Live: " + LIVE_SOURCES.join(", ") + ". Gold & US30 simulated until their feeds connect.";
     } else {
@@ -89,9 +107,16 @@ document.addEventListener("DOMContentLoaded", () => {
       el.querySelector(".val").textContent = s.p.toLocaleString(undefined, { minimumFractionDigits: s.d, maximumFractionDigits: s.d });
       const chg = el.querySelector(".chg");
       if (chg) {
-        const pct = (s.pct !== null && s.pct !== undefined) ? s.pct : ((s.p - s.o) / s.o * 100);
-        chg.textContent = (pct >= 0 ? "+" : "") + pct.toFixed(2) + "%";
-        chg.className = "chg " + (pct >= 0 ? "up" : "down");
+        /* % only ever comes from a real previous close (see header).
+           No previous close => no % at all, never a fabricated one. */
+        if (s.pct !== null && s.pct !== undefined && isFinite(s.pct)) {
+          const pct = s.pct;
+          chg.textContent = (pct >= 0 ? "+" : "") + pct.toFixed(2) + "%";
+          chg.className = "chg " + (pct >= 0 ? "up" : "down");
+        } else {
+          chg.textContent = "—";
+          chg.className = "chg na";
+        }
       }
       el.dataset.live = s.live ? "live" : "sim";
     });
@@ -101,11 +126,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function markLive(key, source) {
     if (!PRICES[key].live) { PRICES[key].live = true; if (LIVE_SOURCES.indexOf(source) === -1) LIVE_SOURCES.push(source); }
   }
+  /* Set to true by fetchJSON on HTTP 429 so the poll loop backs off. */
+  let rateLimited = false;
   async function fetchJSON(url, timeoutMs) {
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), timeoutMs || 8000);
     try {
       const r = await fetch(url, { signal: ctrl.signal });
+      if (r.status === 429) { rateLimited = true; throw new Error("HTTP 429"); }
       if (!r.ok) throw new Error("HTTP " + r.status);
       return await r.json();
     } finally { clearTimeout(t); }
@@ -117,25 +145,36 @@ document.addEventListener("DOMContentLoaded", () => {
       if (d.ethereum && d.ethereum.usd) { PRICES["ETH/USD"].p = d.ethereum.usd; PRICES["ETH/USD"].pct = d.ethereum.usd_24h_change; markLive("ETH/USD", "CoinGecko"); }
     } catch (e) { /* stays simulated */ }
   }
+  /* Previous business-day close for FX, fetched once per session (and
+     retried at most once an hour) — the % is derived from it, so it must
+     never be re-fetched on every 15s poll. */
+  let fxPrevRetryAt = 0;
   async function fetchFX() {
     try {
       const d = await fetchJSON("https://api.exchangerate-api.com/v4/latest/USD");
       if (d && d.rates) {
-        if (d.rates.EUR) PRICES["EUR/USD"].p = 1 / d.rates.EUR;
-        if (d.rates.GBP) PRICES["GBP/USD"].p = 1 / d.rates.GBP;
+        /* Prices in pair units: EUR/USD = 1 / (EUR per USD), and the %
+           is the change in that same inverted value vs the previous
+           close's inverted value — never mixed bases. */
+        const eurNow = d.rates.EUR ? 1 / d.rates.EUR : null;
+        const gbpNow = d.rates.GBP ? 1 / d.rates.GBP : null;
+        if (eurNow) PRICES["EUR/USD"].p = eurNow;
+        if (gbpNow) PRICES["GBP/USD"].p = gbpNow;
         if (d.rates.JPY) PRICES["USD/JPY"].p = d.rates.JPY;
-        /* % change vs previous business-day close (Frankfurter, ECB rates) */
-        for (let back = 1; back <= 5; back++) {
-          try {
-            const day = new Date(Date.now() - back * 864e5).toISOString().slice(0, 10);
-            const prev = await fetchJSON("https://api.frankfurter.app/" + day + "?from=USD&to=EUR,GBP,JPY");
-            if (prev && prev.rates) {
-              if (prev.rates.EUR) PRICES["EUR/USD"].pct = (1 / d.rates.EUR / (1 / prev.rates.EUR) - 1) * 100;
-              if (prev.rates.GBP) PRICES["GBP/USD"].pct = (1 / d.rates.GBP / (1 / prev.rates.GBP) - 1) * 100;
-              if (prev.rates.JPY) PRICES["USD/JPY"].pct = (d.rates.JPY / prev.rates.JPY - 1) * 100;
-              break;
-            }
-          } catch (e) { /* try an earlier day */ }
+        if (Date.now() >= fxPrevRetryAt) {
+          fxPrevRetryAt = Date.now() + 3600e3;
+          for (let back = 1; back <= 5; back++) {
+            try {
+              const day = new Date(Date.now() - back * 864e5).toISOString().slice(0, 10);
+              const prev = await fetchJSON("https://api.frankfurter.dev/v1/" + day + "?from=USD&to=EUR,GBP,JPY");
+              if (prev && prev.rates) {
+                if (eurNow && prev.rates.EUR) PRICES["EUR/USD"].pct = (eurNow / (1 / prev.rates.EUR) - 1) * 100;
+                if (gbpNow && prev.rates.GBP) PRICES["GBP/USD"].pct = (gbpNow / (1 / prev.rates.GBP) - 1) * 100;
+                if (d.rates.JPY && prev.rates.JPY) PRICES["USD/JPY"].pct = (d.rates.JPY / prev.rates.JPY - 1) * 100;
+                break;
+              }
+            } catch (e) { /* try an earlier day; no % if none works */ }
+          }
         }
         ["EUR/USD", "GBP/USD", "USD/JPY"].forEach(k => markLive(k, "ExchangeRate-API"));
       }
@@ -167,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function jitter() {
     Object.keys(PRICES).forEach(k => {
       const s = PRICES[k];
-      if (s.live) return; /* live symbols move only on the 60s API refresh */
+      if (s.live) return; /* live symbols move only on the 15s API refresh */
       const vol = s.p * 0.0012;
       s.p = +(s.p + (Math.random() - 0.48) * vol).toFixed(s.d);
     });
@@ -176,10 +215,18 @@ document.addEventListener("DOMContentLoaded", () => {
   /* marquee: duplicate the quote list once for a seamless loop */
   const track = document.getElementById("ticker-track");
   if (track && !track.dataset.dup) { track.innerHTML += track.innerHTML; track.dataset.dup = "1"; }
+  /* Poll live prices every 15s so they visibly move; if any fetch was
+     rate-limited (HTTP 429) back off to 60s until a clean poll succeeds. */
+  let pollMs = 15000;
+  async function pollLive() {
+    rateLimited = false;
+    await fetchAllLive();
+    pollMs = rateLimited ? 60000 : 15000;
+    setTimeout(pollLive, pollMs);
+  }
   if (document.querySelector("[data-symbol]") || document.getElementById("hero-xau")) {
     renderPrices();
-    fetchAllLive();
-    setInterval(fetchAllLive, 60000);
+    pollLive();
     setInterval(jitter, 3000);
   }
 

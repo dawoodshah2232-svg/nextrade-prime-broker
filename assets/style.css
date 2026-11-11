@@ -87,7 +87,7 @@ p.lead{font-size:1.15rem;color:var(--body)}
 .quote b{color:var(--ink);font-size:1.05rem;display:block}
 .quote span{font-size:.85rem;color:var(--muted)}
 .quote .chg{font-weight:700}
-.quote .chg.up{color:var(--green)} .quote .chg.down{color:var(--red)}
+.quote .chg.up{color:var(--green)} .quote .chg.down{color:var(--red)} .quote .chg.na{color:var(--muted)}
 /* ---------- cards / grids ---------- */
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
