@@ -212,3 +212,80 @@ td b{color:var(--ink)}
 .grid3 .card .btn,.grid2 .card .btn,.grid4 .card .btn{margin-top:auto!important}
 /* ---------- fix: headings must not hide under the sticky header ---------- */
 section{scroll-margin-top:88px}
+
+/* ============ GRADIENT UPGRADE — gold + navy only (no extra colours) ============ */
+:root{
+  --gold-grad:linear-gradient(135deg,#f4dc8a,#c9a227 45%,#8a6d14);
+  --gold-grad-soft:linear-gradient(135deg,#fdf3d0,#f4dc8a 55%,#e8c766);
+  --navy-grad:linear-gradient(160deg,#0a1633,#05070c);
+  --gold-glow:0 8px 20px rgba(201,162,39,.35);
+}
+/* Gold-gradient primary buttons site-wide (darker gold on hover) */
+.btn-gold{background:var(--gold-grad);color:#101828;box-shadow:0 6px 16px rgba(201,162,39,.28)}
+.btn-gold:hover{background:linear-gradient(135deg,#e8c766,#a8861f 55%,#6d5510);box-shadow:0 10px 24px rgba(201,162,39,.42)}
+/* Alternating section backgrounds: white -> light-grey gradient */
+.section.soft{background:linear-gradient(180deg,#ffffff,#f5f6f8)}
+/* Thin gradient divider at the top of each major section */
+.section{border-top:1px solid transparent;border-image:linear-gradient(90deg,transparent,rgba(201,162,39,.45),transparent) 1}
+/* Soft radial gold glow behind the hero */
+.hero{position:relative}
+.hero::before{content:"";position:absolute;top:-140px;right:-80px;width:560px;height:560px;background:radial-gradient(circle,rgba(201,162,39,.22),transparent 65%);pointer-events:none}
+.hero-grid{position:relative;z-index:1}
+/* CTA band: navy gradient + gold glow */
+.cta-band{background:var(--navy-grad);position:relative;overflow:hidden}
+.cta-band::before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:640px;height:320px;background:radial-gradient(ellipse,rgba(201,162,39,.20),transparent 70%);pointer-events:none}
+.cta-band h2,.cta-band p,.cta-band .btn{position:relative;z-index:1}
+
+/* ---- 1 · Account cards ---- */
+.acct-card{position:relative;overflow:hidden}
+.acct-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f4dc8a,#c9a227,#8a6d14)}
+.acct-standard .tag{background:linear-gradient(90deg,#eef0f3,#f4dc8a);color:#101828}
+.acct-raw .tag.gold{background:var(--gold-grad);color:#101828}
+.acct-pro .tag{background:linear-gradient(90deg,#0a1633,#12234d);color:#fff}
+.acct-raw{background:var(--navy-grad);border-color:rgba(201,162,39,.4);box-shadow:0 18px 40px rgba(10,22,51,.35),0 0 0 1px rgba(201,162,39,.25)}
+.acct-raw h3{color:#fff}
+.acct-raw p{color:#c6d2e8}
+.acct-raw b{color:#fff !important}
+.acct-raw .check-list li,.acct-raw .check-list li span{color:#c6d2e8}
+.acct-raw .btn-gold{box-shadow:0 8px 22px rgba(201,162,39,.45)}
+.acct-card:hover{box-shadow:0 18px 40px rgba(201,162,39,.18),var(--shadow)}
+
+/* ---- 2 · Why cards: gold-gradient icon discs + growing gradient underline ---- */
+.why-card .icon3d{width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 30% 28%,#f4dc8a,#c9a227 55%,#8a6d14);box-shadow:0 8px 20px rgba(201,162,39,.35),inset 0 0 0 1px rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center}
+.why-card .icon3d svg{width:34px;height:34px}
+.why-card .icon3d svg circle{fill:none;stroke:#fff}
+.why-card .icon3d svg path{stroke:#fff}
+.why-card h3{position:relative}
+.why-card h3::after{content:"";display:block;height:3px;width:0;margin-top:8px;border-radius:2px;background:linear-gradient(90deg,#f4dc8a,#c9a227,#8a6d14);transition:width .3s ease}
+.why-card:hover h3::after{width:56px}
+.why-card:hover{box-shadow:0 18px 40px rgba(201,162,39,.18),var(--shadow)}
+
+/* ---- 3 · Stats band: navy gradient + radial gold glow, gold-gradient numbers ---- */
+.stats-band{background:radial-gradient(ellipse 60% 90% at 50% 50%,rgba(201,162,39,.16),transparent 70%),linear-gradient(160deg,#0a1633,#05070c)}
+.stat b,.stat b span{background:linear-gradient(135deg,#f4dc8a,#c9a227 50%,#e8c766);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.stat>span{color:#c6d2e8}
+
+/* ---- 4 · Steps: gradient numbers + gradient connecting line ---- */
+.steps{position:relative}
+.steps::before{content:"";position:absolute;top:44px;left:12%;right:12%;height:3px;background:linear-gradient(90deg,transparent,#f4dc8a,#c9a227,#8a6d14,transparent);z-index:0}
+.step{position:relative;z-index:1}
+.step-num{background:linear-gradient(135deg,#f4dc8a,#c9a227 55%,#8a6d14);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.step:hover{border:1px solid transparent;background:linear-gradient(#fff,#fff) padding-box,var(--gold-grad) border-box;transform:translateY(-4px);box-shadow:0 14px 30px rgba(201,162,39,.16)}
+
+/* ---- 5 · New / Already trading: distinct cards + glow behind the pair ---- */
+.duo-glow{position:relative}
+.duo-glow::before{content:"";position:absolute;inset:-24px;background:radial-gradient(ellipse 50% 60% at 50% 50%,rgba(201,162,39,.14),transparent 70%);pointer-events:none}
+.duo-glow .card{position:relative;z-index:1}
+.duo-new{position:relative;overflow:hidden}
+.duo-new::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--gold-grad)}
+.duo-pro{background:var(--navy-grad);border-color:rgba(201,162,39,.4)}
+.duo-pro h3{color:#fff}
+.duo-pro p{color:#c6d2e8}
+
+/* ---- 6 · Funds protected: gradient icon discs + gradient link underline ---- */
+.fund-card .icon3d{width:48px;height:48px;border-radius:50%;background:radial-gradient(circle at 30% 28%,#f4dc8a,#c9a227 55%,#8a6d14);box-shadow:0 8px 18px rgba(201,162,39,.32),inset 0 0 0 1px rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+.fund-card .icon3d svg{width:26px;height:26px}
+.fund-card .icon3d svg *{stroke:#fff;fill:none}
+.funds-link a{background:linear-gradient(90deg,#c9a227,#8a6d14) bottom/0% 2px no-repeat;transition:background-size .3s ease;padding-bottom:2px}
+.funds-link a:hover{background-size:100% 2px}
+
