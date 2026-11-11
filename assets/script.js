@@ -46,30 +46,30 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-count]").forEach(el => cio.observe(el));
 
   /* ---------- live prices (simulated demo feed) ---------- */
+  /* Session-open prices: % change is measured against the open, so the strip
+     shows a real (simulated) day move instead of resetting to +0.00% each tick. */
   const PRICES = {
-    "EUR/USD": { p: 1.1637, d: 4 }, "GBP/USD": { p: 1.3248, d: 4 },
-    "XAU/USD": { p: 4231.40, d: 2 }, "BTC/USD": { p: 97419, d: 0 },
-    "US30": { p: 44210, d: 0 }, "USD/JPY": { p: 154.32, d: 2 }
+    "EUR/USD": { p: 1.1637, d: 4, o: 1.1598 }, "GBP/USD": { p: 1.3248, d: 4, o: 1.3180 },
+    "XAU/USD": { p: 4231.40, d: 2, o: 4210.00 }, "BTC/USD": { p: 97419, d: 0, o: 96800 },
+    "US30": { p: 44210, d: 0, o: 43950 }, "USD/JPY": { p: 154.32, d: 2, o: 153.90 }
   };
   function renderPrices() {
     document.querySelectorAll("[data-symbol]").forEach(el => {
       const s = PRICES[el.dataset.symbol]; if (!s) return;
-      const prev = parseFloat(el.dataset.prev || s.p);
       el.querySelector(".val").textContent = s.p.toLocaleString(undefined, { minimumFractionDigits: s.d, maximumFractionDigits: s.d });
       const chg = el.querySelector(".chg");
       if (chg) {
-        const pct = ((s.p - prev) / prev * 100);
+        const pct = ((s.p - s.o) / s.o * 100);
         chg.textContent = (pct >= 0 ? "+" : "") + pct.toFixed(2) + "%";
         chg.className = "chg " + (pct >= 0 ? "up" : "down");
       }
-      el.dataset.prev = s.p;
     });
     const heroXau = document.getElementById("hero-xau");
     if (heroXau) heroXau.textContent = "$" + PRICES["XAU/USD"].p.toLocaleString(undefined, { minimumFractionDigits: 2 });
   }
   function jitter() {
     Object.keys(PRICES).forEach(k => {
-      const s = PRICES[k], vol = s.p * 0.0006;
+      const s = PRICES[k], vol = s.p * 0.0012;
       s.p = +(s.p + (Math.random() - 0.48) * vol).toFixed(s.d);
     });
     renderPrices();
@@ -132,6 +132,8 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const u = JSON.parse(localStorage.getItem("ntp_user") || "null");
       userName.textContent = u ? (u.name || u.email) : "Demo Trader";
+      /* Logged in: the "log in to see your name here" banner no longer applies. */
+      if (u) { const dn = document.querySelector(".demo-note"); if (dn) dn.remove(); }
     } catch (e) { userName.textContent = "Demo Trader"; }
   }
 });

@@ -82,7 +82,8 @@ p.lead{font-size:1.15rem;color:var(--body)}
 .hero-card .up{color:var(--green);font-weight:700}
 /* ---------- price strip ---------- */
 .price-strip{background:#fff;border-bottom:1px solid var(--line)}
-.price-strip .container{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;padding-top:16px;padding-bottom:16px}
+.price-strip .container{display:grid;grid-template-columns:repeat(5,1fr) auto;gap:16px;padding-top:16px;padding-bottom:16px;align-items:center}
+.strip-note{font-size:.8rem;color:var(--muted);font-weight:600;white-space:nowrap}
 .quote b{color:var(--ink);font-size:1.05rem;display:block}
 .quote span{font-size:.85rem;color:var(--muted)}
 .quote .chg{font-weight:700}
@@ -158,7 +159,7 @@ td b{color:var(--ink)}
 .site-footer a{display:block;padding:4px 0;font-size:.93rem}
 .site-footer a:hover{color:#fff}
 .footer-brand img{height:48px;width:auto;margin-bottom:14px}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding:22px 0;font-size:.85rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding:22px 0;font-size:.85rem;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .risk{font-size:.82rem;line-height:1.6;color:#667085;padding-bottom:24px}
 /* ---------- misc ---------- */
 .badge{display:inline-block;background:var(--gold);color:#101828;font-weight:800;font-size:.8rem;border-radius:999px;padding:5px 12px}
@@ -205,3 +206,9 @@ td b{color:var(--ink)}
   .footer-grid{grid-template-columns:1fr}
   .cta-band{padding:36px 22px}
 }
+
+/* ---------- fix: equal-height cards, buttons aligned at the bottom ---------- */
+.grid3 .card,.grid2 .card,.grid4 .card{display:flex;flex-direction:column;height:100%}
+.grid3 .card .btn,.grid2 .card .btn,.grid4 .card .btn{margin-top:auto!important}
+/* ---------- fix: headings must not hide under the sticky header ---------- */
+section{scroll-margin-top:88px}
