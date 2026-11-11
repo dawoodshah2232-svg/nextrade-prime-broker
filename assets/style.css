@@ -68,7 +68,7 @@ p.lead{font-size:1.15rem;color:var(--body)}
 .hero{background:var(--navy);color:#d0d5dd;padding:72px 0 0;overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
 .hero h1{color:#fff;margin:0 0 18px}
-.hero h1 .gold{color:var(--gold-2)}
+.hero h1 .gold{background:linear-gradient(90deg,#f4dc8a,#c9a227,#8a6d14);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .lead{color:#d0d5dd;max-width:520px;margin-bottom:28px}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
 .hero-proof{display:flex;gap:28px;flex-wrap:wrap;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
@@ -179,7 +179,7 @@ td b{color:var(--ink)}
 .market-tabs a.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 .calc-result{background:var(--bg-soft);border-radius:var(--radius-sm);padding:18px;margin-top:16px;font-size:1.05rem}
 .calc-result b{color:var(--ink)}
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease}
 .reveal.visible{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 @media (max-width:1020px){
@@ -301,3 +301,75 @@ section{scroll-margin-top:88px}
 .header-actions .login-link{display:inline-flex;align-items:center;gap:7px}
 .header-actions .btn .m-ico svg{width:18px;height:18px}
 .footer-grid a{display:flex;align-items:center;gap:9px}
+
+/* ============ ROUND 2 — live marquee, stats icons, card photos, footer, motion ============ */
+
+/* --- price marquee --- */
+.price-strip .container{display:flex;align-items:center;gap:20px;padding-top:14px;padding-bottom:14px}
+.price-strip .strip-note{flex:none}
+.ticker{overflow:hidden;flex:1;min-width:0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.ticker-track{display:flex;width:max-content;animation:ticker 42s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes ticker{to{transform:translateX(-50%)}}
+.ticker-track .quote{display:flex;align-items:baseline;gap:8px;white-space:nowrap;margin-right:48px}
+.ticker-track .quote b{display:inline;font-size:1.02rem}
+.ticker-track .quote>span:first-child{color:var(--ink);font-weight:700}
+
+/* --- stats band: creative icons + balance --- */
+.stats-grid{align-items:start}
+.stat{display:flex;flex-direction:column;align-items:center}
+.stat-ico{flex:none;width:58px;height:58px;margin:0 auto 16px;border-radius:50%;background:radial-gradient(circle at 30% 28%,#f4dc8a,#c9a227 55%,#8a6d14);box-shadow:0 10px 22px rgba(201,162,39,.35),inset 0 0 0 1px rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center}
+.stat-ico svg{width:28px;height:28px}
+
+/* --- card photo banners (duo + funds) --- */
+.duo-photo,.fund-photo{position:relative;flex:none;overflow:hidden;border-radius:var(--radius) var(--radius) 0 0}
+.duo-photo{height:170px;margin:-26px -26px 20px}
+.fund-photo{height:150px;margin:-26px -26px 18px}
+.duo-photo img,.fund-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.duo-new::before{z-index:1}
+.duo-pro .duo-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,22,51,.9));pointer-events:none}
+.card:hover .duo-photo img,.card:hover .fund-photo img{transform:scale(1.03)}
+.split-img img{transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.split-img:hover img{transform:scale(1.03)}
+
+/* --- footer organisation --- */
+.site-footer{border-top:3px solid transparent;border-image:linear-gradient(90deg,transparent,#c9a227,transparent) 1;padding:56px 0 0}
+.footer-grid{padding-bottom:36px;align-items:start}
+.footer-grid>div{min-width:0}
+.footer-grid a{white-space:nowrap;font-size:.9rem}
+.footer-brand p{max-width:300px}
+.risk{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:12px;padding:16px 18px;margin-bottom:24px}
+.footer-bottom{justify-content:space-between;gap:12px;padding:20px 0 24px}
+.footer-legal{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.footer-legal a{display:inline-block;padding:0}
+@media (min-width:1021px){
+  .footer-grid{grid-template-columns:1.2fr 1.15fr 1fr 1fr 1fr 1.15fr;gap:24px}
+  /* mega-menu: fade + slide-down instead of an instant pop */
+  .mega{display:grid;opacity:0;visibility:hidden;transform:translate(-50%,8px);transition:opacity .22s ease,transform .22s ease,visibility 0s linear .22s;pointer-events:none}
+  .main-nav>li:hover .mega,.main-nav>li:focus-within .mega{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s;pointer-events:auto}
+}
+
+/* --- motion: hero entrance, float, buttons, stagger --- */
+@keyframes heroIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.hero h1{animation:heroIn .7s cubic-bezier(.22,1,.36,1) both .05s}
+.hero .lead{animation:heroIn .7s cubic-bezier(.22,1,.36,1) both .16s}
+.hero-cta{animation:heroIn .7s cubic-bezier(.22,1,.36,1) both .27s}
+.hero-proof{animation:heroIn .7s cubic-bezier(.22,1,.36,1) both .38s}
+.hero-media{animation:heroIn .8s cubic-bezier(.22,1,.36,1) both .45s}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hero-card{animation:floatY 6s ease-in-out 1.4s infinite}
+.btn:hover{transform:translateY(-2px)}
+.btn-gold{position:relative;overflow:hidden}
+.btn-gold::after{content:"";position:absolute;top:0;left:-80%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .55s ease;pointer-events:none}
+.btn-gold:hover::after{left:135%}
+.grid3>.reveal:nth-child(2),.grid2>.reveal:nth-child(2),.grid4>.reveal:nth-child(2){transition-delay:.08s}
+.grid3>.reveal:nth-child(3),.grid4>.reveal:nth-child(3){transition-delay:.16s}
+.grid4>.reveal:nth-child(4){transition-delay:.24s}
+
+/* --- reduced motion: everything off, content fully visible --- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .ticker-track{animation:none}
+  .ticker{overflow-x:auto}
+  .js .reveal{opacity:1;transform:none}
+}
