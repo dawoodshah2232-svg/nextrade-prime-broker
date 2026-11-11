@@ -13,29 +13,62 @@ const ACCOUNTS = {
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".main-nav");
-  if (toggle && nav) toggle.addEventListener("click", () => nav.classList.toggle("open"));
-  document.querySelectorAll(".main-nav>li>button").forEach(btn => {
-    btn.addEventListener("click", e => {
-      if (window.innerWidth <= 1020) { e.preventDefault(); btn.parentElement.classList.toggle("open"); }
-    });
+  const navButtons = document.querySelectorAll(".main-nav>li>button");
+  if (toggle && nav) toggle.addEventListener("click", () => {
+    nav.classList.toggle("open");
+    document.body.classList.remove("menus-suppressed");
   });
-
-  /* Escape closes any open mega-menu (and the mobile nav).
-     Desktop menus open on :hover/:focus-within, which Escape cannot
-     un-hover, so blur the focused item and suppress the menus via the
-     .menus-esc-closed body class (see style.css) until the pointer or
-     focus re-enters the nav. */
-  document.addEventListener("keydown", e => {
-    if (e.key !== "Escape") return;
+  /* Mega-menu open/close, desktop (>1020px):
+     Menus open on :hover/:focus-within, which neither Escape nor a
+     second click can undo on their own — so both actions suppress the
+     menus via body.menus-suppressed (see style.css: display:none
+     !important beats the :hover rule AND the min-width fade-in rule,
+     which keeps .mega on display:grid with opacity 0). Suppression is
+     lifted when the pointer re-enters the nav or focus returns to it.
+     Click toggle: hover opens the menu before the first click, so the
+     first click only "claims" it (no visual change); the second click
+     closes it; the third reopens it. mousedown records whether the menu
+     was suppressed BEFORE focusin fires (focus happens before click),
+     so the click handler knows which way to toggle. */
+  function suppressMenus() {
+    document.body.classList.add("menus-suppressed");
     document.querySelectorAll(".main-nav>li.open").forEach(li => li.classList.remove("open"));
     if (nav) nav.classList.remove("open");
     if (document.activeElement) document.activeElement.blur();
-    document.body.classList.add("menus-esc-closed");
+    navButtons.forEach(b => { b._clickOpen = false; });
+  }
+  function unsuppressMenus() { document.body.classList.remove("menus-suppressed"); }
+  navButtons.forEach(btn => {
+    btn.addEventListener("mousedown", () => {
+      btn._wasSuppressed = document.body.classList.contains("menus-suppressed");
+    });
+    btn.addEventListener("click", e => {
+      if (window.innerWidth <= 1020) {
+        e.preventDefault();
+        unsuppressMenus();
+        btn.parentElement.classList.toggle("open");
+        return;
+      }
+      if (btn._wasSuppressed) { unsuppressMenus(); return; }
+      if (btn._clickOpen) { suppressMenus(); return; }
+      btn._clickOpen = true;
+      navButtons.forEach(b => { if (b !== btn) b._clickOpen = false; });
+    });
+  });
+  /* Escape closes any open mega-menu (and the mobile nav). */
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape") return;
+    suppressMenus();
   });
   if (nav) {
-    nav.addEventListener("mouseenter", () => document.body.classList.remove("menus-esc-closed"));
-    nav.addEventListener("focusin", () => document.body.classList.remove("menus-esc-closed"));
+    nav.addEventListener("mouseenter", () => unsuppressMenus());
+    nav.addEventListener("mouseleave", () => navButtons.forEach(b => { b._clickOpen = false; }));
+    nav.addEventListener("focusin", () => unsuppressMenus());
   }
+  /* Clicking anywhere outside the nav closes open menus (desktop). */
+  document.addEventListener("click", e => {
+    if (window.innerWidth > 1020 && nav && !e.target.closest(".main-nav")) suppressMenus();
+  });
 
   /* ---------- scroll reveal (site-wide: every section & card) ---------- */
   /* Sections/cards without .reveal get it here, so the whole site animates.
