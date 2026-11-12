@@ -114,7 +114,8 @@ body.menus-suppressed .main-nav>li .mega,body.menus-esc-closed .main-nav>li .meg
 .orb-2{width:300px;height:300px;background:rgba(46,204,143,.07);bottom:10%;left:-80px;animation-delay:-6s}
 @keyframes drift{from{transform:translate(0,0)}to{transform:translate(-30px,24px)}}
 /* One video only: full-bleed background, melted into the page with dark gradients.
-   The poster <img> is the reduced-motion fallback (shown when the video is off). */
+   The poster <img> is an error-only fallback (shown if the video fails to load);
+   the <video> itself always renders, and JS pauses it under reduced motion. */
 .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
 .hero-bg img,.hero-bg video{width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block}
 .hero-bg video{object-position:center}
@@ -425,17 +426,17 @@ section{scroll-margin-top:88px}
   .ticker-track{animation:none}
   .ticker{overflow-x:auto}
   .js .reveal{opacity:1;transform:none}
-  /* hero video off — the poster photo shows instead */
-  .hero-bg video{display:none}
-  .hero-bg img.poster{display:block}
+  /* hero video stays rendered under reduced motion — JS pauses it, so the
+     poster frame shows as a still; the <img class="poster"> is error-only. */
 }
 
 /* ============ VIDEO-LED HOMEPAGE (Hola Prime structure, Vantage broker content) ============ */
-/* Promo cards overlapping the hero base (Vantage-style): the price strip on the
-   homepage gets extra bottom padding (.strip-overlap) so the cards overlap empty
-   strip space, never the scrolling quotes. */
-.price-strip.strip-overlap .container{padding-bottom:72px}
-.promo-section{position:relative;z-index:5;margin-top:-48px;padding-bottom:8px}
+/* Promo cards overlapping the hero base (Vantage-style): the section sits right
+   after the hero with a -64px top margin, so the cards straddle the hero's
+   bottom edge. The hero has 130px bottom padding, so the overlap covers empty
+   space only — never the stats row or the XAU glass chip (top:34%). The live
+   price marquee scrolls directly under the cards. */
+.promo-section{position:relative;z-index:5;margin-top:-64px;padding-bottom:8px}
 .promo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .promo-card{display:flex;flex-direction:column;background:linear-gradient(180deg,#101828,#0a0d16);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 24px 50px rgba(0,0,0,.5);transition:transform .2s var(--ease),border-color .2s,box-shadow .2s}
 .promo-card:hover{transform:translateY(-4px);border-color:rgba(201,162,39,.5);box-shadow:0 28px 56px rgba(0,0,0,.55),0 0 40px rgba(201,162,39,.10)}
@@ -472,6 +473,8 @@ section{scroll-margin-top:88px}
 .video-meta{padding:20px 24px 24px}
 .video-meta h3{margin:0 0 6px}
 .video-meta p{color:var(--muted);font-size:.98rem}
+.video-error{margin-top:10px;font-size:.88rem;color:var(--gold-light);cursor:pointer}
+.video-error:hover{text-decoration:underline}
 @media (max-width:1020px){
   .promo-grid{grid-template-columns:repeat(2,1fr)}
   .video-grid{grid-template-columns:1fr}
@@ -479,7 +482,6 @@ section{scroll-margin-top:88px}
 @media (max-width:760px){
   .promo-grid{grid-template-columns:1fr}
   .promo-section{margin-top:-40px}
-  .price-strip.strip-overlap .container{padding-bottom:64px}
   .hero{min-height:0}
   .tab-panel{padding:22px}
 }

@@ -338,14 +338,21 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (e) { userName.textContent = "Demo Trader"; }
   }
 
-  /* ---------- hero video: respect reduced motion (poster photo instead) ---------- */
+  /* ---------- hero video: respect reduced motion (paused = still poster frame) ----------
+     The <video> always stays rendered; under reduced motion JS pauses it, so the
+     poster attribute (hero-trader.jpg) shows as a still. The <img class="poster">
+     is an error-only fallback: if the video file fails, hide the video and show it. */
   const heroVideo = document.querySelector(".hero-bg video");
-  if (heroVideo && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    heroVideo.removeAttribute("autoplay");
-    heroVideo.pause();
-    heroVideo.style.display = "none";
-    const poster = document.querySelector(".hero-bg img.poster");
-    if (poster) poster.style.display = "block";
+  if (heroVideo) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      heroVideo.removeAttribute("autoplay");
+      heroVideo.pause();
+    }
+    heroVideo.addEventListener("error", () => {
+      heroVideo.style.display = "none";
+      const poster = document.querySelector(".hero-bg img.poster");
+      if (poster) poster.style.display = "block";
+    });
   }
 
   /* ---------- markets tabs (homepage) ---------- */
@@ -371,5 +378,23 @@ document.addEventListener("DOMContentLoaded", () => {
     playBtn.addEventListener("click", () => { video.play(); });
     video.addEventListener("play", () => frame.classList.add("playing"));
     video.addEventListener("pause", () => frame.classList.remove("playing"));
+    /* "ended" fires without "pause" when a video finishes naturally. */
+    video.addEventListener("ended", () => frame.classList.remove("playing"));
+    /* Error: keep the poster visible, show a retry note under the card. */
+    video.addEventListener("error", () => {
+      frame.classList.remove("playing");
+      const card = frame.closest(".video-card");
+      const meta = card ? card.querySelector(".video-meta") : null;
+      if (!meta || meta.querySelector(".video-error")) return;
+      const note = document.createElement("p");
+      note.className = "video-error";
+      note.textContent = "Video unavailable — tap to retry";
+      note.addEventListener("click", () => {
+        note.remove();
+        video.load();
+        video.play().catch(() => {});
+      });
+      meta.appendChild(note);
+    });
   });
 });
