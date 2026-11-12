@@ -9,6 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" href="assets/logo-light.png">
+<!-- Preload the hero poster still so the chart backdrop paints with the first
+     render instead of waiting for the React bundle + video to load. -->
+<link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 <!-- Single Page Apps for GitHub Pages (rafrex/spa-github-pages): restores the
      route saved by public/404.html. The document always loads from the repo
      root, so the relative favicon above resolves in dev and in production. -->
