@@ -118,7 +118,7 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
-          poster={asset('hero-trader.jpg')}
+          poster={asset('hero-poster.jpg')}
           src={asset('hero-market.mp4')}
           onCanPlay={tryPlay}
           onError={showPoster}
