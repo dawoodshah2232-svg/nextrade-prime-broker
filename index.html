@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=liberty5">
+<link rel="stylesheet" href="assets/style.css?v=liberty6">
 <link rel="icon" href="assets/logo-light.png">
 </head>
 <body>
@@ -73,12 +73,12 @@
   <div class="header-actions"><a class="login-link" href="login.html"><span class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3.2"/><path d="M6 19c1-3 3.2-4.5 6-4.5s5 1.5 6 4.5"/></svg></span>Login</a><a class="btn btn-dark" href="signup.html"><span class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>Get Started</a></div>
 </div></header>
 
-<section class="hero hero-blend"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="hero-bg" aria-hidden="true"><img src="assets/hero-trader.jpg" alt="" loading="eager" fetchpriority="high"></div><div class="container hero-grid">
+<section class="hero hero-blend hero-video"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="hero-bg" aria-hidden="true"><video autoplay muted loop playsinline preload="auto" poster="assets/hero-trader.jpg" src="assets/hero-video.mp4"></video><img class="poster" src="assets/hero-trader.jpg" alt="" loading="eager" fetchpriority="high"></div><div class="container hero-grid">
   <div class="hero-copy">
     <span class="eyebrow">Trade on MetaTrader 5</span>
     <h1>Trade the markets, <span class="gold">clearly.</span></h1>
     <p class="lead">Forex, gold, indices and crypto on MetaTrader 5. Tight spreads, fast execution and funding that takes minutes — with an account that fits the way you trade.</p>
-    <div class="hero-cta"><a class="btn btn-gold" href="signup.html">Open an Account</a><a class="btn btn-outline-light" href="demo-account.html">Try a Demo</a></div>
+    <div class="hero-cta"><a class="btn btn-gold btn-lg" href="signup.html">Open an Account</a><a class="btn btn-outline-light btn-lg" href="demo-account.html">Try a Demo</a></div>
     <div class="hero-proof">
       <div><b>1,000+</b><span>Instruments</span></div>
       <div><b>0.0</b><span>Spreads from (pips)</span></div>
@@ -89,7 +89,7 @@
   <div class="glass-card glass-1"><div class="gc-label">XAU/USD</div><div class="gc-value" id="hero-xau">$4,231.40</div><div class="gc-sub">Gold · MT5</div></div>
 </div></section>
 
-<div class="price-strip"><div class="container">
+<div class="price-strip strip-overlap"><div class="container">
   <span class="strip-note" id="strip-note" title="Fetching live prices…">Simulated prices</span>
   <div class="ticker" aria-label="Market prices"><div class="ticker-track" id="ticker-track">
   <div class="quote" data-symbol="EUR/USD"><span>EUR/USD</span><b class="val">1.1637</b><span class="chg na">—</span></div>
@@ -102,13 +102,42 @@
   </div></div>
 </div></div>
 
+<section class="promo-section"><div class="container">
+  <div class="promo-grid">
+    <a class="promo-card reveal" href="accounts.html"><div class="promo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v4M7 17v4M17 3v4M17 17v4"/><rect x="5" y="7" width="4" height="10" rx="1"/><rect x="15" y="7" width="4" height="10" rx="1"/></svg></div><h3>Raw Spread from 0.0 pips</h3><p>The tightest pricing we offer, with a small commission per lot.</p><span class="promo-link">See accounts →</span></a>
+    <a class="promo-card reveal" href="markets-metals.html"><div class="promo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v5c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 11v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></svg></div><h3>Gold — XAU/USD</h3><p>Trade gold against the dollar, from 0.01 lots, around the clock.</p><span class="promo-link">Trade gold →</span></a>
+    <a class="promo-card reveal" href="platforms-mt5.html"><div class="promo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="12" rx="2"/><path d="M8 20h8M12 16v4M7 12l2.5-3 2 2 3-4"/></svg></div><h3>MetaTrader 5</h3><p>The platform professionals already know — desktop, web and mobile.</p><span class="promo-link">Explore MT5 →</span></a>
+    <a class="promo-card reveal" href="demo-account.html"><div class="promo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l5 3.5-5 3.5z"/></svg></div><h3>Free demo account</h3><p>$10,000 virtual funds, live prices, full MT5 — no time limit.</p><span class="promo-link">Open a demo →</span></a>
+  </div>
+</div></section>
+
+<section class="section" id="spreads"><div class="container">
+  <h2 class="reveal">Spreads that stay honest</h2>
+  <p class="sub reveal">The minimum spread for each account type, on the instruments traders ask about most.</p>
+  <div class="table-wrap reveal" style="margin-top:32px">
+    <table>
+      <thead><tr><th>Instrument</th><th>Standard</th><th>Raw Spread</th><th>Pro</th></tr></thead>
+      <tbody>
+        <tr><td><b>EUR/USD</b></td><td>from 1.0 pip</td><td>from 0.0 pips</td><td>from 0.1 pips</td></tr>
+        <tr><td><b>GBP/USD</b></td><td>from 1.0 pip</td><td>from 0.0 pips</td><td>from 0.1 pips</td></tr>
+        <tr><td><b>USD/JPY</b></td><td>from 1.0 pip</td><td>from 0.0 pips</td><td>from 0.1 pips</td></tr>
+        <tr><td><b>XAU/USD</b></td><td>from 1.0 pip</td><td>from 0.0 pips</td><td>from 0.1 pips</td></tr>
+        <tr><td><b>US30</b></td><td>from 1.0 pip</td><td>from 0.0 pips</td><td>from 0.1 pips</td></tr>
+        <tr><td><b>BTC/USD</b></td><td>from 1.0 pip</td><td>from 0.0 pips</td><td>from 0.1 pips</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted reveal" style="margin-top:14px">Typical spreads — demo. The figures shown are each account type's published minimum spread; actual spreads vary by instrument and market conditions, and gold, indices and crypto are quoted in points. Raw Spread accounts pay $3.50 per side, per lot; Standard and Pro pay no commission.</p>
+  <p class="reveal" style="margin-top:18px"><span class="tag gold">Every account</span>&nbsp; Negative balance protection — your balance can never go below zero, whatever the market does.</p>
+</div></section>
+
 <section class="section"><div class="container">
   <h2 class="reveal">Why traders choose NexTrade Prime</h2>
   <p class="sub reveal">Three things, done properly. No clutter, no small print surprises.</p>
   <div class="grid3" style="margin-top:32px">
+    <div class="card reveal fund-card"><div class="fund-photo"><img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=1200&q=80" alt="Classical bank building — client funds held in segregated accounts" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Segregated funds</h3><p>Client funds are held in segregated accounts, separate from company operating funds.</p><a href="regulation.html" style="font-weight:700;color:var(--ink);margin-top:12px">How we protect your funds →</a></div>
     <div class="card reveal why-card"><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><path d="M20 52l12-14 10 8 18-22" stroke="#c9a227" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M52 24h8v8" stroke="#c9a227" stroke-width="4" stroke-linecap="round"/></svg></div><h3>Tight spreads</h3><p>Spreads from 0.0 pips on Raw Spread accounts and from 1.0 pip on Standard — published on every account page, not hidden in a footnote.</p></div>
     <div class="card reveal why-card"><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><path d="M40 18v22l14 10" stroke="#c9a227" stroke-width="4" stroke-linecap="round"/><circle cx="40" cy="40" r="24" stroke="#c9a227" stroke-width="3"/></svg></div><h3>Fast execution</h3><p>Market execution in milliseconds on MT5, with no requotes on market orders. Your order goes in when you click, not after.</p></div>
-    <div class="card reveal why-card"><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><path d="M40 20v40M52 30H32l-4 10h24l-4 10H28" stroke="#c9a227" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><h3>Easy withdrawals</h3><p>Withdraw to the same method you deposited with. Requests are processed the same day, with no withdrawal fee from NexTrade Prime.</p></div>
   </div>
 </div></section>
 
@@ -117,6 +146,79 @@
   <div class="stat reveal"><div class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19a9 9 0 1 1 14 0"/><path d="M12 14l4-4"/><circle cx="12" cy="14" r="1.6"/></svg></div><b><span data-count="0" data-suffix="" data-decimals="1">0.0</span></b><span>Spreads from (pips)</span></div>
   <div class="stat reveal"><div class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M16 21h3a2 2 0 0 0 2-2v-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg></div><b><span data-count="500" data-prefix="1:">0</span></b><span>Maximum leverage</span></div>
   <div class="stat reveal"><div class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 19a4 4 0 0 1-4 3h-2"/></svg></div><b><span data-count="24" data-suffix="/7">0</span></b><span>Support, every day</span></div>
+</div></section>
+
+<section class="section soft" id="markets"><div class="container">
+  <h2 class="reveal">One account. Every market.</h2>
+  <p class="sub reveal">Trade the markets you know, from one MT5 account. Pick a market to see what trades on it.</p>
+  <div class="tabs reveal" role="tablist" aria-label="Markets">
+    <button class="tab-btn active" type="button" role="tab" aria-selected="true" data-tab="forex">Forex</button>
+    <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="metals">Metals</button>
+    <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="indices">Indices</button>
+    <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="crypto">Crypto</button>
+    <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="energies">Energies</button>
+  </div>
+  <div class="tab-panel active reveal" data-panel="forex" role="tabpanel">
+    <h3>Forex</h3>
+    <p>60+ currency pairs, from the majors to the crosses. Spreads from 0.0 pips on Raw Spread, leverage up to 1:500, minimum trade 0.01 lots.</p>
+    <div class="chip-row"><span class="chip">EUR/USD</span><span class="chip">GBP/USD</span><span class="chip">USD/JPY</span><span class="chip">AUD/USD</span><span class="chip">USD/CHF</span><span class="chip">NZD/USD</span></div>
+    <a class="btn btn-gold btn-sm" style="margin-top:20px" href="markets-forex.html">Explore Forex</a>
+  </div>
+  <div class="tab-panel reveal" data-panel="metals" role="tabpanel" hidden>
+    <h3>Metals</h3>
+    <p>Gold and silver against the dollar — the classic hedge, traded around the clock with no expiry.</p>
+    <div class="chip-row"><span class="chip">XAU/USD</span><span class="chip">XAG/USD</span></div>
+    <a class="btn btn-gold btn-sm" style="margin-top:20px" href="markets-metals.html">Explore Metals</a>
+  </div>
+  <div class="tab-panel reveal" data-panel="indices" role="tabpanel" hidden>
+    <h3>Indices</h3>
+    <p>Trade whole markets in one position — US, UK and European benchmarks, cash indices with no expiry.</p>
+    <div class="chip-row"><span class="chip">US30</span><span class="chip">US500</span><span class="chip">NAS100</span><span class="chip">UK100</span><span class="chip">GER40</span></div>
+    <a class="btn btn-gold btn-sm" style="margin-top:20px" href="markets-indices.html">Explore Indices</a>
+  </div>
+  <div class="tab-panel reveal" data-panel="crypto" role="tabpanel" hidden>
+    <h3>Crypto</h3>
+    <p>Bitcoin, Ethereum and more as CFDs — long or short, 24/7, without a wallet.</p>
+    <div class="chip-row"><span class="chip">BTC/USD</span><span class="chip">ETH/USD</span><span class="chip">LTC/USD</span><span class="chip">XRP/USD</span></div>
+    <a class="btn btn-gold btn-sm" style="margin-top:20px" href="markets-crypto.html">Explore Crypto</a>
+  </div>
+  <div class="tab-panel reveal" data-panel="energies" role="tabpanel" hidden>
+    <h3>Energies</h3>
+    <p>Oil and natural gas — the markets that move on supply, weather and geopolitics.</p>
+    <div class="chip-row"><span class="chip">USOil</span><span class="chip">UKOil</span><span class="chip">NGAS</span></div>
+    <a class="btn btn-gold btn-sm" style="margin-top:20px" href="markets-energies.html">Explore Energies</a>
+  </div>
+</div></section>
+
+<section class="section" id="video"><div class="container">
+  <h2 class="reveal">See trading in action</h2>
+  <p class="sub reveal">Real market footage — no actors, no scripts. This is what a trading day looks like.</p>
+  <div class="video-grid" style="margin-top:32px">
+    <div class="video-card reveal">
+      <div class="video-frame">
+        <video preload="none" playsinline controls poster="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" src="assets/trading-video.mp4"></video>
+        <button class="video-play" type="button" aria-label="Play video: A trader's desk"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+      </div>
+      <div class="video-meta"><h3>A trader's desk</h3><p>Charts, orders and decisions — a trader at work.</p></div>
+    </div>
+    <div class="video-card reveal">
+      <div class="video-frame">
+        <video preload="none" playsinline controls poster="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1600&q=80" src="assets/hero-video.mp4"></video>
+        <button class="video-play" type="button" aria-label="Play video: Charts in focus"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+      </div>
+      <div class="video-meta"><h3>Charts in focus</h3><p>Reading the market, candle by candle, before the next move.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="section soft"><div class="container">
+  <h2 class="reveal">Start trading today</h2>
+  <p class="sub reveal">Three steps. Most traders are trading within the hour.</p>
+  <div class="steps" style="margin-top:32px">
+    <div class="step reveal"><div class="step-num">01</div><h3>Open an account</h3><p>Choose Standard, Raw Spread or Pro. Registration takes about two minutes.</p></div>
+    <div class="step reveal"><div class="step-num">02</div><h3>Fund in minutes</h3><p>Verify your identity, then deposit from $10 by card, bank transfer or e-wallet.</p></div>
+    <div class="step reveal"><div class="step-num">03</div><h3>Trade on MT5</h3><p>Download MT5, log in with your account, and place your first trade.</p></div>
+  </div>
 </div></section>
 
 <section class="section soft"><div class="container">
@@ -145,16 +247,6 @@
   </div>
 </div></section>
 
-<section class="section soft"><div class="container">
-  <h2 class="reveal">Start trading today</h2>
-  <p class="sub reveal">Three steps. Most traders are trading within the hour.</p>
-  <div class="steps" style="margin-top:32px">
-    <div class="step reveal"><div class="step-num">01</div><h3>Open an account</h3><p>Choose Standard, Raw Spread or Pro. Registration takes about two minutes.</p></div>
-    <div class="step reveal"><div class="step-num">02</div><h3>Verify and deposit</h3><p>Verify your identity, then deposit from $10 by card, bank transfer or e-wallet.</p></div>
-    <div class="step reveal"><div class="step-num">03</div><h3>Trade on MT5</h3><p>Download MT5, log in with your account, and place your first trade.</p></div>
-  </div>
-</div></section>
-
 <section class="section"><div class="container">
   <div class="grid2 duo-glow">
     <div class="card reveal duo-new"><div class="duo-photo"><img src="https://images.unsplash.com/photo-1579225663317-c0251b4369bc?auto=format&fit=crop&w=1200&q=80" alt="Young trader learning at a desk with two laptops showing candlestick charts" loading="lazy"></div><h3>New to trading?</h3><p>Start with a demo account and the Learning Centre. Learn how markets move, how leverage works and how to place your first order — with $10,000 of virtual funds and zero risk.</p><a class="btn btn-gold" style="margin-top:16px" href="education.html">Start Learning</a></div>
@@ -162,15 +254,27 @@
   </div>
 </div></section>
 
-<section class="section soft"><div class="container">
-  <h2 class="reveal">Your funds, protected</h2>
-  <p class="sub reveal">How your money is handled matters more than any headline feature.</p>
-  <div class="grid3" style="margin-top:32px">
-    <div class="card reveal fund-card"><div class="fund-photo"><img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=1200&q=80" alt="Classical bank building — client funds held in segregated accounts" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Segregated accounts</h3><p>Client funds are held in segregated accounts, separate from company operating funds.</p></div>
-    <div class="card reveal fund-card"><div class="fund-photo"><img src="https://images.unsplash.com/photo-1716279083176-60af7a63cb03?auto=format&fit=crop&w=1200&q=80" alt="Trader working calmly at a desk with a candlestick chart and order book" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div><h3>Negative balance protection</h3><p>Your account balance can never go below zero. A fast market cannot leave you owing us money.</p></div>
-    <div class="card reveal fund-card"><div class="fund-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Call_center_PV.jpg" alt="Support agent wearing a headset with a microphone, helping a customer at her desk" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-3.2-6.9"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></div><h3>Support that answers</h3><p>Real people, 24/7, by live chat and email. Average first response is measured in minutes, not days.</p></div>
+<section class="section"><div class="container">
+  <h2 class="reveal">Questions, answered</h2>
+  <p class="sub reveal">The six questions every new trader asks. More in the <a href="faq.html" style="font-weight:700;color:var(--ink)">full FAQ</a>.</p>
+  <div style="margin-top:32px;max-width:820px">
+    <div class="faq-item reveal"><button class="faq-q" type="button">How do I open an account? <span class="plus">+</span></button><div class="faq-a">Register on the sign-up page, verify your identity with an ID and proof of address, then deposit from $10. Most accounts are verified within a few hours.</div></div>
+    <div class="faq-item reveal"><button class="faq-q" type="button">What is the minimum deposit? <span class="plus">+</span></button><div class="faq-a">$10 on Standard, $100 on Raw Spread and $500 on Pro. See the full comparison on <a href="accounts.html">Account Types</a>.</div></div>
+    <div class="faq-item reveal"><button class="faq-q" type="button">What is the minimum trade size? <span class="plus">+</span></button><div class="faq-a">0.01 lots on forex, metals and energies — 0.10 lots on indices. That keeps gold and forex accessible from a small account.</div></div>
+    <div class="faq-item reveal"><button class="faq-q" type="button">How long do withdrawals take? <span class="plus">+</span></button><div class="faq-a">Requests are processed the same business day. Card and e-wallet withdrawals usually arrive within 24 hours; bank transfers take 1–3 business days. Details on <a href="deposits-withdrawals.html">Deposits &amp; Withdrawals</a>.</div></div>
+    <div class="faq-item reveal"><button class="faq-q" type="button">Is there a demo account? <span class="plus">+</span></button><div class="faq-a">Yes — $10,000 virtual funds, live prices, full MT5, no time limit. See <a href="demo-account.html">Demo Account</a>.</div></div>
+    <div class="faq-item reveal"><button class="faq-q" type="button">Which platform do you offer? <span class="plus">+</span></button><div class="faq-a">MetaTrader 5 only — desktop, web and mobile. See <a href="platforms-mt5.html">MT5 Platform</a>.</div></div>
   </div>
-  <p class="reveal funds-link" style="margin-top:24px"><a href="regulation.html" style="font-weight:700;color:var(--ink)">How we protect your funds →</a></p>
+</div></section>
+
+<section class="section soft"><div class="container">
+  <h2 class="reveal">Support &amp; resources</h2>
+  <p class="sub reveal">Real people and real answers, whenever you need them.</p>
+  <div class="grid3" style="margin-top:32px">
+    <div class="card reveal fund-card"><div class="fund-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Call_center_PV.jpg" alt="Support agent wearing a headset with a microphone, helping a customer at her desk" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-3.2-6.9"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></div><h3>24/7 support</h3><p>Real people, 24/7, by live chat and email. Average first response is measured in minutes, not days.</p><a class="btn btn-gold btn-sm" style="margin-top:16px" href="contact.html">Contact Us</a></div>
+    <div class="card reveal why-card"><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><circle cx="40" cy="40" r="24" stroke="#c9a227" stroke-width="3"/><path d="M32 32a8 8 0 1 1 12 7c-2.5 2.5-4 3-4 7M40 58h.01" stroke="#c9a227" stroke-width="4" stroke-linecap="round"/></svg></div><h3>Help Centre</h3><p>Answers to the questions traders actually ask — accounts, funding, verification and the platform.</p><a class="btn btn-gold btn-sm" style="margin-top:16px" href="help-centre.html">Visit Help Centre</a></div>
+    <div class="card reveal why-card"><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><path d="M20 32l20-9 20 9-20 9-20-9z" stroke="#c9a227" stroke-width="3" stroke-linejoin="round"/><path d="M28 38v12c0 4 5.5 7 12 7s12-3 12-7V38" stroke="#c9a227" stroke-width="3" stroke-linecap="round"/></svg></div><h3>Education</h3><p>Courses for every level, live sessions and market notes — learn how markets move before you risk a cent.</p><a class="btn btn-gold btn-sm" style="margin-top:16px" href="education.html">Start Learning</a></div>
+  </div>
 </div></section>
 
 <section class="section"><div class="container">
@@ -193,6 +297,6 @@
   <p class="risk">Risk warning: CFDs are leveraged products and carry a high level of risk to your capital. Prices can move against you, and you may lose more than your initial deposit if negative balance protection does not apply in your jurisdiction. You should not trade with money you cannot afford to lose. Past performance is not a reliable indicator of future results. This website is a demonstration front-end; account opening, deposits and trading are simulated in this demo.</p>
   <div class="footer-bottom"><span>© 2026 NexTrade Prime. All rights reserved.</span><span class="footer-legal"><a href="regulation.html">Regulation</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span></div>
 </div></footer>
-<script src="assets/script.js?v=liberty3"></script>
+<script src="assets/script.js?v=liberty4"></script>
 </body>
 </html>

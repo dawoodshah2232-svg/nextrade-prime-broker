@@ -337,4 +337,39 @@ document.addEventListener("DOMContentLoaded", () => {
       if (u) { const dn = document.querySelector(".demo-note"); if (dn) dn.remove(); }
     } catch (e) { userName.textContent = "Demo Trader"; }
   }
+
+  /* ---------- hero video: respect reduced motion (poster photo instead) ---------- */
+  const heroVideo = document.querySelector(".hero-bg video");
+  if (heroVideo && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    heroVideo.removeAttribute("autoplay");
+    heroVideo.pause();
+    heroVideo.style.display = "none";
+    const poster = document.querySelector(".hero-bg img.poster");
+    if (poster) poster.style.display = "block";
+  }
+
+  /* ---------- markets tabs (homepage) ---------- */
+  const tabBtns = document.querySelectorAll(".tab-btn");
+  if (tabBtns.length) tabBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      tabBtns.forEach(b => { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+      document.querySelectorAll(".tab-panel").forEach(p => {
+        const on = p.dataset.panel === btn.dataset.tab;
+        p.classList.toggle("active", on);
+        p.hidden = !on;
+      });
+    });
+  });
+
+  /* ---------- video cards: click the play button to start the video ---------- */
+  document.querySelectorAll(".video-frame").forEach(frame => {
+    const video = frame.querySelector("video");
+    const playBtn = frame.querySelector(".video-play");
+    if (!video || !playBtn) return;
+    playBtn.addEventListener("click", () => { video.play(); });
+    video.addEventListener("play", () => frame.classList.add("playing"));
+    video.addEventListener("pause", () => frame.classList.remove("playing"));
+  });
 });
