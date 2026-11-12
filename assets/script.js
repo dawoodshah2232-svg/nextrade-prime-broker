@@ -132,11 +132,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const PRICES = {
     "EUR/USD": { p: 1.1637, d: 4, live: false, pct: null },
     "GBP/USD": { p: 1.3248, d: 4, live: false, pct: null },
+    "AUD/USD": { p: 0.6482, d: 4, live: false, pct: null },
     "XAU/USD": { p: 4231.40, d: 2, live: false, pct: null },
+    "XAG/USD": { p: 31.42, d: 2, live: false, pct: null },
     "BTC/USD": { p: 97419, d: 0, live: false, pct: null },
     "ETH/USD": { p: 3420, d: 2, live: false, pct: null },
+    "LTC/USD": { p: 92.40, d: 2, live: false, pct: null },
+    "XRP/USD": { p: 0.5420, d: 4, live: false, pct: null },
     "US30": { p: 44210, d: 0, live: false, pct: null },
-    "USD/JPY": { p: 154.32, d: 2, live: false, pct: null }
+    "US500": { p: 6012, d: 0, live: false, pct: null },
+    "NAS100": { p: 21480, d: 0, live: false, pct: null },
+    "USD/JPY": { p: 154.32, d: 2, live: false, pct: null },
+    "USOil": { p: 68.40, d: 2, live: false, pct: null },
+    "UKOil": { p: 72.85, d: 2, live: false, pct: null },
+    "NGAS": { p: 3.21, d: 2, live: false, pct: null }
   };
   const NOTE = document.getElementById("strip-note");
   const LIVE_SOURCES = [];
@@ -169,6 +178,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
       el.dataset.live = s.live ? "live" : "sim";
+      /* Markets-tab snapshot rows carry a LIVE/SIM tag — it must track
+         the real feed state, never claim live for a simulated price. */
+      const tag = el.querySelector(".mp-tag");
+      if (tag) { tag.textContent = s.live ? "LIVE" : "SIM"; tag.classList.toggle("live", s.live); }
     });
     const heroXau = document.getElementById("hero-xau");
     if (heroXau) heroXau.textContent = "$" + PRICES["XAU/USD"].p.toLocaleString(undefined, { minimumFractionDigits: 2 });
@@ -208,25 +221,28 @@ document.addEventListener("DOMContentLoaded", () => {
            close's inverted value — never mixed bases. */
         const eurNow = d.rates.EUR ? 1 / d.rates.EUR : null;
         const gbpNow = d.rates.GBP ? 1 / d.rates.GBP : null;
+        const audNow = d.rates.AUD ? 1 / d.rates.AUD : null;
         if (eurNow) PRICES["EUR/USD"].p = eurNow;
         if (gbpNow) PRICES["GBP/USD"].p = gbpNow;
+        if (audNow) PRICES["AUD/USD"].p = audNow;
         if (d.rates.JPY) PRICES["USD/JPY"].p = d.rates.JPY;
         if (Date.now() >= fxPrevRetryAt) {
           fxPrevRetryAt = Date.now() + 3600e3;
           for (let back = 1; back <= 5; back++) {
             try {
               const day = new Date(Date.now() - back * 864e5).toISOString().slice(0, 10);
-              const prev = await fetchJSON("https://api.frankfurter.dev/v1/" + day + "?from=USD&to=EUR,GBP,JPY");
+              const prev = await fetchJSON("https://api.frankfurter.dev/v1/" + day + "?from=USD&to=EUR,GBP,JPY,AUD");
               if (prev && prev.rates) {
                 if (eurNow && prev.rates.EUR) PRICES["EUR/USD"].pct = (eurNow / (1 / prev.rates.EUR) - 1) * 100;
                 if (gbpNow && prev.rates.GBP) PRICES["GBP/USD"].pct = (gbpNow / (1 / prev.rates.GBP) - 1) * 100;
+                if (audNow && prev.rates.AUD) PRICES["AUD/USD"].pct = (audNow / (1 / prev.rates.AUD) - 1) * 100;
                 if (d.rates.JPY && prev.rates.JPY) PRICES["USD/JPY"].pct = (d.rates.JPY / prev.rates.JPY - 1) * 100;
                 break;
               }
             } catch (e) { /* try an earlier day; no % if none works */ }
           }
         }
-        ["EUR/USD", "GBP/USD", "USD/JPY"].forEach(k => markLive(k, "ExchangeRate-API"));
+        ["EUR/USD", "GBP/USD", "USD/JPY", "AUD/USD"].forEach(k => markLive(k, "ExchangeRate-API"));
       }
     } catch (e) { /* stays simulated */ }
   }
@@ -338,22 +354,70 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (e) { userName.textContent = "Demo Trader"; }
   }
 
-  /* ---------- hero video: respect reduced motion (paused = still poster frame) ----------
-     The <video> always stays rendered; under reduced motion JS pauses it, so the
-     poster attribute (hero-trader.jpg) shows as a still. The <img class="poster">
-     is an error-only fallback: if the video file fails, hide the video and show it. */
-  const heroVideo = document.querySelector(".hero-bg video");
-  if (heroVideo) {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      heroVideo.removeAttribute("autoplay");
-      heroVideo.pause();
-    }
-    heroVideo.addEventListener("error", () => {
-      heroVideo.style.display = "none";
-      const poster = document.querySelector(".hero-bg img.poster");
+  /* ---------- hero background: YouTube embed -> local mp4 -> poster still ----------
+     Primary: YouTube "4k Dynamic Stock Market Interface Video" (EEX0EHTTePE),
+     embedded via the iframe in .hero-yt (src is set from data-src by JS so
+     mobile / reduced-motion users never download it).
+     Fallback chain, in order:
+       1. YouTube iframe — must reach PLAYING within ~4s (YouTube IFrame API).
+          On error, or on the API script failing to load, fall through.
+       2. Local Pexels mp4 (hero-video.mp4) — plays only as a fallback.
+       3. hero-trader.jpg poster still — if the mp4 errors too.
+     Reduced motion or viewport <=760px: skip video entirely, poster still. */
+  (function heroBackground() {
+    const heroBg = document.querySelector(".hero-bg");
+    if (!heroBg) return;
+    const ytWrap = document.getElementById("hero-yt");
+    const ytFrame = document.getElementById("hero-yt-frame");
+    const heroVideo = document.getElementById("hero-video");
+    const poster = document.getElementById("hero-poster");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const small = window.matchMedia("(max-width: 760px)").matches;
+    function showPoster() {
+      if (ytWrap) ytWrap.classList.remove("on");
+      if (heroVideo) { heroVideo.pause(); heroVideo.style.display = "none"; }
       if (poster) poster.style.display = "block";
-    });
-  }
+    }
+    function showLocalVideo() {
+      if (ytWrap) ytWrap.classList.remove("on");
+      if (!heroVideo) { showPoster(); return; }
+      heroVideo.style.display = "block";
+      heroVideo.play().catch(() => showPoster());
+    }
+    if (heroVideo) heroVideo.addEventListener("error", showPoster);
+    if (reduced || small) { showPoster(); return; }
+    if (!ytFrame || !ytFrame.dataset.src) { showLocalVideo(); return; }
+    let settled = false;
+    const failTimer = setTimeout(() => { if (!settled) { settled = true; showLocalVideo(); } }, 4000);
+    ytFrame.addEventListener("error", () => { if (!settled) { settled = true; clearTimeout(failTimer); showLocalVideo(); } });
+    /* YouTube IFrame API: only a PLAYING state proves the embed really plays.
+       The API wraps the existing iframe (enablejsapi=1 is in the embed URL). */
+    function onPlayerState(e) {
+      if (e.data === 1 && !settled) { settled = true; clearTimeout(failTimer); } /* PLAYING */
+    }
+    function onPlayerError() { if (!settled) { settled = true; clearTimeout(failTimer); showLocalVideo(); } }
+    function initPlayer() {
+      try {
+        new window.YT.Player(ytFrame, { events: { onStateChange: onPlayerState, onError: onPlayerError } });
+      } catch (err) { onPlayerError(); }
+    }
+    const prevReady = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function () {
+      if (typeof prevReady === "function") prevReady();
+      initPlayer();
+    };
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      const s = document.createElement("script");
+      s.src = "https://www.youtube.com/iframe_api";
+      s.async = true;
+      s.addEventListener("error", onPlayerError);
+      document.head.appendChild(s);
+    }
+    ytFrame.src = ytFrame.dataset.src;
+    if (ytWrap) ytWrap.classList.add("on");
+  })();
 
   /* ---------- markets tabs (homepage) ---------- */
   const tabBtns = document.querySelectorAll(".tab-btn");

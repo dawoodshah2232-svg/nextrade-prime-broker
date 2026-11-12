@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=liberty8">
+<link rel="stylesheet" href="assets/style.css?v=liberty9">
 <link rel="icon" href="assets/logo-light.png">
 </head>
 <body>
@@ -73,7 +73,7 @@
   <div class="header-actions"><a class="login-link" href="login.html"><span class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3.2"/><path d="M6 19c1-3 3.2-4.5 6-4.5s5 1.5 6 4.5"/></svg></span>Login</a><a class="btn btn-dark" href="signup.html"><span class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>Get Started</a></div>
 </div></header>
 
-<section class="hero hero-blend hero-video"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="hero-bg" aria-hidden="true"><video autoplay muted loop playsinline preload="auto" poster="assets/hero-trader.jpg" src="assets/hero-video.mp4"></video><img class="poster" src="assets/hero-trader.jpg" alt="" loading="eager" fetchpriority="high"></div><div class="container hero-grid">
+<section class="hero hero-blend hero-video"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="hero-bg" aria-hidden="true"><div class="hero-yt" id="hero-yt"><iframe id="hero-yt-frame" data-src="https://www.youtube.com/embed/EEX0EHTTePE?autoplay=1&mute=1&loop=1&playlist=EEX0EHTTePE&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&enablejsapi=1" title="Dynamic stock market interface video" frameborder="0" allow="autoplay; encrypted-media" tabindex="-1"></iframe></div><video id="hero-video" muted loop playsinline preload="none" poster="assets/hero-trader.jpg" src="assets/hero-video.mp4"></video><img class="poster" id="hero-poster" src="assets/hero-trader.jpg" alt="" loading="eager" fetchpriority="high"></div><div class="container hero-grid">
   <div class="hero-copy">
     <span class="eyebrow">Trade on MetaTrader 5</span>
     <h1>Trade the markets, <span class="gold">clearly.</span></h1>
@@ -114,16 +114,16 @@
 <section class="section" id="spreads"><div class="container">
   <h2 class="reveal">Spreads that stay honest</h2>
   <p class="sub reveal">The minimum spread for each account type, on the instruments traders ask about most.</p>
-  <div class="table-wrap reveal" style="margin-top:32px">
-    <table>
-      <thead><tr><th>Instrument</th><th>Standard</th><th>Raw Spread</th><th>Pro</th></tr></thead>
+  <div class="table-wrap reveal spreads-wrap" style="margin-top:32px">
+    <table class="spreads-table">
+      <thead><tr><th>Instrument</th><th>Standard</th><th class="best-col">Raw Spread <span class="best-badge">Best</span></th><th>Pro</th></tr></thead>
       <tbody>
-        <tr><td><b>EUR/USD</b></td><td>from 1.0 pip</td><td>from 0.0 pips</td><td>from 0.1 pips</td></tr>
-        <tr><td><b>GBP/USD</b></td><td>from 1.3 pips</td><td>from 0.2 pips</td><td>from 0.3 pips</td></tr>
-        <tr><td><b>USD/JPY</b></td><td>from 1.2 pips</td><td>from 0.1 pips</td><td>from 0.2 pips</td></tr>
-        <tr><td><b>XAU/USD</b></td><td>from $0.35</td><td>from $0.15</td><td>from $0.20</td></tr>
-        <tr><td><b>US30</b></td><td>from 2.8 points</td><td>from 1.6 points</td><td>from 2.2 points</td></tr>
-        <tr><td><b>BTC/USD</b></td><td>from $28</td><td>from $18</td><td>from $22</td></tr>
+        <tr><td><span class="flag-pair"><img class="flag" src="https://flagcdn.com/w80/eu.png" alt="European Union flag" loading="lazy"><img class="flag" src="https://flagcdn.com/w80/us.png" alt="United States flag" loading="lazy"></span><span class="inst"><b>EUR/USD</b><span>Euro / US Dollar</span></span></td><td>from 1.0 pip</td><td class="best-col">from 0.0 pips</td><td>from 0.1 pips</td></tr>
+        <tr><td><span class="flag-pair"><img class="flag" src="https://flagcdn.com/w80/gb.png" alt="United Kingdom flag" loading="lazy"><img class="flag" src="https://flagcdn.com/w80/us.png" alt="United States flag" loading="lazy"></span><span class="inst"><b>GBP/USD</b><span>British Pound / US Dollar</span></span></td><td>from 1.3 pips</td><td class="best-col">from 0.2 pips</td><td>from 0.3 pips</td></tr>
+        <tr><td><span class="flag-pair"><img class="flag" src="https://flagcdn.com/w80/us.png" alt="United States flag" loading="lazy"><img class="flag" src="https://flagcdn.com/w80/jp.png" alt="Japan flag" loading="lazy"></span><span class="inst"><b>USD/JPY</b><span>US Dollar / Japanese Yen</span></span></td><td>from 1.2 pips</td><td class="best-col">from 0.1 pips</td><td>from 0.2 pips</td></tr>
+        <tr><td><span class="flag-pair"><span class="flag flag-au" aria-hidden="true">Au</span><img class="flag" src="https://flagcdn.com/w80/us.png" alt="United States flag" loading="lazy"></span><span class="inst"><b>XAU/USD</b><span>Gold / US Dollar</span></span></td><td>from $0.35</td><td class="best-col">from $0.15</td><td>from $0.20</td></tr>
+        <tr><td><span class="flag-pair"><img class="flag" src="https://flagcdn.com/w80/us.png" alt="United States flag" loading="lazy"><span class="flag flag-idx" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span></span><span class="inst"><b>US30</b><span>US Wall Street 30</span></span></td><td>from 2.8 points</td><td class="best-col">from 1.6 points</td><td>from 2.2 points</td></tr>
+        <tr><td><span class="flag-pair"><span class="flag flag-btc" aria-hidden="true">₿</span><img class="flag" src="https://flagcdn.com/w80/us.png" alt="United States flag" loading="lazy"></span><span class="inst"><b>BTC/USD</b><span>Bitcoin / US Dollar</span></span></td><td>from $28</td><td class="best-col">from $18</td><td>from $22</td></tr>
       </tbody>
     </table>
   </div>
@@ -135,58 +135,104 @@
   <h2 class="reveal">Why traders choose NexTrade Prime</h2>
   <p class="sub reveal">Three things, done properly. No clutter, no small print surprises.</p>
   <div class="grid3" style="margin-top:32px">
-    <div class="card reveal fund-card"><div class="fund-photo"><img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=1200&q=80" alt="Classical bank building — client funds held in segregated accounts" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Segregated funds</h3><p>Client funds are held in segregated accounts, separate from company operating funds.</p><a href="regulation.html" style="font-weight:700;color:var(--ink);margin-top:12px">How we protect your funds →</a></div>
-    <div class="card reveal why-card"><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><path d="M20 52l12-14 10 8 18-22" stroke="#c9a227" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M52 24h8v8" stroke="#c9a227" stroke-width="4" stroke-linecap="round"/></svg></div><h3>Tight spreads</h3><p>Spreads from 0.0 pips on Raw Spread accounts and from 1.0 pip on Standard — published on every account page, not hidden in a footnote.</p></div>
-    <div class="card reveal why-card"><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><path d="M40 18v22l14 10" stroke="#c9a227" stroke-width="4" stroke-linecap="round"/><circle cx="40" cy="40" r="24" stroke="#c9a227" stroke-width="3"/></svg></div><h3>Fast execution</h3><p>Market execution in milliseconds on MT5, with no requotes on market orders. Your order goes in when you click, not after.</p></div>
+    <div class="card reveal fund-card why-card"><div class="fund-photo"><img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=1200&q=80" alt="Classical bank building — client funds held in segregated accounts" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Segregated funds</h3><p>Client funds are held in segregated accounts, separate from company operating funds.</p><a class="card-link" href="regulation.html">How we protect your funds →</a></div>
+    <div class="card reveal fund-card why-card"><div class="fund-photo"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80" alt="Candlestick chart close-up — tight spreads on every account" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><path d="M20 52l12-14 10 8 18-22" stroke="#c9a227" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M52 24h8v8" stroke="#c9a227" stroke-width="4" stroke-linecap="round"/></svg></div><h3>Tight spreads</h3><p>Spreads from 0.0 pips on Raw Spread accounts and from 1.0 pip on Standard — published on every account page, not hidden in a footnote.</p><a class="card-link" href="accounts.html">See the spreads →</a></div>
+    <div class="card reveal fund-card why-card"><div class="fund-photo"><img src="https://images.unsplash.com/photo-1716279083176-60af7a63cb03?auto=format&fit=crop&w=1200&q=80" alt="Trader at a desk with a candlestick chart and order book — orders executed in milliseconds" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><path d="M40 18v22l14 10" stroke="#c9a227" stroke-width="4" stroke-linecap="round"/><circle cx="40" cy="40" r="24" stroke="#c9a227" stroke-width="3"/></svg></div><h3>Fast execution</h3><p>Market execution in milliseconds on MT5, with no requotes on market orders. Your order goes in when you click, not after.</p><a class="card-link" href="platforms-mt5.html">Explore MT5 →</a></div>
   </div>
 </div></section>
 
 <section class="stats-band"><div class="container stats-grid">
   <div class="stat reveal"><div class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg></div><b><span data-count="1000" data-suffix="+">0</span></b><span>Instruments to trade</span></div>
-  <div class="stat reveal"><div class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19a9 9 0 1 1 14 0"/><path d="M12 14l4-4"/><circle cx="12" cy="14" r="1.6"/></svg></div><b><span data-count="0" data-suffix="" data-decimals="1">0.0</span></b><span>Spreads from (pips)</span></div>
+  <div class="stat reveal"><div class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19a9 9 0 1 1 16 0"/><path d="M12 15l4.2-4.2"/><circle cx="12" cy="15" r="1.7" fill="#fff" stroke="none"/></svg></div><b><span data-count="0" data-suffix="" data-decimals="1">0.0</span></b><span>Spreads from (pips)</span></div>
   <div class="stat reveal"><div class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M16 21h3a2 2 0 0 0 2-2v-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg></div><b><span data-count="500" data-prefix="1:">0</span></b><span>Maximum leverage</span></div>
-  <div class="stat reveal"><div class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 19a4 4 0 0 1-4 3h-2"/></svg></div><b><span data-count="24" data-suffix="/7">0</span></b><span>Support, every day</span></div>
+  <div class="stat reveal"><div class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2.5" y="13" width="4.5" height="7" rx="2"/><rect x="17" y="13" width="4.5" height="7" rx="2"/><path d="M20 20a3.5 3.5 0 0 1-3.5 3h-3"/></svg></div><b><span data-count="24" data-suffix="/7">0</span></b><span>Support, every day</span></div>
 </div></section>
 
 <section class="section soft" id="markets"><div class="container">
   <h2 class="reveal">One account. Every market.</h2>
   <p class="sub reveal">Trade the markets you know, from one MT5 account. Pick a market to see what trades on it.</p>
   <div class="tabs reveal" role="tablist" aria-label="Markets">
-    <button class="tab-btn active" type="button" role="tab" aria-selected="true" data-tab="forex">Forex</button>
-    <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="metals">Metals</button>
-    <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="indices">Indices</button>
-    <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="crypto">Crypto</button>
-    <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="energies">Energies</button>
+    <button class="tab-btn active" type="button" role="tab" aria-selected="true" data-tab="forex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h13M17 4l3 3-3 3M20 17H7M7 14l-3 3 3 3"/></svg>Forex</button>
+    <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="metals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v5c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 11v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></svg>Metals</button>
+    <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="indices"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M7 21v-7M12 21V8M17 21v-4"/></svg>Indices</button>
+    <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="crypto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 8h3.5a2.5 2.5 0 0 1 0 5H9.5zM9.5 13H13a2.5 2.5 0 0 1 0 5H9.5zM11 6v2M11 16v2M13.5 6v2M13.5 16v2"/></svg>Crypto</button>
+    <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="energies"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>Energies</button>
   </div>
   <div class="tab-panel active reveal" data-panel="forex" role="tabpanel">
+    <div class="tab-main">
     <h3>Forex</h3>
     <p>60+ currency pairs, from the majors to the crosses. Spreads from 0.0 pips on Raw Spread, leverage up to 1:500, minimum trade 0.01 lots.</p>
     <div class="chip-row"><span class="chip">EUR/USD</span><span class="chip">GBP/USD</span><span class="chip">USD/JPY</span><span class="chip">AUD/USD</span><span class="chip">USD/CHF</span><span class="chip">NZD/USD</span></div>
     <a class="btn btn-gold btn-sm" style="margin-top:20px" href="markets-forex.html">Explore Forex</a>
+    </div>
+    <aside class="tab-side">
+      <div class="tab-side-head"><span class="tab-side-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h13M17 4l3 3-3 3M20 17H7M7 14l-3 3 3 3"/></svg></span><div><b>Forex snapshot</b><span>Prices update every 15 seconds</span></div></div>
+      <div class="mkt-price" data-symbol="EUR/USD"><span class="mp-ico"><img src="https://flagcdn.com/w80/eu.png" alt=""></span><span class="mp-sym">EUR/USD</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <div class="mkt-price" data-symbol="GBP/USD"><span class="mp-ico"><img src="https://flagcdn.com/w80/gb.png" alt=""></span><span class="mp-sym">GBP/USD</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <div class="mkt-price" data-symbol="USD/JPY"><span class="mp-ico"><img src="https://flagcdn.com/w80/us.png" alt=""></span><span class="mp-sym">USD/JPY</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <div class="mkt-price" data-symbol="AUD/USD"><span class="mp-ico"><img src="https://flagcdn.com/w80/au.png" alt=""></span><span class="mp-sym">AUD/USD</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <p class="tab-side-note">LIVE = live feed connected. SIM = simulated price until the feed connects.</p>
+    </aside>
   </div>
   <div class="tab-panel reveal" data-panel="metals" role="tabpanel" hidden>
+    <div class="tab-main">
     <h3>Metals</h3>
     <p>Gold and silver against the dollar — the classic hedge, traded around the clock with no expiry.</p>
     <div class="chip-row"><span class="chip">XAU/USD</span><span class="chip">XAG/USD</span></div>
     <a class="btn btn-gold btn-sm" style="margin-top:20px" href="markets-metals.html">Explore Metals</a>
+    </div>
+    <aside class="tab-side">
+      <div class="tab-side-head"><span class="tab-side-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v5c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 11v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></svg></span><div><b>Metals snapshot</b><span>Prices update every 15 seconds</span></div></div>
+      <div class="mkt-price" data-symbol="XAU/USD"><span class="mp-ico mp-glyph mp-au">Au</span><span class="mp-sym">XAU/USD</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <div class="mkt-price" data-symbol="XAG/USD"><span class="mp-ico mp-glyph mp-ag">Ag</span><span class="mp-sym">XAG/USD</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <p class="tab-side-note">LIVE = live feed connected. SIM = simulated price until the feed connects.</p>
+    </aside>
   </div>
   <div class="tab-panel reveal" data-panel="indices" role="tabpanel" hidden>
+    <div class="tab-main">
     <h3>Indices</h3>
     <p>Trade whole markets in one position — US, UK and European benchmarks, cash indices with no expiry.</p>
     <div class="chip-row"><span class="chip">US30</span><span class="chip">US500</span><span class="chip">NAS100</span><span class="chip">UK100</span><span class="chip">GER40</span></div>
     <a class="btn btn-gold btn-sm" style="margin-top:20px" href="markets-indices.html">Explore Indices</a>
+    </div>
+    <aside class="tab-side">
+      <div class="tab-side-head"><span class="tab-side-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M7 21v-7M12 21V8M17 21v-4"/></svg></span><div><b>Indices snapshot</b><span>Prices update every 15 seconds</span></div></div>
+      <div class="mkt-price" data-symbol="US30"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span class="mp-sym">US30</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <div class="mkt-price" data-symbol="US500"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span class="mp-sym">US500</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <div class="mkt-price" data-symbol="NAS100"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span class="mp-sym">NAS100</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <p class="tab-side-note">LIVE = live feed connected. SIM = simulated price until the feed connects.</p>
+    </aside>
   </div>
   <div class="tab-panel reveal" data-panel="crypto" role="tabpanel" hidden>
+    <div class="tab-main">
     <h3>Crypto</h3>
     <p>Bitcoin, Ethereum and more as CFDs — long or short, 24/7, without a wallet.</p>
     <div class="chip-row"><span class="chip">BTC/USD</span><span class="chip">ETH/USD</span><span class="chip">LTC/USD</span><span class="chip">XRP/USD</span></div>
     <a class="btn btn-gold btn-sm" style="margin-top:20px" href="markets-crypto.html">Explore Crypto</a>
+    </div>
+    <aside class="tab-side">
+      <div class="tab-side-head"><span class="tab-side-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 8h3.5a2.5 2.5 0 0 1 0 5H9.5zM9.5 13H13a2.5 2.5 0 0 1 0 5H9.5zM11 6v2M11 16v2M13.5 6v2M13.5 16v2"/></svg></span><div><b>Crypto snapshot</b><span>Prices update every 15 seconds</span></div></div>
+      <div class="mkt-price" data-symbol="BTC/USD"><span class="mp-ico mp-glyph mp-btc">₿</span><span class="mp-sym">BTC/USD</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <div class="mkt-price" data-symbol="ETH/USD"><span class="mp-ico mp-glyph mp-eth">Ξ</span><span class="mp-sym">ETH/USD</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <div class="mkt-price" data-symbol="LTC/USD"><span class="mp-ico mp-glyph mp-ltc">Ł</span><span class="mp-sym">LTC/USD</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <div class="mkt-price" data-symbol="XRP/USD"><span class="mp-ico mp-glyph mp-xrp">X</span><span class="mp-sym">XRP/USD</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <p class="tab-side-note">LIVE = live feed connected. SIM = simulated price until the feed connects.</p>
+    </aside>
   </div>
   <div class="tab-panel reveal" data-panel="energies" role="tabpanel" hidden>
+    <div class="tab-main">
     <h3>Energies</h3>
     <p>Oil and natural gas — the markets that move on supply, weather and geopolitics.</p>
     <div class="chip-row"><span class="chip">USOil</span><span class="chip">UKOil</span><span class="chip">NGAS</span></div>
     <a class="btn btn-gold btn-sm" style="margin-top:20px" href="markets-energies.html">Explore Energies</a>
+    </div>
+    <aside class="tab-side">
+      <div class="tab-side-head"><span class="tab-side-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span><div><b>Energies snapshot</b><span>Prices update every 15 seconds</span></div></div>
+      <div class="mkt-price" data-symbol="USOil"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.6 6 11a6 6 0 0 1-12 0c0-4.4 6-11 6-11z"/></svg></span><span class="mp-sym">USOil</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <div class="mkt-price" data-symbol="UKOil"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.6 6 11a6 6 0 0 1-12 0c0-4.4 6-11 6-11z"/></svg></span><span class="mp-sym">UKOil</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <div class="mkt-price" data-symbol="NGAS"><span class="mp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8c766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span><span class="mp-sym">NGAS</span><b class="val">—</b><span class="chg na">—</span><span class="mp-tag">SIM</span></div>
+      <p class="tab-side-note">LIVE = live feed connected. SIM = simulated price until the feed connects.</p>
+    </aside>
   </div>
 </div></section>
 
@@ -215,9 +261,9 @@
   <h2 class="reveal">Start trading today</h2>
   <p class="sub reveal">Three steps. Most traders are trading within the hour.</p>
   <div class="steps" style="margin-top:32px">
-    <div class="step reveal"><div class="step-num">01</div><h3>Open an account</h3><p>Choose Standard, Raw Spread or Pro. Registration takes about two minutes.</p></div>
-    <div class="step reveal"><div class="step-num">02</div><h3>Fund in minutes</h3><p>Verify your identity, then deposit from $10 by card, bank transfer or e-wallet.</p></div>
-    <div class="step reveal"><div class="step-num">03</div><h3>Trade on MT5</h3><p>Download MT5, log in with your account, and place your first trade.</p></div>
+    <div class="step reveal" data-ghost="01"><div class="step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="8" r="4"/><path d="M3.5 20c.8-3.2 3.4-5 6.5-5s5.7 1.8 6.5 5"/><path d="M18 8h4M20 6v4"/></svg></div><div class="step-num">01</div><h3>Open an account</h3><p>Choose Standard, Raw Spread or Pro. Registration takes about two minutes.</p></div>
+    <div class="step reveal" data-ghost="02"><div class="step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19M6 15h4"/></svg></div><div class="step-num">02</div><h3>Fund in minutes</h3><p>Verify your identity, then deposit from $10 by card, bank transfer or e-wallet.</p></div>
+    <div class="step reveal" data-ghost="03"><div class="step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="12" rx="2"/><path d="M8 20h8M12 16v4M7 12l2.5-3 2 2 3-4"/></svg></div><div class="step-num">03</div><h3>Trade on MT5</h3><p>Download MT5, log in with your account, and place your first trade.</p></div>
   </div>
 </div></section>
 
@@ -233,8 +279,9 @@
 
 <section class="section"><div class="container">
   <div class="grid2">
-    <div class="split-img reveal"><img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&w=1200&q=80" alt="MetaTrader 5 terminal on a laptop screen with a phone beside it" loading="lazy"></div>
+    <div class="split-img reveal mt5-shot"><img src="assets/mt5-terminal.png" alt="MetaTrader 5 desktop terminal — Market Watch, Navigator and XAU/USD charts with indicators" loading="lazy"></div>
     <div class="reveal">
+      <div class="mt5-logo-chip"><img src="https://www.metatrader5.com/i/metatrader-5-logo.png" alt="MetaTrader 5" loading="lazy"></div>
       <h2>One platform. Every market.</h2>
       <p class="lead" style="margin-bottom:18px">Every NexTrade Prime account trades on MetaTrader 5 — the platform professional traders already know. Desktop, web and mobile, with the same account everywhere.</p>
       <ul class="check-list">
@@ -271,9 +318,9 @@
   <h2 class="reveal">Support &amp; resources</h2>
   <p class="sub reveal">Real people and real answers, whenever you need them.</p>
   <div class="grid3" style="margin-top:32px">
-    <div class="card reveal fund-card"><div class="fund-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Call_center_PV.jpg" alt="Support agent wearing a headset with a microphone, helping a customer at her desk" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-3.2-6.9"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></div><h3>24/7 support</h3><p>Real people, 24/7, by live chat and email. Average first response is measured in minutes, not days.</p><a class="btn btn-gold btn-sm" style="margin-top:16px" href="contact.html">Contact Us</a></div>
-    <div class="card reveal why-card"><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><circle cx="40" cy="40" r="24" stroke="#c9a227" stroke-width="3"/><path d="M32 32a8 8 0 1 1 12 7c-2.5 2.5-4 3-4 7M40 58h.01" stroke="#c9a227" stroke-width="4" stroke-linecap="round"/></svg></div><h3>Help Centre</h3><p>Answers to the questions traders actually ask — accounts, funding, verification and the platform.</p><a class="btn btn-gold btn-sm" style="margin-top:16px" href="help-centre.html">Visit Help Centre</a></div>
-    <div class="card reveal why-card"><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><path d="M20 32l20-9 20 9-20 9-20-9z" stroke="#c9a227" stroke-width="3" stroke-linejoin="round"/><path d="M28 38v12c0 4 5.5 7 12 7s12-3 12-7V38" stroke="#c9a227" stroke-width="3" stroke-linecap="round"/></svg></div><h3>Education</h3><p>Courses for every level, live sessions and market notes — learn how markets move before you risk a cent.</p><a class="btn btn-gold btn-sm" style="margin-top:16px" href="education.html">Start Learning</a></div>
+    <div class="card reveal fund-card why-card"><div class="fund-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Call_center_PV.jpg" alt="Support agent wearing a headset with a microphone, helping a customer at her desk" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-3.2-6.9"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></div><h3>24/7 support</h3><p>Real people, 24/7, by live chat and email. Average first response is measured in minutes, not days.</p><a class="btn btn-gold btn-sm" style="margin-top:16px" href="contact.html">Contact Us</a></div>
+    <div class="card reveal fund-card why-card"><div class="fund-photo"><img src="assets/help-centre.jpg" alt="Smiling support agent wearing a headset, helping a customer at her desk" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><circle cx="40" cy="40" r="24" stroke="#c9a227" stroke-width="3"/><path d="M32 32a8 8 0 1 1 12 7c-2.5 2.5-4 3-4 7M40 58h.01" stroke="#c9a227" stroke-width="4" stroke-linecap="round"/></svg></div><h3>Help Centre</h3><p>Answers to the questions traders actually ask — accounts, funding, verification and the platform.</p><a class="btn btn-gold btn-sm" style="margin-top:16px" href="help-centre.html">Visit Help Centre</a></div>
+    <div class="card reveal fund-card why-card"><div class="fund-photo"><img src="assets/education.jpg" alt="Student learning online — taking notes at a laptop with earphones in" loading="lazy"></div><div class="icon3d"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="37" fill="#fdf3d0"/><path d="M20 32l20-9 20 9-20 9-20-9z" stroke="#c9a227" stroke-width="3" stroke-linejoin="round"/><path d="M28 38v12c0 4 5.5 7 12 7s12-3 12-7V38" stroke="#c9a227" stroke-width="3" stroke-linecap="round"/></svg></div><h3>Education</h3><p>Courses for every level, live sessions and market notes — learn how markets move before you risk a cent.</p><a class="btn btn-gold btn-sm" style="margin-top:16px" href="education.html">Start Learning</a></div>
   </div>
 </div></section>
 
@@ -297,6 +344,6 @@
   <p class="risk">Risk warning: CFDs are leveraged products and carry a high level of risk to your capital. Prices can move against you, and you may lose more than your initial deposit if negative balance protection does not apply in your jurisdiction. You should not trade with money you cannot afford to lose. Past performance is not a reliable indicator of future results. This website is a demonstration front-end; account opening, deposits and trading are simulated in this demo.</p>
   <div class="footer-bottom"><span>© 2026 NexTrade Prime. All rights reserved.</span><span class="footer-legal"><a href="regulation.html">Regulation</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span></div>
 </div></footer>
-<script src="assets/script.js?v=liberty5"></script>
+<script src="assets/script.js?v=liberty6"></script>
 </body>
 </html>

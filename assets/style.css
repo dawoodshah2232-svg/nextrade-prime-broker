@@ -195,7 +195,7 @@ td b{color:var(--ink)}
 .tag.gold{background:linear-gradient(135deg,#e8c766,#c9a227);color:#081226}
 /* ---------- steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:step;position:relative}
-@media (min-width:761px){.step:not(:last-child)::after{content:"";position:absolute;top:46px;right:-22px;width:22px;height:3px;background:linear-gradient(90deg,#f4dc8a,#c9a227);z-index:2;pointer-events:none}}
+@media (min-width:761px){.step:not(:last-child)::after{content:"";position:absolute;top:119px;right:-22px;width:22px;height:3px;background:linear-gradient(90deg,#f4dc8a,#c9a227);z-index:2;pointer-events:none}}
 .step{background:var(--card-bg);border:1px solid var(--line-soft);border-radius:var(--radius);padding:28px;position:relative;z-index:1;transition:transform .2s var(--ease),box-shadow .2s}
 .step-num{font-size:2rem;font-weight:800;font-family:var(--font-display);background:linear-gradient(135deg,#f4dc8a,#c9a227 55%,#8a6d14);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .step h3{margin:10px 0 8px}
@@ -387,7 +387,7 @@ section{scroll-margin-top:88px}
 /* --- card photo banners (duo + funds) --- */
 .duo-photo,.fund-photo{position:relative;flex:none;overflow:hidden;border-radius:var(--radius) var(--radius) 0 0}
 .duo-photo{height:170px;margin:-26px -26px 20px}
-.fund-photo{height:150px;margin:-26px -26px 18px}
+.fund-photo{height:180px;margin:-26px -26px 18px}
 .duo-photo img,.fund-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
 .duo-new::before{z-index:1}
 .duo-pro .duo-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,22,51,.9));pointer-events:none}
@@ -484,4 +484,148 @@ section{scroll-margin-top:88px}
   .promo-section{margin-top:-40px}
   .hero{min-height:0}
   .tab-panel{padding:22px}
+}
+
+/* ============ HOMEPAGE POLISH — 2026-11-12 (Dawood screenshot feedback) ============ */
+
+/* --- ITEM 1: spreads table — flags, best column, hover --- */
+.spreads-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.spreads-table{width:100%;border-collapse:separate;border-spacing:0;min-width:640px}
+.spreads-table thead th{font-family:var(--font-head);font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right;padding:14px 18px;border-bottom:1px solid rgba(201,162,39,.28);white-space:nowrap}
+.spreads-table thead th:first-child{text-align:left}
+.spreads-table tbody td{padding:15px 18px;text-align:right;border-bottom:1px solid rgba(255,255,255,.06);font-size:1.02rem;vertical-align:middle;white-space:nowrap}
+.spreads-table tbody tr{transition:background .25s ease,box-shadow .25s ease}
+.spreads-table tbody tr:hover{background:rgba(201,162,39,.07);box-shadow:inset 3px 0 0 var(--gold)}
+.spreads-table tbody td:first-child{text-align:left}
+.spreads-table .best-col{background:linear-gradient(180deg,rgba(201,162,39,.13),rgba(201,162,39,.05))}
+.spreads-table thead th.best-col{color:var(--gold2)}
+.best-badge{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:99px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1405;font-family:var(--font-body);font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;vertical-align:middle}
+.flag-pair{display:inline-flex;align-items:center;margin-right:14px;vertical-align:middle}
+.flag{width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid #0e1322;box-shadow:0 0 0 1px rgba(201,162,39,.55);display:block}
+.flag+.flag{margin-left:-10px}
+.flag-disc{display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem}
+.flag-au{background:linear-gradient(135deg,#f4dc8a,#c9a227);color:#1a1405}
+.flag-btc{background:#f7931a;color:#fff;font-size:.95rem}
+.flag-idx{background:linear-gradient(135deg,#1c2740,#0e1322);color:#e8c766}
+.flag-idx svg{width:16px;height:16px}
+.inst{display:inline-block;vertical-align:middle}
+.inst b{display:block;font-size:1.02rem;letter-spacing:.01em}
+.inst small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+
+/* --- ITEM 2 + 8: Why / Support cards — identical photo-top structure, aligned baselines --- */
+.fund-card.why-card{display:flex;flex-direction:column}
+.fund-card.why-card .icon3d{margin:0 0 14px}
+.fund-card.why-card h3{margin:0 0 10px}
+.fund-card.why-card p{margin:0 0 16px;flex:1}
+.fund-card.why-card .card-link{margin-top:auto;font-weight:700;color:var(--ink)}
+.fund-card.why-card .btn{align-self:flex-start;margin-top:auto!important}
+.fund-card.why-card .fund-photo{flex:none}
+
+/* --- ITEM 3: stats band — big numerals, bigger crisper icons --- */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.stat{display:flex;flex-direction:column;align-items:center;gap:10px;padding:30px 16px 26px;text-align:center}
+.stat-ico{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,rgba(201,162,39,.28),rgba(201,162,39,.1));border:1px solid rgba(201,162,39,.45);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px rgba(201,162,39,.06)}
+.stat-ico svg{width:34px;height:34px}
+.stat b{font-family:var(--font-head);font-size:2.75rem;line-height:1.05;font-weight:700;background:linear-gradient(135deg,#f4dc8a,#c9a227);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.01em}
+.stat span:last-child{font-size:.95rem;color:var(--muted)}
+
+/* --- ITEM 4: markets tabs — icons + split panel + live snapshot --- */
+.tab-btn{display:inline-flex;align-items:center;gap:8px}
+.tab-btn svg{width:18px;height:18px;flex:none}
+.tab-panel{display:grid;grid-template-columns:1.35fr 1fr;gap:32px;align-items:start;padding:32px 36px}
+.tab-main h3{font-size:1.5rem;margin:0 0 12px}
+.tab-main p{margin:0 0 16px}
+.tab-side{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(201,162,39,.22);border-radius:14px;padding:18px 18px 12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.tab-side-head{display:flex;gap:12px;align-items:center;padding-bottom:14px;margin-bottom:6px;border-bottom:1px solid rgba(255,255,255,.08)}
+.tab-side-ico{width:42px;height:42px;flex:none;border-radius:50%;background:rgba(201,162,39,.16);border:1px solid rgba(201,162,39,.4);display:flex;align-items:center;justify-content:center}
+.tab-side-ico svg{width:22px;height:22px}
+.tab-side-head b{display:block;font-size:1rem}
+.tab-side-head span{font-size:.8rem;color:var(--muted)}
+.mkt-price{display:grid;grid-template-columns:30px 1fr auto auto 34px;gap:10px;align-items:center;padding:11px 2px;border-bottom:1px solid rgba(255,255,255,.05)}
+.mkt-price:last-of-type{border-bottom:none}
+.mp-ico{width:30px;height:30px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);flex:none}
+.mp-ico img{width:100%;height:100%;object-fit:cover}
+.mp-ico svg{width:17px;height:17px}
+.mp-glyph{font-weight:800;font-size:.8rem;color:#0e1322}
+.mp-au{background:linear-gradient(135deg,#f4dc8a,#c9a227)}
+.mp-ag{background:linear-gradient(135deg,#e8ecf2,#9aa7bf)}
+.mp-btc{background:#f7931a;color:#fff}
+.mp-eth{background:#627eea;color:#fff;font-size:.95rem}
+.mp-ltc{background:#345d9d;color:#fff}
+.mp-xrp{background:#23292f;color:#fff;border-color:rgba(255,255,255,.25)}
+.mp-sym{font-weight:700;font-size:.95rem}
+.mkt-price .val{font-size:1rem;text-align:right}
+.mkt-price .chg{font-size:.85rem;text-align:right;min-width:64px}
+.mkt-price .chg.up{color:#4ade80}.mkt-price .chg.down{color:#f87171}.mkt-price .chg.na{color:var(--muted)}
+.mp-tag{font-size:.62rem;font-weight:800;letter-spacing:.08em;text-align:center;padding:3px 0;border-radius:5px;background:rgba(255,255,255,.08);color:var(--muted)}
+.mp-tag.live{background:rgba(74,222,128,.16);color:#4ade80}
+.tab-side-note{font-size:.75rem;color:var(--muted);margin:12px 0 4px;line-height:1.5}
+
+/* --- ITEM 5: steps — ghost numerals, gradient badges, icons, hover --- */
+.step{position:relative;overflow:hidden;transition:transform .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease)}
+.step::before{content:attr(data-ghost);position:absolute;top:-18px;right:6px;font-family:var(--font-head);font-size:7.5rem;line-height:1;font-weight:700;color:rgba(201,162,39,.09);pointer-events:none;z-index:0}
+.step>*{position:relative;z-index:1}
+.step:hover{transform:translateY(-5px);border-color:rgba(201,162,39,.5);box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 1px rgba(201,162,39,.25)}
+.step-ico{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(201,162,39,.3),rgba(201,162,39,.12));border:1px solid rgba(201,162,39,.45);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.step-ico svg{width:27px;height:27px}
+.step .step-num{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));background-clip:border-box;-webkit-background-clip:border-box;color:#1a1405;-webkit-text-fill-color:#1a1405;font-family:var(--font-head);font-weight:700;font-size:1.05rem;display:flex;align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 6px 16px rgba(201,162,39,.35)}
+
+/* --- ITEM 7: MT5 section — real terminal shot + logo chip --- */
+.mt5-shot{border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px rgba(201,162,39,.3)}
+.mt5-shot img{width:100%;height:100%;object-fit:cover;display:block}
+.mt5-logo-chip{display:inline-flex;align-items:center;background:#fff;border-radius:10px;padding:10px 16px;margin-bottom:18px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.mt5-logo-chip img{height:34px;width:auto;display:block}
+
+/* --- ITEM 9: YouTube hero embed (16:9 cover trick) --- */
+.hero-yt{position:absolute;inset:0;overflow:hidden;display:none}
+.hero-yt.on{display:block}
+.hero-yt iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100vw;height:56.25vw;min-height:100%;min-width:177.78vh;border:0;pointer-events:none}
+.hero-bg img.poster{display:none}
+.hero-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* --- ITEM 6: mobile + tablet --- */
+@media (max-width:1020px){
+  .tab-panel{grid-template-columns:1fr;gap:24px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-grid{grid-template-columns:1fr}
+  .hero h1{font-size:clamp(2.4rem,4.6vw,3.9rem)}
+}
+@media (max-width:760px){
+  .hero{min-height:0;padding:120px 0 110px}
+  .hero h1{font-size:clamp(2rem,8.5vw,2.6rem);line-height:1.12}
+  .hero-sub{font-size:1.02rem}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .hero-cta .btn{width:100%;justify-content:center;min-height:48px}
+  .hero-proof{grid-template-columns:repeat(2,1fr);gap:14px}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .stat{padding:22px 10px 18px}
+  .stat b{font-size:2.1rem}
+  .stat-ico{width:60px;height:60px}
+  .stat-ico svg{width:28px;height:28px}
+  .tabs{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:6px}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab-btn{flex:none;min-height:44px}
+  .tab-panel{padding:22px}
+  .mkt-price{grid-template-columns:26px 1fr auto auto 30px;gap:8px}
+  .mp-ico{width:26px;height:26px}
+  .mkt-price .chg{min-width:56px;font-size:.8rem}
+  .spreads-table{min-width:560px}
+  .spreads-table thead th,.spreads-table tbody td{padding:12px 12px}
+  .flag{width:26px;height:26px}
+  .flag-pair{margin-right:10px}
+  .inst small{display:none}
+  .fund-photo{height:160px}
+  .steps{grid-template-columns:1fr}
+  .step::before{font-size:6rem;top:-12px}
+  .mt5-logo-chip img{height:28px}
+  .btn{min-height:44px}
+  .nav-cta .btn{padding:10px 16px}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .footer-bottom{flex-direction:column;gap:10px;text-align:center}
+  .video-grid{grid-template-columns:1fr}
+  .promo-grid{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr;gap:28px}
+  .grid3{grid-template-columns:1fr}
+  .acc-grid{grid-template-columns:1fr}
+  .faq-item summary{min-height:44px}
 }
