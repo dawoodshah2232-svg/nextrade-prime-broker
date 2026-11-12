@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Redirecting…</title>
+<!-- Single Page Apps for GitHub Pages (rafrex/spa-github-pages, MIT).
+     GitHub Pages serves this file for every unknown path; it redirects to
+     the SPA entry with the requested route encoded in the query string,
+     and the snippet in index.html restores it. pathSegmentsToKeep = 1
+     because the site lives one segment deep: /nextrade-prime-broker/. -->
+<script>
+  (function () {
+    var pathSegmentsToKeep = 1;
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+      l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+      (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+      l.hash
+    );
+  })();
+</script>
+</head>
+<body></body>
+</html>
