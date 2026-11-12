@@ -21,7 +21,19 @@ export function useReveal(dep) {
       },
       { threshold: 0.12 },
     );
-    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    document.querySelectorAll('.reveal').forEach((el) => {
+      // Already scrolled past before this observer existed: the SPA renders
+      // only after the JS bundle executes, so a fast scroll can pass a
+      // section before it is observed — it would then sit invisible
+      // (opacity 0), reading as a large empty dark band, until scrolled
+      // back up to. Reveal it now; it can never intersect again on the way
+      // down. Everything else is observed normally.
+      if (el.getBoundingClientRect().bottom <= 0) {
+        el.classList.add('visible');
+      } else {
+        io.observe(el);
+      }
+    });
     return () => io.disconnect();
   }, [dep]);
 }

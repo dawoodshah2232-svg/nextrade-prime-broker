@@ -56,12 +56,53 @@ export function formatPrice(p, d) {
   return p.toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d });
 }
 
-// The strip note, worded exactly as the old site showed it.
+// The strip note. It must stay truthful PER FEED: `live` is true only when
+// BOTH main feeds are up, but one live feed must never be reported as
+// "unreachable" — the Forex rows can be LIVE while crypto is down, and the
+// banner has to say exactly that. Gold/US30 get their own trailing note,
+// dropped once their own feed connects. Per-row LIVE/SIM tags are driven
+// by the per-symbol `live` flags and are untouched by this.
 export function priceNote(live, sources) {
+  const fxLive = sources.indexOf('ExchangeRate-API') !== -1;
+  const cryptoLive = sources.indexOf('CoinGecko') !== -1;
+  const goldLive = sources.indexOf('metals.live') !== -1;
+  const us30Live = sources.indexOf('Yahoo Finance') !== -1;
+  const tail =
+    goldLive && us30Live
+      ? ''
+      : goldLive
+        ? ' US30 simulated until its feed connects.'
+        : us30Live
+          ? ' Gold simulated until its feed connects.'
+          : ' Gold & US30 simulated until their feeds connect.';
   if (live) {
     return {
       text: 'Live prices',
-      title: 'Live: ' + sources.join(', ') + '. Gold & US30 simulated until their feeds connect.',
+      title: 'Live: ' + sources.join(', ') + '.' + tail,
+    };
+  }
+  if (fxLive || cryptoLive || goldLive || us30Live) {
+    const liveBits = [];
+    if (fxLive) liveBits.push('FX');
+    if (cryptoLive) liveBits.push('crypto');
+    if (goldLive) liveBits.push('gold');
+    if (us30Live) liveBits.push('US30');
+    const downBits = [];
+    if (!fxLive) downBits.push('FX');
+    if (!cryptoLive) downBits.push('crypto');
+    return {
+      text: 'Live ' + liveBits.join(' + ') + ' prices',
+      title:
+        'Live: ' +
+        sources.join(', ') +
+        '. ' +
+        downBits.join(' and ') +
+        ' feed' +
+        (downBits.length > 1 ? 's' : '') +
+        ' unreachable — ' +
+        downBits.join(' and ') +
+        ' prices simulated.' +
+        tail,
     };
   }
   return {

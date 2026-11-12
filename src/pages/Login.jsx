@@ -10,14 +10,20 @@
 // is no longer true, so the note now names the demo account. Still labelled
 // DEMO, same tone as before.
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../lib/auth';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { isLoggedIn, login } from '../lib/auth';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  // Already signed in (a session exists in localStorage) — the login form
+  // is pointless; go straight to the client area.
+  if (isLoggedIn()) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   function handleSubmit(e) {
     e.preventDefault();

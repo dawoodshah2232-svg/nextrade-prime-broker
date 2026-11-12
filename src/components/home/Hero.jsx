@@ -2,12 +2,19 @@
 // the old index.html, with the heroBackground behaviour from script.js
 // (~lines 357-388): reduced motion or viewport <=760px pauses the video
 // and shows the poster still; a video error does the same. Autoplay is
-// native (attributes on the <video>); JS only retries once, muted, if the
-// browser blocked it anyway. NOTE: the YouTube video Dawood picked
+// native (attributes on the <video>); JS retries until it is actually
+// playing (see the effect below) because some browsers block the initial
+// autoplay — the QA browser froze the hero on its first frame even with a
+// one-shot retry. NOTE: the YouTube video Dawood picked
 // (EEX0EHTTePE) was removed 12 Nov — YouTube refuses it in embedded
 // players (Error 153). No iframe / API code here, ever.
 // The hero proof row is STATIC in the old markup (no data-count) — only
 // the StatsBand counts up. The XAU/USD glass card is live via usePrices.
+// The <video> element is STABLE across re-renders: same position in the
+// tree, no key, and every prop (autoPlay/muted/loop/playsInline/preload/
+// poster/src) is identical on every render (asset() is a pure string
+// concat), so React never touches the DOM node when usePrices ticks every
+// 15s — playback is never reset by a price update.
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { asset } from '../../lib/asset';
@@ -17,30 +24,84 @@ export default function Hero() {
   const { prices } = usePrices();
   const videoRef = useRef(null);
   const [posterOnly, setPosterOnly] = useState(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const small = window.matchMedia('(max-width: 760px)').matches;
-    if (reduced || small) {
-      if (video) video.pause();
-      setPosterOnly(true);
-      return;
-    }
-    // Autoplay is native. One safety net only: if the browser blocked the
-    // autoplay anyway, retry once muted.
-    if (video && video.paused) {
-      video.muted = true;
-      video.play().catch(() => {
-        /* stays on poster frame; the error handler covers failure */
-      });
-    }
-  }, []);
+  // Ref mirror of posterOnly: the retry loop and the onCanPlay handler run
+  // outside React's render cycle, so they read this instead of stale state.
+  const posterOnlyRef = useRef(false);
 
   const showPoster = () => {
     if (videoRef.current) videoRef.current.pause();
+    posterOnlyRef.current = true;
     setPosterOnly(true);
   };
+
+  // Play if the browser lets us — used by onCanPlay. Sets muted
+  // imperatively first (see the effect for why React's muted prop is not
+  // enough on its own).
+  const tryPlay = () => {
+    const v = videoRef.current;
+    if (!v || posterOnlyRef.current || !v.paused) return;
+    v.muted = true;
+    v.play().catch(() => {
+      /* blocked for now — the retry loop tries again */
+    });
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    // React sets the `muted` ATTRIBUTE, but Chrome's autoplay policy checks
+    // the muted PROPERTY — and the property is only initialised from the
+    // attribute at element creation, before React sets it (long-standing
+    // React gotcha). Set it imperatively the moment the element exists, so
+    // the native autoplay evaluation sees a muted video.
+    video.muted = true;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const small = window.matchMedia('(max-width: 760px)').matches;
+    if (reduced || small) {
+      video.pause();
+      posterOnlyRef.current = true;
+      setPosterOnly(true);
+      return;
+    }
+    // Autoplay is native (attributes on the <video>), but some browsers
+    // block the initial autoplay — the QA browser froze the hero on its
+    // first frame even with a one-shot retry. Retry until it is actually
+    // playing: immediately, then every 500ms for up to ~5s. The loop
+    // clears itself the moment playback starts, and on unmount.
+    let tries = 0;
+    let timer = null;
+    const stop = () => {
+      if (timer !== null) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+    const tick = () => {
+      const v = videoRef.current;
+      if (!v || posterOnlyRef.current) {
+        stop();
+        return;
+      }
+      if (!v.paused) {
+        stop();
+        return;
+      }
+      tries += 1;
+      if (tries > 10) {
+        stop();
+        return;
+      }
+      v.muted = true;
+      v.play().catch(() => {
+        /* retry on the next tick */
+      });
+    };
+    tick();
+    timer = setInterval(tick, 500);
+    return stop;
+    // Run once on mount — the video element is stable across re-renders.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const xau = prices['XAU/USD'];
 
@@ -59,6 +120,7 @@ export default function Hero() {
           preload="auto"
           poster={asset('hero-trader.jpg')}
           src={asset('hero-market.mp4')}
+          onCanPlay={tryPlay}
           onError={showPoster}
           style={posterOnly ? { display: 'none' } : undefined}
         ></video>
