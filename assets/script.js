@@ -355,15 +355,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ---------- hero background: YouTube embed -> local mp4 -> poster still ----------
-     Primary: YouTube "4k Dynamic Stock Market Interface Video" (EEX0EHTTePE),
-     embedded via the iframe in .hero-yt (src is set from data-src by JS so
-     mobile / reduced-motion users never download it).
+     Primary: YouTube "4k Dynamic Stock Market Interface Video" (EEX0EHTTePE).
+     The iframe carries its src directly in the HTML — a muted autoplay embed
+     plays on its own, with no API dependency for basic playback.
      Fallback chain, in order:
-       1. YouTube iframe — must reach PLAYING within ~4s (YouTube IFrame API).
-          On error, or on the API script failing to load, fall through.
+       1. YouTube iframe — must fire `load` within 6s, else fall through.
        2. Local Pexels mp4 (hero-video.mp4) — plays only as a fallback.
        3. hero-trader.jpg poster still — if the mp4 errors too.
-     Reduced motion or viewport <=760px: skip video entirely, poster still. */
+     Reduced motion or viewport <=760px: skip video entirely, poster still
+     (the iframe src is removed immediately so it never loads/plays). */
   (function heroBackground() {
     const heroBg = document.querySelector(".hero-bg");
     if (!heroBg) return;
@@ -373,49 +373,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const poster = document.getElementById("hero-poster");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.matchMedia("(max-width: 760px)").matches;
-    function showPoster() {
+    function stopYouTube() {
       if (ytWrap) ytWrap.classList.remove("on");
+      if (ytFrame) ytFrame.removeAttribute("src");
+    }
+    function showPoster() {
+      stopYouTube();
       if (heroVideo) { heroVideo.pause(); heroVideo.style.display = "none"; }
       if (poster) poster.style.display = "block";
     }
     function showLocalVideo() {
-      if (ytWrap) ytWrap.classList.remove("on");
+      stopYouTube();
       if (!heroVideo) { showPoster(); return; }
       heroVideo.style.display = "block";
       heroVideo.play().catch(() => showPoster());
     }
     if (heroVideo) heroVideo.addEventListener("error", showPoster);
     if (reduced || small) { showPoster(); return; }
-    if (!ytFrame || !ytFrame.dataset.src) { showLocalVideo(); return; }
+    if (!ytFrame || !ytFrame.getAttribute("src")) { showLocalVideo(); return; }
+    /* Primary fallback: if the YouTube embed hasn't loaded within 6s,
+       hide it and play the local mp4. The load event is the only signal
+       needed — no IFrame API dependency. */
     let settled = false;
-    const failTimer = setTimeout(() => { if (!settled) { settled = true; showLocalVideo(); } }, 4000);
+    const failTimer = setTimeout(() => { if (!settled) { settled = true; showLocalVideo(); } }, 6000);
+    ytFrame.addEventListener("load", () => { settled = true; clearTimeout(failTimer); });
     ytFrame.addEventListener("error", () => { if (!settled) { settled = true; clearTimeout(failTimer); showLocalVideo(); } });
-    /* YouTube IFrame API: only a PLAYING state proves the embed really plays.
-       The API wraps the existing iframe (enablejsapi=1 is in the embed URL). */
-    function onPlayerState(e) {
-      if (e.data === 1 && !settled) { settled = true; clearTimeout(failTimer); } /* PLAYING */
-    }
-    function onPlayerError() { if (!settled) { settled = true; clearTimeout(failTimer); showLocalVideo(); } }
-    function initPlayer() {
-      try {
-        new window.YT.Player(ytFrame, { events: { onStateChange: onPlayerState, onError: onPlayerError } });
-      } catch (err) { onPlayerError(); }
-    }
-    const prevReady = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = function () {
-      if (typeof prevReady === "function") prevReady();
-      initPlayer();
-    };
-    if (window.YT && window.YT.Player) {
-      initPlayer();
-    } else {
-      const s = document.createElement("script");
-      s.src = "https://www.youtube.com/iframe_api";
-      s.async = true;
-      s.addEventListener("error", onPlayerError);
-      document.head.appendChild(s);
-    }
-    ytFrame.src = ytFrame.dataset.src;
     if (ytWrap) ytWrap.classList.add("on");
   })();
 

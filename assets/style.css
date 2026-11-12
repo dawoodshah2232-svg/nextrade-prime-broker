@@ -14,6 +14,9 @@
   --navy:#0a1633; --navy-2:#081226; --navy-3:#12234d;
   --navy-950:#05070c; --navy-900:#0a0d16; --navy-800:#0e1322; --navy-700:#16203a;
   --gold:#c9a227; --gold-2:#e8c766; --gold-light:#e8c766; --gold-dark:#8a6d14; --gold-deep:#9a7b1a;
+  /* Aliases: several rules use the unhyphenated / short names — define them so
+     those declarations resolve instead of dropping out (badges, table headers). */
+  --gold2:var(--gold-2); --font-head:var(--font-display); --font-body:var(--font);
   --ink:#f2f5fa; --body:#c6d2e8; --muted:#9aa7bf; --muted-2:#7c8aa8;
   --line:rgba(201,162,39,.28); --line-soft:rgba(255,255,255,.08);
   --card-bg:rgba(255,255,255,.035);
@@ -195,7 +198,12 @@ td b{color:var(--ink)}
 .tag.gold{background:linear-gradient(135deg,#e8c766,#c9a227);color:#081226}
 /* ---------- steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:step;position:relative}
-@media (min-width:761px){.step:not(:last-child)::after{content:"";position:absolute;top:119px;right:-22px;width:22px;height:3px;background:linear-gradient(90deg,#f4dc8a,#c9a227);z-index:2;pointer-events:none}}
+/* Gap bridges live on the .steps container, NOT on .step::after: .step has
+   overflow:hidden (for the ghost numeral), which clips anything extending
+   past the card edge. Columns are (100%-44px)/3 wide with 22px gaps, so the
+   bridges sit exactly in the gaps at badge-centre height (118px) and never
+   touch the numerals. */
+@media (min-width:761px){.steps::before,.steps::after{content:"";position:absolute;top:118px;width:22px;height:3px;background:linear-gradient(90deg,#f4dc8a,#c9a227);z-index:2;pointer-events:none}.steps::before{left:calc((100% - 44px)/3)}.steps::after{left:calc((100% - 44px)/3*2 + 22px)}}
 .step{background:var(--card-bg);border:1px solid var(--line-soft);border-radius:var(--radius);padding:28px;position:relative;z-index:1;transition:transform .2s var(--ease),box-shadow .2s}
 .step-num{font-size:2rem;font-weight:800;font-family:var(--font-display);background:linear-gradient(135deg,#f4dc8a,#c9a227 55%,#8a6d14);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .step h3{margin:10px 0 8px}
@@ -499,7 +507,7 @@ section{scroll-margin-top:88px}
 .spreads-table tbody td:first-child{text-align:left}
 .spreads-table .best-col{background:linear-gradient(180deg,rgba(201,162,39,.13),rgba(201,162,39,.05))}
 .spreads-table thead th.best-col{color:var(--gold2)}
-.best-badge{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:99px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1405;font-family:var(--font-body);font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;vertical-align:middle}
+.best-badge{display:inline-block;margin-left:8px;padding:3px 9px;border-radius:99px;background:linear-gradient(135deg,#f4dc8a,#c9a227);color:#05070C;font-family:var(--font-body);font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;vertical-align:middle;box-shadow:0 2px 8px rgba(201,162,39,.45)}
 .flag-pair{display:inline-flex;align-items:center;margin-right:14px;vertical-align:middle}
 .flag{width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid #0e1322;box-shadow:0 0 0 1px rgba(201,162,39,.55);display:block}
 .flag+.flag{margin-left:-10px}
@@ -527,12 +535,16 @@ section{scroll-margin-top:88px}
 .stat-ico{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,rgba(201,162,39,.28),rgba(201,162,39,.1));border:1px solid rgba(201,162,39,.45);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px rgba(201,162,39,.06)}
 .stat-ico svg{width:34px;height:34px}
 .stat b{font-family:var(--font-head);font-size:2.75rem;line-height:1.05;font-weight:700;background:linear-gradient(135deg,#f4dc8a,#c9a227);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.01em}
+/* The numeral lives in a span inside <b> — .stat span{font-size:.95rem} would
+   shrink it back to label size, so the span must inherit the big size. */
+.stat b span{font-size:inherit;line-height:inherit}
 .stat span:last-child{font-size:.95rem;color:var(--muted)}
 
 /* --- ITEM 4: markets tabs — icons + split panel + live snapshot --- */
 .tab-btn{display:inline-flex;align-items:center;gap:8px}
 .tab-btn svg{width:18px;height:18px;flex:none}
-.tab-panel{display:grid;grid-template-columns:1.35fr 1fr;gap:32px;align-items:start;padding:32px 36px}
+.tab-panel{display:grid;grid-template-columns:1.35fr 1fr;gap:32px;align-items:stretch;padding:32px 36px}
+.tab-main{display:flex;flex-direction:column;justify-content:center}
 .tab-main h3{font-size:1.5rem;margin:0 0 12px}
 .tab-main p{margin:0 0 16px}
 .tab-side{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid rgba(201,162,39,.22);border-radius:14px;padding:18px 18px 12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
@@ -568,7 +580,7 @@ section{scroll-margin-top:88px}
 .step:hover{transform:translateY(-5px);border-color:rgba(201,162,39,.5);box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 1px rgba(201,162,39,.25)}
 .step-ico{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(201,162,39,.3),rgba(201,162,39,.12));border:1px solid rgba(201,162,39,.45);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
 .step-ico svg{width:27px;height:27px}
-.step .step-num{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));background-clip:border-box;-webkit-background-clip:border-box;color:#1a1405;-webkit-text-fill-color:#1a1405;font-family:var(--font-head);font-weight:700;font-size:1.05rem;display:flex;align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 6px 16px rgba(201,162,39,.35)}
+.step .step-num{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#f4dc8a,#c9a227);background-clip:border-box;-webkit-background-clip:border-box;color:#05070C;-webkit-text-fill-color:#05070C;font-family:var(--font-head);font-weight:700;font-size:1.05rem;display:flex;align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 6px 16px rgba(201,162,39,.35)}
 
 /* --- ITEM 7: MT5 section — real terminal shot + logo chip --- */
 .mt5-shot{border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px rgba(201,162,39,.3)}
