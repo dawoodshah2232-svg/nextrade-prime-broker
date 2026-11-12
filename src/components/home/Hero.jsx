@@ -109,7 +109,11 @@ export default function Hero() {
     <section className="hero hero-blend hero-video">
       <div className="orb orb-1"></div>
       <div className="orb orb-2"></div>
-      <div className="hero-bg" aria-hidden="true">
+      {/* Poster frame as the container background: the <video> poster
+          attribute does not reliably paint while an autoplaying video
+          buffers (Chrome shows black), so the chart still is the backdrop
+          itself — visible instantly, covered by the video once it plays. */}
+      <div className="hero-bg" aria-hidden="true" style={{ backgroundImage: `url(${asset('hero-poster.jpg')})`, backgroundSize: 'cover', backgroundPosition: '50% 22%' }}>
         <video
           ref={videoRef}
           id="hero-video"
