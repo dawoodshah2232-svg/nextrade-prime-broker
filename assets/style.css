@@ -195,7 +195,7 @@ td b{color:var(--ink)}
 .tag.gold{background:linear-gradient(135deg,#e8c766,#c9a227);color:#081226}
 /* ---------- steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:step;position:relative}
-.steps::before{content:"";position:absolute;top:44px;left:12%;right:12%;height:3px;background:linear-gradient(90deg,transparent,#f4dc8a,#c9a227,#8a6d14,transparent);z-index:0}
+@media (min-width:761px){.step:not(:last-child)::after{content:"";position:absolute;top:46px;right:-22px;width:22px;height:3px;background:linear-gradient(90deg,#f4dc8a,#c9a227);z-index:2;pointer-events:none}}
 .step{background:var(--card-bg);border:1px solid var(--line-soft);border-radius:var(--radius);padding:28px;position:relative;z-index:1;transition:transform .2s var(--ease),box-shadow .2s}
 .step-num{font-size:2rem;font-weight:800;font-family:var(--font-display);background:linear-gradient(135deg,#f4dc8a,#c9a227 55%,#8a6d14);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .step h3{margin:10px 0 8px}
