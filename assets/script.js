@@ -354,55 +354,36 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (e) { userName.textContent = "Demo Trader"; }
   }
 
-  /* ---------- hero background: YouTube embed -> local mp4 -> poster still ----------
-     Primary: YouTube "4k Dynamic Stock Market Interface Video" (EEX0EHTTePE).
-     The iframe carries its src directly in the HTML — a muted autoplay embed
-     plays on its own, with no API dependency for basic playback.
-     Fallback chain, in order:
-       1. YouTube iframe — must fire `load` within 6s, else fall through.
-       2. Local Pexels mp4 (hero-video.mp4) — plays only as a fallback.
-       3. hero-trader.jpg poster still — if the mp4 errors too.
-     Reduced motion or viewport <=760px: skip video entirely, poster still
-     (the iframe src is removed immediately so it never loads/plays). */
+  /* ---------- hero background: local mp4 (autoplay) -> poster still ----------
+     Primary: local Pexels mp4 (hero-market.mp4 — "Dynamic Finance Chart
+     Display in Dark Room", Pexels 38736274). The <video> carries the AUTOPLAY
+     attribute (muted + loop + playsinline), so the browser handles playback
+     natively — JS never drives play() as the primary mechanism.
+     NOTE: the YouTube video Dawood picked (EEX0EHTTePE) was removed 12 Nov:
+     YouTube serves it on youtube.com but refuses it in embedded players
+     ("Video player configuration error / Error 153"), so it can never play
+     as a website background. No iframe / API / timer code remains.
+     Reduced motion or viewport <=760px: pause the video, show the poster.
+     Video error: show the poster. */
   (function heroBackground() {
     const heroBg = document.querySelector(".hero-bg");
     if (!heroBg) return;
-    const ytWrap = document.getElementById("hero-yt");
-    const ytFrame = document.getElementById("hero-yt-frame");
     const heroVideo = document.getElementById("hero-video");
     const poster = document.getElementById("hero-poster");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.matchMedia("(max-width: 760px)").matches;
-    /* Debug override for QA: ?hero=yt forces the YouTube background even under
-       reduced-motion / small screens, so playback can be verified in browsers
-       that force reduced-motion. Normal visitors are unaffected. */
-    const forceYT = new URLSearchParams(location.search).get("hero") === "yt";
-    function stopYouTube() {
-      if (ytWrap) ytWrap.classList.remove("on");
-      if (ytFrame) ytFrame.removeAttribute("src");
-    }
     function showPoster() {
-      stopYouTube();
-      if (heroVideo) { heroVideo.pause(); heroVideo.style.display = "none"; }
+      if (heroVideo) { heroVideo.pause(); heroVideo.removeAttribute("autoplay"); heroVideo.style.display = "none"; }
       if (poster) poster.style.display = "block";
     }
-    function showLocalVideo() {
-      stopYouTube();
-      if (!heroVideo) { showPoster(); return; }
-      heroVideo.style.display = "block";
-      heroVideo.play().catch(() => showPoster());
-    }
     if (heroVideo) heroVideo.addEventListener("error", showPoster);
-    if ((reduced || small) && !forceYT) { showPoster(); return; }
-    if (!ytFrame || !ytFrame.getAttribute("src")) { showLocalVideo(); return; }
-    /* Primary fallback: if the YouTube embed hasn't loaded within 6s,
-       hide it and play the local mp4. The load event is the only signal
-       needed — no IFrame API dependency. */
-    let settled = false;
-    const failTimer = setTimeout(() => { if (!settled) { settled = true; showLocalVideo(); } }, 6000);
-    ytFrame.addEventListener("load", () => { settled = true; clearTimeout(failTimer); });
-    ytFrame.addEventListener("error", () => { if (!settled) { settled = true; clearTimeout(failTimer); showLocalVideo(); } });
-    if (ytWrap) ytWrap.classList.add("on");
+    if (reduced || small) { showPoster(); return; }
+    /* Autoplay is native (attribute on the <video>). One safety net only:
+       if the browser blocked the autoplay anyway, retry once muted. */
+    if (heroVideo && heroVideo.paused) {
+      heroVideo.muted = true;
+      heroVideo.play().catch(() => { /* stays on poster frame; error handler covers failure */ });
+    }
   })();
 
   /* ---------- markets tabs (homepage) ---------- */
