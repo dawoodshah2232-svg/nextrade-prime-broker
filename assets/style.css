@@ -131,7 +131,7 @@ body.menus-suppressed .main-nav>li .mega,body.menus-esc-closed .main-nav>li .meg
 .hero .lead{color:#c6d2e8;max-width:540px;margin-bottom:28px}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin:32px 0 26px}
 .hero-proof{display:flex;gap:26px;flex-wrap:wrap;color:#c6d2e8;font-size:.92rem}
-.hero-proof b{color:var(--gold-light);font-size:1.35rem;display:block;font-family:var(--font-display)}
+.hero-proof b{color:var(--gold-light);font-size:1.6rem;display:block;font-family:var(--font-display)}
 .hero-proof span{font-size:.9rem;color:#9aa7bf}
 /* floating glass card (XAU/USD live price) */
 .glass-card{position:absolute;z-index:4;background:rgba(10,13,22,.78);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:14px 18px;box-shadow:0 20px 44px rgba(0,0,0,.55);animation:floaty 6s ease-in-out infinite alternate;min-width:210px}
@@ -538,7 +538,11 @@ section{scroll-margin-top:88px}
 /* The numeral lives in a span inside <b> — .stat span{font-size:.95rem} would
    shrink it back to label size, so the span must inherit the big size. */
 .stat b span{font-size:inherit;line-height:inherit}
-.stat span:last-child{font-size:.95rem;color:var(--muted)}
+/* Label only: the numeral span inside <b> is ALSO a :last-child of its parent,
+   so a bare ".stat span:last-child" (0,2,1) beats ".stat b span" (0,1,2) and
+   shrinks the numeral back to 15px. The child combinator keeps this on the
+   label span, which is the only direct-child span of .stat. */
+.stat>span:last-child{font-size:.95rem;color:var(--muted)}
 
 /* --- ITEM 4: markets tabs — icons + split panel + live snapshot --- */
 .tab-btn{display:inline-flex;align-items:center;gap:8px}

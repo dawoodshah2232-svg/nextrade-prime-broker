@@ -373,6 +373,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const poster = document.getElementById("hero-poster");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.matchMedia("(max-width: 760px)").matches;
+    /* Debug override for QA: ?hero=yt forces the YouTube background even under
+       reduced-motion / small screens, so playback can be verified in browsers
+       that force reduced-motion. Normal visitors are unaffected. */
+    const forceYT = new URLSearchParams(location.search).get("hero") === "yt";
     function stopYouTube() {
       if (ytWrap) ytWrap.classList.remove("on");
       if (ytFrame) ytFrame.removeAttribute("src");
@@ -389,7 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
       heroVideo.play().catch(() => showPoster());
     }
     if (heroVideo) heroVideo.addEventListener("error", showPoster);
-    if (reduced || small) { showPoster(); return; }
+    if ((reduced || small) && !forceYT) { showPoster(); return; }
     if (!ytFrame || !ytFrame.getAttribute("src")) { showLocalVideo(); return; }
     /* Primary fallback: if the YouTube embed hasn't loaded within 6s,
        hide it and play the local mp4. The load event is the only signal
