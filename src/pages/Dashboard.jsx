@@ -129,7 +129,7 @@ export default function Dashboard() {
                   </td>
                   <td>Standard</td>
                   <td>$10,842.50</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>MT5</td>
                   <td>
                     <Link to="/platforms/mt5" style={{ fontWeight: 700, color: 'var(--ink)' }}>
@@ -143,7 +143,7 @@ export default function Dashboard() {
                   </td>
                   <td>Demo — $10,000 virtual</td>
                   <td>$9,860.00</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>MT5</td>
                   <td>
                     <Link to="/demo-account" style={{ fontWeight: 700, color: 'var(--ink)' }}>

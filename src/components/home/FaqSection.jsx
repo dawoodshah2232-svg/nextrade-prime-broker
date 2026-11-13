@@ -7,13 +7,13 @@ import FaqAccordion from '../FaqAccordion';
 const ITEMS = [
   {
     q: 'How do I open an account?',
-    a: 'Register on the sign-up page, verify your identity with an ID and proof of address, then deposit from $10. Most accounts are verified within a few hours.',
+    a: 'Register on the sign-up page, verify your identity with an ID and proof of address, then deposit from $100. Most accounts are verified within a few hours.',
   },
   {
     q: 'What is the minimum deposit?',
     a: (
       <>
-        $10 on Standard, $100 on Raw Spread and $500 on Pro. See the full comparison on{' '}
+        $100 on every account type — Standard, ECN, PRO, VIP and Islamic. The minimum withdrawal is also $100. See the full comparison on{' '}
         <Link to="/accounts">Account Types</Link>.
       </>
     ),

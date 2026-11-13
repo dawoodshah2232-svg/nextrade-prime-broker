@@ -1,5 +1,6 @@
-// Four promo cards overlapping the hero base — verbatim port of the old
-// index.html promo section. The icons are inlined verbatim (stroke
+// Four promo cards overlapping the hero base — the client's headline offers
+// (fast withdrawals, 30% first-deposit bonus, 10% re-deposit bonus,
+// swap-free first week). The icons are inlined verbatim (stroke
 // #e8c766 inside .promo-ico) — MIcon would be wrong here: it renders a
 // .m-ico wrapper with a #c9a227 stroke, which is the header's styling,
 // not the promo cards'.
@@ -7,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const CARDS = [
   {
-    to: '/accounts',
+    to: '/deposits-withdrawals',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -18,17 +19,15 @@ const CARDS = [
         strokeLinejoin="round"
         aria-hidden="true"
       >
-        <path d="M7 3v4M7 17v4M17 3v4M17 17v4" />
-        <rect x="5" y="7" width="4" height="10" rx="1" />
-        <rect x="15" y="7" width="4" height="10" rx="1" />
+        <path d="M13 2L4 14h7l-1 8 9-12h-7z" />
       </svg>
     ),
-    title: 'Raw Spread from 0.0 pips',
-    text: 'The tightest pricing we offer, with a small commission per lot.',
-    link: 'See accounts →',
+    title: 'Fast withdrawals',
+    text: 'Payout speed above all — a simple, secure withdrawal process. Minimum withdrawal $100.',
+    link: 'How it works →',
   },
   {
-    to: '/markets/metals',
+    to: '/promotions',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -39,17 +38,16 @@ const CARDS = [
         strokeLinejoin="round"
         aria-hidden="true"
       >
-        <ellipse cx="12" cy="6" rx="7" ry="3" />
-        <path d="M5 6v5c0 1.7 3.1 3 7 3s7-1.3 7-3V6" />
-        <path d="M5 11v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5" />
+        <rect x="3" y="8" width="18" height="13" rx="2" />
+        <path d="M12 8v13M3 12h18M12 8c-1.5-3-5-3.5-5-1s3 1 5 1c2 0 5 1.5 5-1s-3.5-2-5 1z" />
       </svg>
     ),
-    title: 'Gold — XAU/USD',
-    text: 'Trade gold against the dollar, from 0.01 lots, around the clock.',
-    link: 'Trade gold →',
+    title: '30% first-deposit bonus',
+    text: 'Boost your trading power with a 30% bonus on your first deposit.',
+    link: 'See terms →',
   },
   {
-    to: '/platforms/mt5',
+    to: '/promotions',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -60,16 +58,16 @@ const CARDS = [
         strokeLinejoin="round"
         aria-hidden="true"
       >
-        <rect x="2.5" y="4" width="19" height="12" rx="2" />
-        <path d="M8 20h8M12 16v4M7 12l2.5-3 2 2 3-4" />
+        <path d="M21 12a9 9 0 1 1-3-6.7L21 8" />
+        <path d="M21 3v5h-5M12 8v8M8 12h8" />
       </svg>
     ),
-    title: 'MetaTrader 5',
-    text: 'The platform professionals already know — desktop, web and mobile.',
-    link: 'Explore MT5 →',
+    title: '10% re-deposit bonus',
+    text: 'Earn a 10% bonus on every subsequent deposit you make.',
+    link: 'See terms →',
   },
   {
-    to: '/demo-account',
+    to: '/promotions',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -80,13 +78,12 @@ const CARDS = [
         strokeLinejoin="round"
         aria-hidden="true"
       >
-        <circle cx="12" cy="12" r="9" />
-        <path d="M10 8.5l5 3.5-5 3.5z" />
+        <path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" />
       </svg>
     ),
-    title: 'Free demo account',
-    text: '$10,000 virtual funds, live prices, full MT5 — no time limit.',
-    link: 'Open a demo →',
+    title: 'Swap-free first week',
+    text: 'No overnight swaps for your first week of live trading.',
+    link: 'Learn more →',
   },
 ];
 
@@ -96,7 +93,7 @@ export default function PromoCards() {
       <div className="container">
         <div className="promo-grid">
           {CARDS.map((c) => (
-            <Link key={c.to} className="promo-card reveal" to={c.to}>
+            <Link key={c.title} className="promo-card reveal" to={c.to}>
               <div className="promo-ico">{c.icon}</div>
               <h3>{c.title}</h3>
               <p>{c.text}</p>

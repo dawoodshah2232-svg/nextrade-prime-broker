@@ -37,11 +37,11 @@ export default function DuoSection() {
             </div>
             <h3>Already trading?</h3>
             <p>
-              Move to Raw Spread for spreads from 0.0 pips, or Pro for near-raw spreads with no
+              Move to ECN for spreads from 0.0 pips, or PRO for near-raw spreads with no
               commission. Your history and open positions stay exactly where they are.
             </p>
             <Link className="btn btn-gold" style={{ marginTop: 16 }} to="/accounts">
-              See Raw Spread
+              See ECN
             </Link>
           </div>
         </div>

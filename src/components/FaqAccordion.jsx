@@ -16,11 +16,20 @@ export default function FaqAccordion({ items }) {
       return next;
     });
   };
+  // No .reveal on the items: React rewrites className on every toggle, which
+  // wiped the .visible class the reveal observer adds — so an opened item
+  // faded back to opacity 0 and the FAQ looked empty. The parent section
+  // still animates in.
   return (
     <>
       {items.map((item, i) => (
-        <div key={i} className={'faq-item reveal' + (open.has(i) ? ' open' : '')}>
-          <button className="faq-q" type="button" onClick={() => toggle(i)}>
+        <div key={i} className={'faq-item' + (open.has(i) ? ' open' : '')}>
+          <button
+            className="faq-q"
+            type="button"
+            aria-expanded={open.has(i)}
+            onClick={() => toggle(i)}
+          >
             {item.q} <span className="plus">+</span>
           </button>
           {typeof item.a === 'string' ? (

@@ -1,10 +1,11 @@
 // Site shell: top strip + header + page + footer, on every route.
-// The top strip sat above the header on all 34 old pages (same text).
-// useReveal(pathname) re-runs the scroll-reveal observer after every
-// navigation, so newly mounted sections/cards animate in.
+// The top strip carries the motto and the language selector (visible on
+// desktop and mobile). useReveal(pathname) re-runs the scroll-reveal
+// observer after every navigation, so newly mounted sections animate in.
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
+import LanguageSelect from './LanguageSelect';
 import { useReveal } from '../hooks/useReveal';
 
 export default function Layout() {
@@ -14,9 +15,16 @@ export default function Layout() {
     <>
       <div className="topstrip">
         <div className="container">
-          <span>Trade with confidence — spreads from 0.0 pips on Raw Spread accounts</span>
-          <span>
-            English &nbsp;·&nbsp; <Link to="/help-centre">Help Centre</Link>
+          <span className="topstrip-msg">
+            <b>Payout speed above all</b>
+            <span className="topstrip-extra">
+              {' '}
+              · Leverage up to 1:1000 · 30% first-deposit bonus
+            </span>
+          </span>
+          <span className="topstrip-right">
+            <LanguageSelect />
+            <Link to="/help-centre">Help Centre</Link>
           </span>
         </div>
       </div>

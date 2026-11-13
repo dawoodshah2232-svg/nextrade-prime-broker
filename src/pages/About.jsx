@@ -101,7 +101,7 @@ export default function About() {
               className="stat reveal"
               style={{ background: 'var(--bg-soft)', borderRadius: 14, padding: 28 }}
             >
-              <b style={{ color: 'var(--ink)' }}>1:500</b>
+              <b style={{ color: 'var(--ink)' }}>1:1000</b>
               <span style={{ color: 'var(--muted)' }}>Max leverage</span>
             </div>
             <div

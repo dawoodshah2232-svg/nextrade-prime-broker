@@ -1,7 +1,7 @@
 // Stats band — verbatim port of the old index.html stats-band. The four
 // stats count up via the shared CountUp component, matching the old
 // data-count / data-prefix / data-suffix / data-decimals attributes
-// (1000+, 0.0, 1:500, 24/7). Stat icons are inlined verbatim (white
+// (1000+, 0.0, 1:1000, 24/7). Stat icons are inlined verbatim (white
 // stroke) — they are not the gold header/footer icons.
 import CountUp from '../CountUp';
 
@@ -65,7 +65,7 @@ export default function StatsBand() {
             </svg>
           </div>
           <b>
-            <CountUp end={500} prefix="1:" />
+            <CountUp end={1000} prefix="1:" grouping={false} />
           </b>
           <span>Maximum leverage</span>
         </div>

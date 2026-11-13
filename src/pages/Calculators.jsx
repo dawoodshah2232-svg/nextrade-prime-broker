@@ -14,7 +14,7 @@ export default function Calculators() {
   const [pipResult, setPipResult] = useState(null);
   const [mgLots, setMgLots] = useState('1');
   const [mgPrice, setMgPrice] = useState('1.1637');
-  const [mgLev, setMgLev] = useState('500');
+  const [mgLev, setMgLev] = useState('1000');
   const [marginResult, setMarginResult] = useState(null);
 
   function calcPip(e) {
@@ -36,7 +36,7 @@ export default function Calculators() {
     e.preventDefault();
     const lots = parseFloat(mgLots || '1');
     const price = parseFloat(mgPrice || '1');
-    const lev = parseFloat(mgLev || '500');
+    const lev = parseFloat(mgLev || '1000');
     const margin = (lots * 100000 * price) / lev;
     setMarginResult(
       <>
@@ -130,6 +130,7 @@ export default function Calculators() {
                 <div className="field">
                   <label htmlFor="mg-lev">Leverage</label>
                   <select id="mg-lev" value={mgLev} onChange={(e) => setMgLev(e.target.value)}>
+                    <option value="1000">1:1000</option>
                     <option value="500">1:500</option>
                     <option value="200">1:200</option>
                     <option value="100">1:100</option>

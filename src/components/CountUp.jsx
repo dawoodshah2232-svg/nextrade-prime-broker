@@ -5,7 +5,14 @@
 // Usage (homepage stats band): <b><CountUp end={1000} suffix="+" /></b>
 import { useEffect, useRef, useState } from 'react';
 
-export default function CountUp({ end, decimals = 0, prefix = '', suffix = '', duration = 1400 }) {
+export default function CountUp({
+  end,
+  decimals = 0,
+  prefix = '',
+  suffix = '',
+  duration = 1400,
+  grouping = true,
+}) {
   const ref = useRef(null);
   // Matches the old markup's pre-animation text: plain 0 / 0.0, no affixes.
   const [text, setText] = useState(decimals ? (0).toFixed(decimals) : '0');
@@ -23,7 +30,13 @@ export default function CountUp({ end, decimals = 0, prefix = '', suffix = '', d
             const p = Math.min((now - start) / duration, 1);
             const v = end * (1 - Math.pow(1 - p, 3));
             setText(
-              prefix + (decimals ? v.toFixed(decimals) : Math.round(v).toLocaleString()) + suffix,
+              prefix +
+                (decimals
+                  ? v.toFixed(decimals)
+                  : grouping
+                    ? Math.round(v).toLocaleString()
+                    : String(Math.round(v))) +
+                suffix,
             );
             if (p < 1) requestAnimationFrame(tick);
           };
@@ -34,7 +47,7 @@ export default function CountUp({ end, decimals = 0, prefix = '', suffix = '', d
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [end, decimals, prefix, suffix, duration]);
+  }, [end, decimals, prefix, suffix, duration, grouping]);
 
   return <span ref={ref}>{text}</span>;
 }

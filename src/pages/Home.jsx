@@ -6,6 +6,7 @@
 // seamless marquee loop, exactly as the old script.js did.
 import Hero from '../components/home/Hero';
 import PromoCards from '../components/home/PromoCards';
+import Pillars from '../components/home/Pillars';
 import SpreadsTable from '../components/home/SpreadsTable';
 import WhyCards from '../components/home/WhyCards';
 import StatsBand from '../components/home/StatsBand';
@@ -78,6 +79,7 @@ export default function Home() {
       <Hero />
       <PromoCards />
       <PriceStrip />
+      <Pillars />
       <SpreadsTable />
       <WhyCards />
       <StatsBand />

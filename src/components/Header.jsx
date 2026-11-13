@@ -35,7 +35,7 @@ const MENUS = [
       {
         title: 'Accounts',
         links: [
-          { to: '/accounts', icon: 'accounts', title: 'Account Types', desc: 'Standard, Raw Spread and Pro' },
+          { to: '/accounts', icon: 'accounts', title: 'Account Types', desc: 'Standard, ECN, PRO, VIP, Islamic' },
           { to: '/demo-account', icon: 'demo', title: 'Demo Account', desc: 'Practice with $10,000 virtual funds' },
           { to: '/islamic-accounts', icon: 'islamic', title: 'Islamic Accounts', desc: 'Swap-free trading, no interest' },
         ],
@@ -200,7 +200,7 @@ export default function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <Link className="brand" to="/" aria-label="NexTrade Prime — home">
-          <img src={asset('logo-light.png')} alt="NexTrade Prime" />
+          <img src={asset('logo-dark.png')} alt="NexTrade Prime" />
         </Link>
         <button className="menu-toggle" type="button" aria-label="Open menu" onClick={onToggle}>
           ☰

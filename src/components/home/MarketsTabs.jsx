@@ -95,7 +95,7 @@ const TABS = [
   {
     id: 'forex',
     label: 'Forex',
-    text: '60+ currency pairs, from the majors to the crosses. Spreads from 0.0 pips on Raw Spread, leverage up to 1:500, minimum trade 0.01 lots.',
+    text: '60+ currency pairs, from the majors to the crosses. Spreads from 0.0 pips on ECN, leverage up to 1:1000, minimum trade 0.01 lots.',
     chips: ['EUR/USD', 'GBP/USD', 'USD/JPY', 'AUD/USD', 'USD/CHF', 'NZD/USD'],
     linkTo: '/markets/forex',
     linkLabel: 'Explore Forex',

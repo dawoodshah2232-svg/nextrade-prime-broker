@@ -25,7 +25,7 @@ export default function MarketsMetals() {
           { label: 'Metals' },
         ]}
         title="Metals trading"
-        intro="Gold and silver — the classic hedge — traded as CFDs on MT5 with tight spreads and leverage up to 1:500."
+        intro="Gold and silver — the classic hedge — traded as CFDs on MT5 with tight spreads and leverage up to 1:1000."
       />
 
       <section className="section">
@@ -55,7 +55,7 @@ export default function MarketsMetals() {
                     <b>XAU/USD</b> — Gold
                   </td>
                   <td>0.12</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>0.01</td>
                   <td>23/5</td>
                 </tr>
@@ -64,7 +64,7 @@ export default function MarketsMetals() {
                     <b>XAG/USD</b> — Silver
                   </td>
                   <td>0.02</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>0.01</td>
                   <td>23/5</td>
                 </tr>
@@ -73,7 +73,7 @@ export default function MarketsMetals() {
                     <b>XAU/EUR</b> — Gold / Euro
                   </td>
                   <td>0.25</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>0.01</td>
                   <td>23/5</td>
                 </tr>

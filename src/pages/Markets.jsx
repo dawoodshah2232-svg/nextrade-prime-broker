@@ -34,7 +34,7 @@ export default function Markets() {
               <h3>Forex</h3>
               <p>
                 60+ currency pairs, majors, minors and exotics. Trade 24 hours a day, five
-                days a week, with spreads from 0.0 pips on Raw Spread.
+                days a week, with spreads from 0.0 pips on ECN.
               </p>
               <Link to="/markets/forex" style={{ fontWeight: 700, color: 'var(--ink)' }}>
                 Trade Forex →

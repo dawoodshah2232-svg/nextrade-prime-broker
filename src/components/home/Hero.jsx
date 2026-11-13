@@ -140,37 +140,37 @@ export default function Hero() {
       </div>
       <div className="container hero-grid">
         <div className="hero-copy">
-          <span className="eyebrow">Trade on MetaTrader 5</span>
+          <span className="eyebrow">NexTrade Prime · MetaTrader 5</span>
           <h1>
-            Trade the markets, <span className="gold">clearly.</span>
+            Payout speed <span className="gold">above all.</span>
           </h1>
           <p className="lead">
-            Forex, gold, indices and crypto on MetaTrader 5. Tight spreads, fast execution and
-            funding that takes minutes — with an account that fits the way you trade.
+            Fast withdrawals, a secure and transparent process, and leverage up to 1:1000 on every
+            account. Trade forex, gold, indices and crypto on MetaTrader 5.
           </p>
           <div className="hero-cta">
             <Link className="btn btn-gold btn-lg" to="/signup">
               Open an Account
             </Link>
-            <Link className="btn btn-outline-light btn-lg" to="/demo-account">
-              Try a Demo
+            <Link className="btn btn-outline-light btn-lg" to="/deposits-withdrawals">
+              How Withdrawals Work
             </Link>
           </div>
           <div className="hero-proof">
             <div>
-              <b>1,000+</b>
-              <span>Instruments</span>
-            </div>
-            <div>
-              <b>0.0</b>
-              <span>Spreads from (pips)</span>
-            </div>
-            <div>
-              <b>1:500</b>
+              <b>1:1000</b>
               <span>Max leverage</span>
             </div>
             <div>
-              <b>$10</b>
+              <b>30%</b>
+              <span>First-deposit bonus</span>
+            </div>
+            <div>
+              <b>10%</b>
+              <span>Re-deposit bonus</span>
+            </div>
+            <div>
+              <b>$100</b>
               <span>Minimum deposit</span>
             </div>
           </div>

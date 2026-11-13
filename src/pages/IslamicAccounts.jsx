@@ -22,7 +22,7 @@ export default function IslamicAccounts() {
           { label: 'Islamic Accounts' },
         ]}
         title="Islamic accounts"
-        intro="Swap-free trading with no overnight interest — available on Standard, Raw Spread and Pro accounts, at no extra cost."
+        intro="Swap-free trading with no overnight interest — available on every account type, at no extra cost — with leverage up to 1:1000."
       />
 
       <section className="section">

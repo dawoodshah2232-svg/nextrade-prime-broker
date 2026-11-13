@@ -12,7 +12,7 @@ export default function DepositsWithdrawals() {
           { label: 'Deposits & Withdrawals' },
         ]}
         title="Deposits & withdrawals"
-        intro="Fund in minutes, withdraw the same day. No deposit or withdrawal fee from NexTrade Prime."
+        intro="Payout speed above all. Fund in minutes, withdraw the same day. Minimum deposit $100 · minimum withdrawal $100 · no deposit or withdrawal fee from NexTrade Prime."
       />
 
       <section className="section">
@@ -32,7 +32,7 @@ export default function DepositsWithdrawals() {
                     <b>Debit / credit card</b>
                   </td>
                   <td>Instant</td>
-                  <td>$10</td>
+                  <td>$100</td>
                   <td>None</td>
                 </tr>
                 <tr>
@@ -40,7 +40,7 @@ export default function DepositsWithdrawals() {
                     <b>Bank transfer</b>
                   </td>
                   <td>1–2 business days</td>
-                  <td>$10</td>
+                  <td>$100</td>
                   <td>None</td>
                 </tr>
                 <tr>
@@ -48,7 +48,7 @@ export default function DepositsWithdrawals() {
                     <b>E-wallets</b>
                   </td>
                   <td>Instant</td>
-                  <td>$10</td>
+                  <td>$100</td>
                   <td>None</td>
                 </tr>
                 <tr>
@@ -56,7 +56,7 @@ export default function DepositsWithdrawals() {
                     <b>USDT (TRC20)</b>
                   </td>
                   <td>Up to 1 hour</td>
-                  <td>$10</td>
+                  <td>$100</td>
                   <td>None</td>
                 </tr>
               </tbody>
@@ -67,8 +67,20 @@ export default function DepositsWithdrawals() {
             Withdraw to the same method you deposited with — this is an anti-fraud rule that
             protects your account. Requests submitted before the daily cut-off are processed
             the same business day; card and e-wallet withdrawals usually arrive within 24
-            hours, bank transfers within 1–3 business days depending on your bank.
+            hours, bank transfers within 1–3 business days depending on your bank. The minimum
+            withdrawal is <b>$100</b>.
           </p>
+          <ol className="withdraw-steps">
+            <li>
+              <b>Request</b> a withdrawal from your client area.
+            </li>
+            <li>
+              <b>Review</b> — we check it against your verified details the same business day.
+            </li>
+            <li>
+              <b>Paid</b> back to the method you deposited with.
+            </li>
+          </ol>
           <div className="grid3" style={{ marginTop: '28px' }}>
             <div className="card reveal">
               <h3>Same-day processing</h3>

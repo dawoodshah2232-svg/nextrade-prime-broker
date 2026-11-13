@@ -18,9 +18,9 @@ export default function SpreadsTable() {
                 <th>Instrument</th>
                 <th>Standard</th>
                 <th className="best-col">
-                  Raw Spread <span className="best-badge">Best</span>
+                  ECN <span className="best-badge">Best</span>
                 </th>
-                <th>Pro</th>
+                <th>PRO</th>
               </tr>
             </thead>
             <tbody>
@@ -179,8 +179,8 @@ export default function SpreadsTable() {
         <p className="small muted reveal" style={{ marginTop: 14 }}>
           Typical spreads — demo. The figures shown are each account type's published minimum
           spread; actual spreads vary by instrument and market conditions. Forex is quoted in
-          pips, gold and crypto in dollars, and indices in points. Raw Spread accounts pay $3.50
-          per side, per lot; Standard and Pro pay no commission.
+          pips, gold and crypto in dollars, and indices in points. ECN accounts pay $3.50
+          per side, per lot; Standard and PRO pay no commission.
         </p>
         <p className="reveal" style={{ marginTop: 18 }}>
           <span className="tag gold">Every account</span>&nbsp; Negative balance protection — your

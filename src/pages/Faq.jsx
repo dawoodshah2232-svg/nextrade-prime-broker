@@ -11,7 +11,7 @@ const items = [
     a: (
       <>
         Register on the <Link to="/signup">sign-up page</Link>, verify your identity with an ID
-        and proof of address, then deposit from $10. Most accounts are verified within a few
+        and proof of address, then deposit from $100. Most accounts are verified within a few
         hours.
       </>
     ),
@@ -20,7 +20,7 @@ const items = [
     q: 'What is the minimum deposit?',
     a: (
       <>
-        $10 on Standard, $100 on Raw Spread and $500 on Pro. See the full comparison on{' '}
+        $100 on every account type — Standard, ECN, PRO, VIP and Islamic. The minimum withdrawal is also $100. See the full comparison on{' '}
         <Link to="/accounts">Account Types</Link>.
       </>
     ),
@@ -64,7 +64,7 @@ const items = [
     q: 'Do you offer Islamic accounts?',
     a: (
       <>
-        Yes. Swap-free accounts are available on all three account types at no extra cost. See{' '}
+        Yes. Swap-free trading is available on every account type at no extra cost, and every new live account trades swap-free for its first week. See{' '}
         <Link to="/islamic-accounts">Islamic Accounts</Link>.
       </>
     ),
@@ -75,6 +75,29 @@ const items = [
       <>
         MetaTrader 5 only — desktop, web and mobile. See{' '}
         <Link to="/platforms-mt5">MT5 Platform</Link>.
+      </>
+    ),
+  },
+  {
+    q: 'What is the maximum leverage?',
+    a: 'Up to 1:1000 on every account type — Standard, ECN, PRO, VIP and Islamic — subject to the account, instrument and trading conditions. Higher leverage magnifies losses as well as gains.',
+  },
+  {
+    q: 'What promotions are available?',
+    a: (
+      <>
+        A 30% bonus on your first deposit, a 10% bonus on every re-deposit, and swap-free trading
+        for your first week. Bonus terms, eligibility and trading requirements apply — see{' '}
+        <Link to="/promotions">Promotions</Link>.
+      </>
+    ),
+  },
+  {
+    q: 'What is the minimum withdrawal?',
+    a: (
+      <>
+        $100. Withdrawals go back to the method you deposited with. See{' '}
+        <Link to="/deposits-withdrawals">Deposits &amp; Withdrawals</Link>.
       </>
     ),
   },

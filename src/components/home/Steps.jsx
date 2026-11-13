@@ -27,7 +27,7 @@ export default function Steps() {
             </div>
             <div className="step-num">01</div>
             <h3>Open an account</h3>
-            <p>Choose Standard, Raw Spread or Pro. Registration takes about two minutes.</p>
+            <p>Choose Standard, ECN, PRO, VIP or Islamic. Registration takes about two minutes.</p>
           </div>
           <div className="step reveal" data-ghost="02">
             <div className="step-ico">
@@ -46,7 +46,7 @@ export default function Steps() {
             </div>
             <div className="step-num">02</div>
             <h3>Fund in minutes</h3>
-            <p>Verify your identity, then deposit from $10 by card, bank transfer or e-wallet.</p>
+            <p>Verify your identity, then deposit from $100 by card, bank transfer or e-wallet.</p>
           </div>
           <div className="step reveal" data-ghost="03">
             <div className="step-ico">

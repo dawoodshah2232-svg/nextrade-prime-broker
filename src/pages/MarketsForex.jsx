@@ -44,7 +44,7 @@ export default function MarketsForex() {
                     <b>EUR/USD</b>
                   </td>
                   <td>0.0 pips</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>0.01</td>
                   <td>24/5</td>
                 </tr>
@@ -53,7 +53,7 @@ export default function MarketsForex() {
                     <b>GBP/USD</b>
                   </td>
                   <td>0.1 pips</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>0.01</td>
                   <td>24/5</td>
                 </tr>
@@ -62,7 +62,7 @@ export default function MarketsForex() {
                     <b>USD/JPY</b>
                   </td>
                   <td>0.1 pips</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>0.01</td>
                   <td>24/5</td>
                 </tr>
@@ -71,7 +71,7 @@ export default function MarketsForex() {
                     <b>USD/CHF</b>
                   </td>
                   <td>0.2 pips</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>0.01</td>
                   <td>24/5</td>
                 </tr>
@@ -80,7 +80,7 @@ export default function MarketsForex() {
                     <b>AUD/USD</b>
                   </td>
                   <td>0.2 pips</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>0.01</td>
                   <td>24/5</td>
                 </tr>
@@ -89,7 +89,7 @@ export default function MarketsForex() {
                     <b>USD/CAD</b>
                   </td>
                   <td>0.2 pips</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>0.01</td>
                   <td>24/5</td>
                 </tr>
@@ -98,7 +98,7 @@ export default function MarketsForex() {
                     <b>EUR/GBP</b>
                   </td>
                   <td>0.3 pips</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>0.01</td>
                   <td>24/5</td>
                 </tr>
@@ -107,7 +107,7 @@ export default function MarketsForex() {
                     <b>EUR/JPY</b>
                   </td>
                   <td>0.3 pips</td>
-                  <td>1:500</td>
+                  <td>1:1000</td>
                   <td>0.01</td>
                   <td>24/5</td>
                 </tr>
@@ -115,7 +115,7 @@ export default function MarketsForex() {
             </table>
           </div>
           <p style={{ marginTop: '16px', color: 'var(--muted)' }}>
-            Spreads shown are minimums on Raw Spread accounts and can widen around news and at
+            Spreads shown are minimums on ECN accounts and can widen around news and at
             market open. See the full comparison on{' '}
             <Link to="/accounts" style={{ fontWeight: 700, color: 'var(--ink)' }}>
               Account Types

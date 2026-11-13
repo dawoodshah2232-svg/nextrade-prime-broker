@@ -1,7 +1,50 @@
-// Converted from promotions.html in ~/workspace/nextrade-old-html/ —
-// verbatim copy, cards and terms; internal links are <Link> routes.
+// Promotions — the client's current offers (brief §3, matching the
+// yournextrade.com key points): 30% first-deposit bonus, 10% re-deposit
+// bonus, swap-free first week, plus leverage up to 1:1000. Caps, expiry and
+// trading requirements are NOT invented here: the cards point to the full
+// promotion terms, which the company must confirm before publishing figures.
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+
+const PROMOS = [
+  {
+    big: '30%',
+    tag: 'First deposit',
+    title: 'First-deposit bonus',
+    text: 'Boost your trading power with a 30% bonus on your first deposit into a live account.',
+    terms: 'Minimum deposit $100 · one first-deposit bonus per client · eligibility, caps, expiry and trading requirements apply',
+    cta: 'Claim 30% Bonus',
+    to: '/signup',
+    gold: true,
+  },
+  {
+    big: '10%',
+    tag: 'Every re-deposit',
+    title: 'Re-deposit bonus',
+    text: 'Earn a 10% bonus on every subsequent deposit you make into your live account.',
+    terms: 'Applies to deposits after your first · eligibility, caps, expiry and trading requirements apply',
+    cta: 'Open an Account',
+    to: '/signup',
+  },
+  {
+    big: '0',
+    tag: 'First week',
+    title: 'Swap-free first week',
+    text: 'No overnight swap charges for your first week of live trading, on every account type.',
+    terms: 'New live accounts · first week of trading · eligibility and timing set out in the promotion terms',
+    cta: 'See Account Types',
+    to: '/accounts',
+  },
+  {
+    big: '1:1000',
+    tag: 'All accounts',
+    title: 'Leverage up to 1:1000',
+    text: 'Maximise your potential with flexible leverage on Standard, ECN, PRO, VIP and Islamic accounts.',
+    terms: 'Subject to account, instrument and trading conditions · leverage magnifies losses as well as gains',
+    cta: 'Compare Accounts',
+    to: '/accounts',
+  },
+];
 
 export default function Promotions() {
   return (
@@ -14,56 +57,26 @@ export default function Promotions() {
 
       <section className="section">
         <div className="container">
-          <div className="grid3">
-            <div className="card reveal">
-              <span className="tag gold">New traders</span>
-              <h3>Welcome bonus — 50% on your first deposit</h3>
-              <p>
-                Deposit for the first time and get a 50% trading bonus, up to $500. The bonus
-                is credited as margin and can be withdrawn once the volume requirement is met.
-              </p>
-              <p style={{ marginTop: '10px', color: 'var(--muted)', fontSize: '.9rem' }}>
-                Terms: minimum deposit $100 · volume requirement applies · one bonus per client
-              </p>
-              <Link className="btn btn-gold" style={{ marginTop: '14px' }} to="/signup">
-                Claim Welcome Bonus
-              </Link>
-            </div>
-            <div className="card reveal">
-              <span className="tag">All traders</span>
-              <h3>Refer a trader — $50 each</h3>
-              <p>
-                Invite a friend to open a live account and deposit. You both get $50 trading
-                credit once they trade 1 standard lot.
-              </p>
-              <p style={{ marginTop: '10px', color: 'var(--muted)', fontSize: '.9rem' }}>
-                Terms: referred account must be verified · credit is non-withdrawable until
-                traded
-              </p>
-              <Link className="btn btn-dark" style={{ marginTop: '14px' }} to="/dashboard">
-                Get Your Referral Link
-              </Link>
-            </div>
-            <div className="card reveal">
-              <span className="tag">Active traders</span>
-              <h3>Cashback on volume</h3>
-              <p>
-                Trade 10+ lots a month on Raw Spread and earn $2 cashback per lot, paid weekly
-                into your account. No opt-in needed.
-              </p>
-              <p style={{ marginTop: '10px', color: 'var(--muted)', fontSize: '.9rem' }}>
-                Terms: Raw Spread accounts only · paid every Monday · see full terms in your
-                client area
-              </p>
-              <Link className="btn btn-dark" style={{ marginTop: '14px' }} to="/accounts">
-                See Raw Spread
-              </Link>
-            </div>
+          <div className="grid2 promo-page-grid">
+            {PROMOS.map((p) => (
+              <div key={p.title} className="card promo-offer">
+                <div className="promo-offer-head">
+                  <span className="promo-big">{p.big}</span>
+                  <span className={'tag' + (p.gold ? ' gold' : '')}>{p.tag}</span>
+                </div>
+                <h3>{p.title}</h3>
+                <p>{p.text}</p>
+                <p className="promo-terms">Terms: {p.terms}</p>
+                <Link className={'btn ' + (p.gold ? 'btn-gold' : 'btn-dark')} to={p.to}>
+                  {p.cta}
+                </Link>
+              </div>
+            ))}
           </div>
           <p style={{ marginTop: '28px', color: 'var(--muted)' }}>
-            Bonuses are trading credit, not cash, and carry volume requirements. Never deposit
-            more than you can afford to lose in order to chase a bonus. Full terms for each
-            promotion are available in your client area and from{' '}
+            Bonuses are trading credit, not cash, and carry trading requirements before they can be
+            withdrawn. Never deposit more than you can afford to lose in order to chase a bonus.
+            Full terms for each promotion are available in your client area and from{' '}
             <Link to="/contact" style={{ fontWeight: 700, color: 'var(--ink)' }}>
               support
             </Link>

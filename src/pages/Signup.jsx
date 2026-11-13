@@ -39,7 +39,7 @@ export default function Signup() {
         />
         <div className="overlay">
           <h2>Start trading today.</h2>
-          <p>Register in two minutes, verify, deposit from $10 — and trade on MT5.</p>
+          <p>Register in two minutes, verify, deposit from $100 — and trade on MT5.</p>
         </div>
       </div>
       <div className="auth-form">
@@ -93,9 +93,11 @@ export default function Signup() {
             <div className="field">
               <label htmlFor="su-account">First account</label>
               <select id="su-account">
-                <option>Standard — from $10</option>
-                <option>Raw Spread — from $100</option>
-                <option>Pro — from $500</option>
+                <option>Standard</option>
+                <option>ECN</option>
+                <option>PRO</option>
+                <option>VIP</option>
+                <option>Islamic (swap-free)</option>
                 <option>Demo — $10,000 virtual</option>
               </select>
             </div>

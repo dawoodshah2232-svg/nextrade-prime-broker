@@ -61,7 +61,7 @@ export default function WhyCards() {
             </div>
             <h3>Tight spreads</h3>
             <p>
-              Spreads from 0.0 pips on Raw Spread accounts and from 1.0 pip on Standard — published
+              Spreads from 0.0 pips on ECN accounts and from 1.0 pip on Standard — published
               on every account page, not hidden in a footnote.
             </p>
             <Link className="card-link" to="/accounts">

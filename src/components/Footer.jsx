@@ -1,8 +1,6 @@
-// Site footer — markup ported exactly from the old index.html
-// (<footer class="site-footer">), links converted to <Link> and pointed at
-// the canonical routes. ONE addition (client motto, supplied via Kailash):
-// "PAYOUT SPEED ABOVE ALL" under the logo, in the existing .eyebrow style
-// (small gold caps) — no new design language.
+// Site footer (light theme): link columns, risk warning, then a distinct
+// "Important" corporate block (company registration, England and Wales)
+// above the copyright line — per the client brief, visible on every page.
 import { Link } from 'react-router-dom';
 import { asset } from '../lib/asset';
 import { FIcon } from './icons';
@@ -15,6 +13,7 @@ const COLUMNS = [
       { to: '/demo-account', icon: 'demo', label: 'Demo Account' },
       { to: '/islamic-accounts', icon: 'islamic', label: 'Islamic Accounts' },
       { to: '/deposits-withdrawals', icon: 'deposits', label: 'Deposits & Withdrawals' },
+      { to: '/promotions', icon: 'promotions', label: 'Promotions' },
     ],
   },
   {
@@ -60,13 +59,13 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <img src={asset('logo-light.png')} alt="NexTrade Prime" />
+            <img src={asset('logo-dark.png')} alt="NexTrade Prime" />
             <div className="eyebrow" style={{ marginBottom: 12 }}>
               PAYOUT SPEED ABOVE ALL
             </div>
             <p>
-              Trade forex, gold, indices and crypto on MetaTrader 5 — with tight spreads, fast
-              execution and support that answers.
+              Trade forex, gold, indices and crypto on MetaTrader 5 — with fast payouts, leverage
+              up to 1:1000 and support that answers.
             </p>
           </div>
           {COLUMNS.map((col) => (
@@ -82,20 +81,28 @@ export default function Footer() {
           ))}
         </div>
         <p className="risk">
-          Risk warning: CFDs are leveraged products and carry a high level of risk to your capital.
-          Prices can move against you, and you may lose more than your initial deposit if negative
-          balance protection does not apply in your jurisdiction. You should not trade with money
-          you cannot afford to lose. Past performance is not a reliable indicator of future results.
-          This website is a demonstration front-end; account opening, deposits and trading are
-          simulated in this demo.
+          <b>Risk Warning:</b> Contracts for Difference (CFDs) are complex leveraged financial
+          products and carry a high risk of losing money rapidly due to leverage. Trading may not be
+          suitable for all investors. You should carefully consider your financial circumstances,
+          investment objectives, level of experience and risk tolerance before trading. Do not trade
+          with funds you cannot afford to lose. Bonuses and promotions are subject to their terms.
         </p>
+        <div className="footer-important">
+          <p>
+            <b>Important:</b> NexTrade is operated by <b>NexTrade Ltd</b>, a company registered in{' '}
+            <b>England and Wales</b> under company number <b>17435407</b>. Services are not offered
+            in jurisdictions where such distribution or use would be contrary to applicable laws or
+            regulations.
+          </p>
+          <p className="footer-corp">The corporate entity is incorporated in England and Wales.</p>
+        </div>
         <div className="footer-bottom">
-          <span>© 2026 NexTrade Prime. All rights reserved.</span>
+          <span>© 2026 NexTrade Ltd. All rights reserved.</span>
           <span className="footer-legal">
             <Link to="/regulation">Regulation</Link>
             <Link to="/contact">Contact</Link>
-            <Link to="/privacy">Privacy</Link>
-            <Link to="/terms">Terms</Link>
+            <Link to="/privacy">Privacy Policy</Link>
+            <Link to="/terms">Terms &amp; Conditions</Link>
           </span>
         </div>
       </div>

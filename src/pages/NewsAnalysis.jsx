@@ -76,7 +76,7 @@ export default function NewsAnalysis() {
             </div>
             <div className="card reveal">
               <span className="tag">Education</span>
-              <h3>Leverage: 1:500 explained properly</h3>
+              <h3>Leverage: 1:1000 explained properly</h3>
               <p>
                 Leverage is a tool, not a target. How margin really works, and why smaller is
                 usually smarter.
