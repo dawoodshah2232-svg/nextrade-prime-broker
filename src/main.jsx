@@ -8,8 +8,7 @@ import './style.css';
 // too): without it, .reveal elements never animate in.
 document.documentElement.classList.add('js');
 
-// BASE_URL is '/' in dev and '/nextrade-prime-broker/' in the production
-// build, so the basename is '' locally and '/nextrade-prime-broker' live.
+// BASE_URL is '/' (site lives at the domain root), so the basename is ''.
 const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 ReactDOM.createRoot(document.getElementById('root')).render(

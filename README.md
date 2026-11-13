@@ -1,6 +1,6 @@
 # NexTrade Prime — Forex Broker Website (Demo Front-End)
 
-Live demo: https://dawoodshah2232-svg.github.io/nextrade-prime-broker/
+Live: https://nextradeprime.com/
 Repo: https://github.com/dawoodshah2232-svg/nextrade-prime-broker
 
 A forex broker demo website for NexTrade Prime — **MT5 only**, with a demo
@@ -15,8 +15,7 @@ Company motto: **PAYOUT SPEED ABOVE ALL**
 
 - Vite + React (JSX) + react-router-dom
 - Single global stylesheet: `src/style.css`
-- Base path `/nextrade-prime-broker/` (GitHub Pages project site);
-  build output is `dist/`
+- Base path `/` (served from the domain root); build output is `dist/`
 
 ## Run locally
 
@@ -34,16 +33,27 @@ npm run preview    # serve the production build locally
 
 ## Deploy
 
-Push to `main` → GitHub Actions builds the site and deploys `dist/` to
-GitHub Pages. Workflow: `.github/workflows/deploy.yml` (checkout, Node 22,
-`npm ci`, `npm run build`, upload `dist/` as the Pages artifact, deploy).
-The Pages source is **GitHub Actions**.
+Push to `main` (or run the workflow manually) → GitHub Actions builds the
+site and rsyncs **only the contents of `dist/`** over SSH to cPanel
+(`public_html/nextradeprime.com`). Workflow: `.github/workflows/deploy.yml`.
+Client-side routes are served by `public/.htaccess` (copied into `dist/`).
+
+Repository secrets (Settings → Secrets and variables → Actions):
+
+| Secret | Value |
+| --- | --- |
+| `CPANEL_HOST` | cPanel server host / IP |
+| `CPANEL_USER` | cPanel username |
+| `CPANEL_PORT` | SSH port (optional, defaults to 22) |
+| `CPANEL_TARGET` | `public_html/nextradeprime.com` |
+| `CPANEL_SSH_KEY` | full private key (authorized in cPanel → SSH Access) |
+| `CPANEL_SSH_PASSPHRASE` | the key's passphrase (only if it has one) |
 
 ## Project structure
 
 ```
-index.html            # Vite entry (root)
-vite.config.js        # base path /nextrade-prime-broker/
+index.html            # Vite entry shell (the only HTML file)
+vite.config.js        # base path /, dev server on 5173 (next free port if busy)
 src/
   main.jsx            # router entry
   style.css           # single global stylesheet
@@ -51,6 +61,7 @@ src/
   components/         # shared UI (header, footer, …)
   lib/                # shared helpers (demo auth, prices, …)
 public/
+  .htaccess           # Apache: HTTPS, no-www, SPA route fallback, caching
   assets/             # images, videos, logos (copied to dist/ as-is)
 ```
 
@@ -66,5 +77,5 @@ production use.
 ## History
 
 The site was originally built as static HTML and converted to React
-(Vite + JSX) in November 2026. Same design, same pages, same URLs, same
-GitHub Pages address.
+(Vite + JSX) in November 2026. Same design, same pages, same URLs. Hosting
+moved from GitHub Pages to cPanel (nextradeprime.com).
