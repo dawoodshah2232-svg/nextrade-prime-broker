@@ -31,32 +31,32 @@ export default function DemoAccount() {
             <div className="reveal">
               <h2>Learn the platform before you risk a dollar</h2>
               <p className="lead" style={{ marginBottom: '18px' }}>
-                A demo account works exactly like a live one — same charts, same order types,
-                same spreads — except the money is virtual.
+                A demo account works exactly like a live one - same charts, same order types,
+                same spreads - except the money is virtual.
               </p>
               <ul className="check-list">
                 <li>
                   <Check />
                   <span>
-                    <b>$10,000 virtual balance</b> — reset any time from your client area.
+                    <b>$10,000 virtual balance</b> - reset any time from your client area.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>All 1,000+ instruments</b> — forex, gold, indices, crypto and energies.
+                    <b>All 1,000+ instruments</b> - forex, gold, indices, crypto and energies.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>Full MT5</b> — indicators, EAs and one-click trading, just like live.
+                    <b>Full MT5</b> - indicators, EAs and one-click trading, just like live.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>No time limit</b> — keep it for as long as you need it.
+                    <b>No time limit</b> - keep it for as long as you need it.
                   </span>
                 </li>
               </ul>

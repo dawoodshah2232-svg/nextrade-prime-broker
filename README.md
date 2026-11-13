@@ -1,9 +1,9 @@
-# NexTrade Prime — Forex Broker Website (Demo Front-End)
+# NexTrade Prime - Forex Broker Website (Demo Front-End)
 
 Live: https://nextradeprime.com/
 Repo: https://github.com/dawoodshah2232-svg/nextrade-prime-broker
 
-A forex broker demo website for NexTrade Prime — **MT5 only**, with a demo
+A forex broker demo website for NexTrade Prime - **MT5 only**, with a demo
 client area (login / signup / dashboard). No other platform is named
 anywhere. No fake reviews, payout totals, client counts, awards, or
 regulation/licence claims; the regulation page says plainly that no
@@ -40,14 +40,14 @@ Client-side routes are served by `public/.htaccess` (copied into `dist/`).
 
 Repository secrets (Settings → Secrets and variables → Actions):
 
-| Secret | Value |
-| --- | --- |
-| `CPANEL_HOST` | cPanel server host / IP |
-| `CPANEL_USER` | cPanel username |
-| `CPANEL_PORT` | SSH port (optional, defaults to 22) |
-| `CPANEL_TARGET` | `public_html/nextradeprime.com` |
-| `CPANEL_SSH_KEY` | full private key (authorized in cPanel → SSH Access) |
-| `CPANEL_SSH_PASSPHRASE` | the key's passphrase (only if it has one) |
+| Secret                  | Value                                                |
+| ----------------------- | ---------------------------------------------------- |
+| `CPANEL_HOST`           | cPanel server host / IP                              |
+| `CPANEL_USER`           | cPanel username                                      |
+| `CPANEL_PORT`           | SSH port (optional, defaults to 22)                  |
+| `CPANEL_TARGET`         | `public_html/nextradeprime.com`                      |
+| `CPANEL_SSH_KEY`        | full private key (authorized in cPanel → SSH Access) |
+| `CPANEL_SSH_PASSPHRASE` | the key's passphrase (only if it has one)            |
 
 ## Project structure
 

@@ -1,4 +1,4 @@
-// Converted from help-centre.html (~/workspace/nextrade-old-html/) — copy,
+// Converted from help-centre.html (~/workspace/nextrade-old-html/) - copy,
 // sections and classes verbatim. Six link cards in a grid3; all links are
 // <Link> to canonical routes.
 import { Link } from 'react-router-dom';
@@ -22,7 +22,7 @@ export default function HelpCentre() {
             <Link to="/contact" style={{ color: '#fff', fontWeight: 700 }}>
               Contact us
             </Link>{' '}
-            — we answer 24/7.
+            - we answer 24/7.
           </>
         }
       />

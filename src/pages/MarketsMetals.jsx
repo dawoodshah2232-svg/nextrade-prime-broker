@@ -1,7 +1,7 @@
 // Full conversion of markets/gold.html from ~/workspace/nextrade-old-html/
 // (the gold page IS the metals content; route /markets/metals). The flat
-// markets-metals.html is byte-for-byte identical in body content — verified
-// by diff, modulo ../ path prefixes — so the placeholder's source note and
+// markets-metals.html is byte-for-byte identical in body content - verified
+// by diff, modulo ../ path prefixes - so the placeholder's source note and
 // this one describe the same page. The green check SVGs are copied verbatim
 // from the old page (not part of the gold icon set in ../components/icons.jsx).
 import { Link } from 'react-router-dom';
@@ -25,7 +25,7 @@ export default function MarketsMetals() {
           { label: 'Metals' },
         ]}
         title="Metals trading"
-        intro="Gold and silver — the classic hedge — traded as CFDs on MT5 with tight spreads and leverage up to 1:1000."
+        intro="Gold and silver - the classic hedge - traded as CFDs on MT5 with tight spreads and leverage up to 1:1000."
       />
 
       <section className="section">
@@ -52,7 +52,7 @@ export default function MarketsMetals() {
                 </tr>
                 <tr>
                   <td>
-                    <b>XAU/USD</b> — Gold
+                    <b>XAU/USD</b> - Gold
                   </td>
                   <td>0.12</td>
                   <td>1:1000</td>
@@ -61,7 +61,7 @@ export default function MarketsMetals() {
                 </tr>
                 <tr>
                   <td>
-                    <b>XAG/USD</b> — Silver
+                    <b>XAG/USD</b> - Silver
                   </td>
                   <td>0.02</td>
                   <td>1:1000</td>
@@ -70,7 +70,7 @@ export default function MarketsMetals() {
                 </tr>
                 <tr>
                   <td>
-                    <b>XAU/EUR</b> — Gold / Euro
+                    <b>XAU/EUR</b> - Gold / Euro
                   </td>
                   <td>0.25</td>
                   <td>1:1000</td>
@@ -79,7 +79,7 @@ export default function MarketsMetals() {
                 </tr>
                 <tr>
                   <td>
-                    <b>XPT/USD</b> — Platinum
+                    <b>XPT/USD</b> - Platinum
                   </td>
                   <td>0.60</td>
                   <td>1:200</td>
@@ -99,26 +99,26 @@ export default function MarketsMetals() {
             <div className="reveal">
               <h2>Why traders trade gold</h2>
               <p className="lead" style={{ marginBottom: '16px' }}>
-                Gold moves on inflation data, interest-rate expectations and risk sentiment —
+                Gold moves on inflation data, interest-rate expectations and risk sentiment -
                 and it moves a lot. That is why it is the most-traded metal on MT5.
               </p>
               <ul className="check-list">
                 <li>
                   <Check />
                   <span>
-                    <b>Trade from 0.01 lots</b> — gold from a few dollars of margin.
+                    <b>Trade from 0.01 lots</b> - gold from a few dollars of margin.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>Trade the news</b> — NFP, CPI and Fed decisions move gold fast.
+                    <b>Trade the news</b> - NFP, CPI and Fed decisions move gold fast.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>Hedge your portfolio</b> — gold often rises when stocks fall.
+                    <b>Hedge your portfolio</b> - gold often rises when stocks fall.
                   </span>
                 </li>
               </ul>

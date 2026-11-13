@@ -1,4 +1,4 @@
-// Count-up number — ported from the old script.js (lines ~83-102):
+// Count-up number - ported from the old script.js (lines ~83-102):
 // starts when scrolled into view (IntersectionObserver, threshold 0.4),
 // 1400ms cubic ease-out (1-(1-p)^3), integers get toLocaleString grouping.
 // Props: end (number), decimals (0), prefix (''), suffix (''), duration (1400).
@@ -31,12 +31,12 @@ export default function CountUp({
             const v = end * (1 - Math.pow(1 - p, 3));
             setText(
               prefix +
-                (decimals
-                  ? v.toFixed(decimals)
-                  : grouping
-                    ? Math.round(v).toLocaleString()
-                    : String(Math.round(v))) +
-                suffix,
+              (decimals
+                ? v.toFixed(decimals)
+                : grouping
+                  ? Math.round(v).toLocaleString()
+                  : String(Math.round(v))) +
+              suffix,
             );
             if (p < 1) requestAnimationFrame(tick);
           };

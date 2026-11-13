@@ -1,9 +1,9 @@
-// Gold line icons — verbatim paths from the old static site's header and
+// Gold line icons - verbatim paths from the old static site's header and
 // footer. Every icon shares the same <svg> attributes (24x24, no fill,
 // #c9a227 stroke, width 2, round caps/joins); only the paths differ.
 // MIcon renders the .m-ico wrapper (header + mega menus); FIcon renders
 // the .f-ico wrapper (footer). Page agents: reuse these for any icon the
-// old page already had — do not redraw or restyle them.
+// old page already had - do not redraw or restyle them.
 
 const ICON_PATHS = {
   trading: (

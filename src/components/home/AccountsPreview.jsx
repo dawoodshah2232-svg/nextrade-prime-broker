@@ -1,4 +1,4 @@
-// "Pick the account that fits you" — the five account types from the client
+// "Pick the account that fits you" - the five account types from the client
 // brief (Standard, ECN, PRO, VIP, Islamic). No per-account minimum deposit
 // or leverage tier: one shared note covers leverage (1:1000) and $100 minimum.
 import { Link } from 'react-router-dom';

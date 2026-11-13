@@ -1,4 +1,4 @@
-// Promotions — the client's current offers (brief §3, matching the
+// Promotions - the client's current offers (brief §3, matching the
 // yournextrade.com key points): 30% first-deposit bonus, 10% re-deposit
 // bonus, swap-free first week, plus leverage up to 1:1000. Caps, expiry and
 // trading requirements are NOT invented here: the cards point to the full
@@ -52,7 +52,7 @@ export default function Promotions() {
       <PageHero
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Promotions' }]}
         title="Promotions"
-        intro="Current offers for new and existing traders. Every promotion carries clear terms — read them before you opt in."
+        intro="Current offers for new and existing traders. Every promotion carries clear terms - read them before you opt in."
       />
 
       <section className="section">

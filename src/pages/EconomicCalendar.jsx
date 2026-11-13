@@ -1,4 +1,4 @@
-// Converted from economic-calendar.html in ~/workspace/nextrade-old-html/ —
+// Converted from economic-calendar.html in ~/workspace/nextrade-old-html/ -
 // verbatim copy, table and cards; internal links are <Link> routes.
 // The table gains an explicit <tbody> (the browser inserts one in the old
 // page's DOM anyway, so the rendered output is identical; it only silences
@@ -16,7 +16,7 @@ export default function EconomicCalendar() {
           { label: 'Economic Calendar' },
         ]}
         title="Economic calendar"
-        intro="The events that move markets — NFP, CPI, rate decisions and more. All times in GMT. Check it before you trade."
+        intro="The events that move markets - NFP, CPI, rate decisions and more. All times in GMT. Check it before you trade."
       />
 
       <section className="section">
@@ -35,7 +35,7 @@ export default function EconomicCalendar() {
                   <td>
                     <b>Mon 09:00</b>
                   </td>
-                  <td>Market open briefing — week ahead</td>
+                  <td>Market open briefing - week ahead</td>
                   <td>Global</td>
                   <td>
                     <span className="tag">Medium</span>
@@ -46,7 +46,7 @@ export default function EconomicCalendar() {
                   <td>
                     <b>Tue 13:30</b>
                   </td>
-                  <td>US CPI — inflation data</td>
+                  <td>US CPI - inflation data</td>
                   <td>USA</td>
                   <td>
                     <span className="tag gold">High</span>
@@ -124,7 +124,7 @@ export default function EconomicCalendar() {
           </div>
           <p style={{ marginTop: '16px', color: 'var(--muted)' }}>
             This is a sample weekly schedule showing the regular high-impact releases. Exact
-            dates shift each month — the live calendar in your client area always shows the
+            dates shift each month - the live calendar in your client area always shows the
             current week. Spreads can widen and slippage can occur around high-impact releases;
             consider reducing size or standing aside if you are new.
           </p>

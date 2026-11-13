@@ -1,7 +1,7 @@
-// Converted from platforms/mt5.html in ~/workspace/nextrade-old-html/ —
+// Converted from platforms/mt5.html in ~/workspace/nextrade-old-html/ -
 // the folder copy is canonical. The flat platforms-mt5.html is the same
 // page; the only differences are the ../ path prefixes on its links and
-// asset URLs (verified by diff — body copy is identical).
+// asset URLs (verified by diff - body copy is identical).
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 
@@ -24,7 +24,7 @@ export default function PlatformsMt5() {
           { label: 'MT5' },
         ]}
         title="MetaTrader 5"
-        intro="The platform professional traders already know. Advanced charting, automated trading and one-click execution — on every device."
+        intro="The platform professional traders already know. Advanced charting, automated trading and one-click execution - on every device."
       />
 
       <section className="section">
@@ -51,7 +51,7 @@ export default function PlatformsMt5() {
               >
                 <img
                   src="https://www.metatrader5.com/i/metatrader-5-logo.png"
-                  alt="MetaTrader 5 — official logo"
+                  alt="MetaTrader 5 - official logo"
                   style={{ height: '36px', width: 'auto' }}
                 />
                 <b style={{ color: 'var(--ink)' }}>MetaTrader 5</b>
@@ -66,26 +66,26 @@ export default function PlatformsMt5() {
                 <li>
                   <Check />
                   <span>
-                    <b>80+ indicators and 21 timeframes</b> — chart any market, any way you like.
+                    <b>80+ indicators and 21 timeframes</b> - chart any market, any way you like.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>Expert Advisors (EAs)</b> — automate your strategy and trade around the
+                    <b>Expert Advisors (EAs)</b> - automate your strategy and trade around the
                     clock.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>Depth of market</b> — see the order book and trade with full transparency.
+                    <b>Depth of market</b> - see the order book and trade with full transparency.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>One-click trading</b> — enter and exit in a single click.
+                    <b>One-click trading</b> - enter and exit in a single click.
                   </span>
                 </li>
               </ul>
@@ -97,7 +97,7 @@ export default function PlatformsMt5() {
               <h3>MT5 Desktop</h3>
               <p>
                 The full terminal for Windows and Mac. Every indicator, every EA, every order
-                type — with the fastest execution.
+                type - with the fastest execution.
               </p>
             </div>
             <div className="card reveal">

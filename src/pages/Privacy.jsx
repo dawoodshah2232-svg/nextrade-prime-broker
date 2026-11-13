@@ -1,4 +1,4 @@
-// Converted from privacy.html (~/workspace/nextrade-old-html/) — copy,
+// Converted from privacy.html (~/workspace/nextrade-old-html/) - copy,
 // sections and classes verbatim.
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
@@ -29,7 +29,7 @@ export default function Privacy() {
             <h2>What we do not collect</h2>
             <p style={{ marginBottom: 16 }}>
               We do not collect payment details, identity documents, or trading account credentials
-              on this website. Do not enter real account passwords or card details here — account
+              on this website. Do not enter real account passwords or card details here - account
               opening, deposits and trading are simulated in this demo.
             </p>
             <h2>Cookies and analytics</h2>

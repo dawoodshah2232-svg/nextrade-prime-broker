@@ -1,4 +1,4 @@
-// "One platform. Every market." — MT5 split section, verbatim port of
+// "One platform. Every market." - MT5 split section, verbatim port of
 // the old index.html section. Terminal screenshot via asset(); the MT5
 // logo URL is copied verbatim from metatrader5.com.
 import { Link } from 'react-router-dom';
@@ -7,15 +7,15 @@ import { asset } from '../../lib/asset';
 const CHECKS = [
   {
     bold: '80+ indicators',
-    rest: ' — charting, drawing tools and depth of market built in.',
+    rest: ' - charting, drawing tools and depth of market built in.',
   },
   {
     bold: 'Expert Advisors',
-    rest: ' — run automated strategies around the clock.',
+    rest: ' - run automated strategies around the clock.',
   },
   {
     bold: 'One-click trading',
-    rest: ' — enter and exit in a single click.',
+    rest: ' - enter and exit in a single click.',
   },
 ];
 
@@ -27,7 +27,7 @@ export default function MT5Section() {
           <div className="split-img reveal mt5-shot">
             <img
               src={asset('mt5-terminal.png')}
-              alt="MetaTrader 5 desktop terminal — Market Watch, Navigator and XAU/USD charts with indicators"
+              alt="MetaTrader 5 desktop terminal - Market Watch, Navigator and XAU/USD charts with indicators"
               loading="lazy"
             />
           </div>
@@ -41,7 +41,7 @@ export default function MT5Section() {
             </div>
             <h2>One platform. Every market.</h2>
             <p className="lead" style={{ marginBottom: 18 }}>
-              Every NexTrade Prime account trades on MetaTrader 5 — the platform professional
+              Every NexTrade Prime account trades on MetaTrader 5 - the platform professional
               traders already know. Desktop, web and mobile, with the same account everywhere.
             </p>
             <ul className="check-list">

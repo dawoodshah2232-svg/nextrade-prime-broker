@@ -1,8 +1,8 @@
-// Stats band — verbatim port of the old index.html stats-band. The four
+// Stats band - verbatim port of the old index.html stats-band. The four
 // stats count up via the shared CountUp component, matching the old
 // data-count / data-prefix / data-suffix / data-decimals attributes
 // (1000+, 0.0, 1:1000, 24/7). Stat icons are inlined verbatim (white
-// stroke) — they are not the gold header/footer icons.
+// stroke) - they are not the gold header/footer icons.
 import CountUp from '../CountUp';
 
 export default function StatsBand() {

@@ -1,7 +1,7 @@
-// Homepage — full conversion of the old index.html, in the old page's
+// Homepage - full conversion of the old index.html, in the old page's
 // order: hero, promo cards, price strip, spreads, why, stats, markets
 // tabs, video, steps, accounts, MT5, duo, FAQ, support, final CTA.
-// The price strip (ticker) lives on the homepage ONLY — it is built here
+// The price strip (ticker) lives on the homepage ONLY - it is built here
 // from usePrices(), with the 7-quote list duplicated once for the
 // seamless marquee loop, exactly as the old script.js did.
 import Hero from '../components/home/Hero';
@@ -24,7 +24,7 @@ import { formatPrice, priceNote, usePrices } from '../lib/prices';
 const TICKER_SYMBOLS = ['EUR/USD', 'GBP/USD', 'XAU/USD', 'BTC/USD', 'ETH/USD', 'USD/JPY', 'US30'];
 
 // % change only ever comes from a real previous close: pct === null means
-// no previous close, so the slot shows an em dash — never a fabricated %.
+// no previous close, so the slot shows an em dash - never a fabricated %.
 function chgOf(s) {
   if (s.pct !== null && s.pct !== undefined && isFinite(s.pct)) {
     return {
@@ -32,7 +32,7 @@ function chgOf(s) {
       cls: 'chg ' + (s.pct >= 0 ? 'up' : 'down'),
     };
   }
-  return { text: '—', cls: 'chg na' };
+  return { text: '-', cls: 'chg na' };
 }
 
 function PriceStrip() {

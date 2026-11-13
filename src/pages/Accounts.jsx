@@ -1,4 +1,4 @@
-// Account Types page — the five account types from the client brief
+// Account Types page - the five account types from the client brief
 // (Standard, ECN, PRO, VIP, Islamic) with a comparison table. Per the brief
 // the table lists NO per-account minimum deposit or leverage tier; the shared
 // conditions (1:1000 leverage, $100 minimum deposit and withdrawal) sit in
@@ -92,7 +92,7 @@ export default function Accounts() {
             <Link to="/demo-account" style={{ fontWeight: 700, color: 'var(--ink)' }}>
               demo account
             </Link>{' '}
-            — it costs nothing, and you can open a live account of any type later. Need
+            - it costs nothing, and you can open a live account of any type later. Need
             swap-free trading? See{' '}
             <Link to="/islamic-accounts" style={{ fontWeight: 700, color: 'var(--ink)' }}>
               Islamic accounts

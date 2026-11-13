@@ -1,6 +1,6 @@
-// "Start trading today" — three steps, verbatim port of the old
+// "Start trading today" - three steps, verbatim port of the old
 // index.html section. Ghost numerals, badges and connectors are
-// markup/classes only — the global stylesheet already handles them.
+// markup/classes only - the global stylesheet already handles them.
 // Step icons are inlined verbatim (white stroke).
 export default function Steps() {
   return (

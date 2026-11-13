@@ -1,9 +1,9 @@
-// "See trading in action" — two video cards, verbatim port of the old
+// "See trading in action" - two video cards, verbatim port of the old
 // index.html #video section, with the play-on-click behaviour from
 // script.js (~lines 404+): the play button starts the video, the frame
 // gets .playing while it plays (CSS hides the button), and "ended" fires
 // without "pause" when a video finishes naturally. On error the poster
-// stays visible and a "Video unavailable — tap to retry" note appears
+// stays visible and a "Video unavailable - tap to retry" note appears
 // under the card; tapping it reloads and retries.
 import { useRef, useState } from 'react';
 import { asset } from '../../lib/asset';
@@ -18,7 +18,7 @@ function VideoCard({ video, poster, label, title, text }) {
     const v = videoRef.current;
     if (v) {
       v.load();
-      v.play().catch(() => {});
+      v.play().catch(() => { });
     }
   };
 
@@ -58,7 +58,7 @@ function VideoCard({ video, poster, label, title, text }) {
         <p>{text}</p>
         {error && (
           <p className="video-error" onClick={retry}>
-            Video unavailable — tap to retry
+            Video unavailable - tap to retry
           </p>
         )}
       </div>
@@ -72,7 +72,7 @@ export default function VideoSection() {
       <div className="container">
         <h2 className="reveal">See trading in action</h2>
         <p className="sub reveal">
-          Real market footage — no actors, no scripts. This is what a trading day looks like.
+          Real market footage - no actors, no scripts. This is what a trading day looks like.
         </p>
         <div className="video-grid" style={{ marginTop: 32 }}>
           <VideoCard
@@ -80,7 +80,7 @@ export default function VideoSection() {
             poster="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80"
             label="A trader's desk"
             title="A trader's desk"
-            text="Charts, orders and decisions — a trader at work."
+            text="Charts, orders and decisions - a trader at work."
           />
           <VideoCard
             video="hero-video.mp4"

@@ -1,12 +1,12 @@
-// Login — converted from login.html (~/workspace/nextrade-old-html/).
+// Login - converted from login.html (~/workspace/nextrade-old-html/).
 // The old page had NO page hero: the split auth layout IS the page, so the
 // placeholder's PageHero is dropped. The overlay heading "Welcome back,
 // trader." lives in the auth visual, as in the old page.
-// Submit via login() from ../lib/auth — it accepts ONLY the demo account
+// Submit via login() from ../lib/auth - it accepts ONLY the demo account
 // demo@nextradeprime.com / demo1234 and returns { ok, user } or { ok, error };
 // on success navigate to /dashboard, on failure show the returned error
 // inline (the old site used alert()).
-// WORDING UPDATE (per spec): the old demo note said "use any email" — that
+// WORDING UPDATE (per spec): the old demo note said "use any email" - that
 // is no longer true, so the note now names the demo account. Still labelled
 // DEMO, same tone as before.
 import { useState } from 'react';
@@ -19,7 +19,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Already signed in (a session exists in localStorage) — the login form
+  // Already signed in (a session exists in localStorage) - the login form
   // is pointless; go straight to the client area.
   if (isLoggedIn()) {
     return <Navigate to="/dashboard" replace />;
@@ -53,7 +53,7 @@ export default function Login() {
           <h2 style={{ marginBottom: 6 }}>Log in</h2>
           <p style={{ color: 'var(--muted)', marginBottom: 20 }}>Access your client area.</p>
           <div className="demo-note">
-            Demo only — log in with the demo account: <b>demo@nextradeprime.com / demo1234</b>.
+            Demo only - log in with the demo account: <b>demo@nextradeprime.com / demo1234</b>.
           </div>
           {error && (
             <div role="alert" style={{ color: 'var(--red)', marginBottom: 16, fontSize: '.92rem' }}>

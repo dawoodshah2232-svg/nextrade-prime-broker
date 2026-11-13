@@ -32,7 +32,7 @@ import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 
 // The old site was separate HTML files, so every navigation started at the
-// top of the page. In the SPA we reproduce that on every route change —
+// top of the page. In the SPA we reproduce that on every route change -
 // except for hash links (e.g. /education#live), which scroll to the anchor.
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -68,7 +68,7 @@ export default function App() {
           <Route path="/markets/energies" element={<MarketsEnergies />} />
           {/* The old markets/gold.html was a duplicate of the metals page. */}
           <Route path="/markets/gold" element={<Navigate to="/markets/metals" replace />} />
-          {/* Flat aliases from the old site — canonical routes are /markets/*. */}
+          {/* Flat aliases from the old site - canonical routes are /markets/*. */}
           <Route path="/markets-forex" element={<Navigate to="/markets/forex" replace />} />
           <Route path="/markets-metals" element={<Navigate to="/markets/metals" replace />} />
           <Route path="/markets-indices" element={<Navigate to="/markets/indices" replace />} />

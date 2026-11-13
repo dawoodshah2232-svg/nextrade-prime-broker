@@ -1,7 +1,7 @@
-// "New to trading?" / "Already trading?" duo — verbatim port of the old
+// "New to trading?" / "Already trading?" duo - verbatim port of the old
 // index.html section that sits between the MT5 split and the FAQ. (It was
 // not in the task's numbered list, but it is in the old homepage, so a
-// faithful port keeps it — same copy, same photos, same links.)
+// faithful port keeps it - same copy, same photos, same links.)
 import { Link } from 'react-router-dom';
 
 export default function DuoSection() {
@@ -20,7 +20,7 @@ export default function DuoSection() {
             <h3>New to trading?</h3>
             <p>
               Start with a demo account and the Learning Centre. Learn how markets move, how
-              leverage works and how to place your first order — with $10,000 of virtual funds and
+              leverage works and how to place your first order - with $10,000 of virtual funds and
               zero risk.
             </p>
             <Link className="btn btn-gold" style={{ marginTop: 16 }} to="/education">
@@ -31,7 +31,7 @@ export default function DuoSection() {
             <div className="duo-photo">
               <img
                 src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80"
-                alt="Experienced trader's desk from above — laptops with trading charts, notebook and coffee"
+                alt="Experienced trader's desk from above - laptops with trading charts, notebook and coffee"
                 loading="lazy"
               />
             </div>

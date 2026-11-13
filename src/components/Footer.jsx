@@ -1,6 +1,6 @@
 // Site footer (light theme): link columns, risk warning, then a distinct
 // "Important" corporate block (company registration, England and Wales)
-// above the copyright line — per the client brief, visible on every page.
+// above the copyright line - per the client brief, visible on every page.
 import { Link } from 'react-router-dom';
 import { asset } from '../lib/asset';
 import { FIcon } from './icons';
@@ -64,7 +64,7 @@ export default function Footer() {
               PAYOUT SPEED ABOVE ALL
             </div>
             <p>
-              Trade forex, gold, indices and crypto on MetaTrader 5 — with fast payouts, leverage
+              Trade forex, gold, indices and crypto on MetaTrader 5 - with fast payouts, leverage
               up to 1:1000 and support that answers.
             </p>
           </div>

@@ -64,7 +64,7 @@ export default function Markets() {
               <h3>Crypto</h3>
               <p>
                 Bitcoin, Ethereum and major altcoins, traded as CFDs with leverage up to 1:20
-                — no wallet needed.
+                - no wallet needed.
               </p>
               <Link to="/markets/crypto" style={{ fontWeight: 700, color: 'var(--ink)' }}>
                 Trade Crypto →

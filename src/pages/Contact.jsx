@@ -1,4 +1,4 @@
-// Converted from contact.html (~/workspace/nextrade-old-html/) — copy,
+// Converted from contact.html (~/workspace/nextrade-old-html/) - copy,
 // sections and classes verbatim. The old form's inline onsubmit (prevent
 // default, show #contact-done, reset the form) is ported to a React
 // onSubmit handler with useState; the #contact-done element keeps its id,
@@ -26,7 +26,7 @@ export default function Contact() {
           { label: 'Contact Us' },
         ]}
         title="Contact us"
-        intro="Real people, 24/7. Live chat is fastest — email works too, and we answer within a few hours."
+        intro="Real people, 24/7. Live chat is fastest - email works too, and we answer within a few hours."
       />
 
       <section className="section">
@@ -66,7 +66,7 @@ export default function Contact() {
                 className="demo-note"
                 style={{ display: sent ? 'block' : 'none', marginTop: 16 }}
               >
-                Thank you — your message has been received (demo). Our team will reply by email.
+                Thank you - your message has been received (demo). Our team will reply by email.
               </p>
             </div>
             <div className="reveal">
@@ -74,7 +74,7 @@ export default function Contact() {
               <div className="card" style={{ marginTop: 16 }}>
                 <h3>Live chat</h3>
                 <p>
-                  Available 24/7 from any page — look for the chat button in your client area after
+                  Available 24/7 from any page - look for the chat button in your client area after
                   you{' '}
                   <Link to="/login" style={{ fontWeight: 700, color: 'var(--ink)' }}>
                     log in
@@ -85,7 +85,7 @@ export default function Contact() {
               <div className="card" style={{ marginTop: 16 }}>
                 <h3>Email</h3>
                 <p>
-                  Use the contact form below and our team will reply — for account, payment and
+                  Use the contact form below and our team will reply - for account, payment and
                   platform questions.
                 </p>
               </div>

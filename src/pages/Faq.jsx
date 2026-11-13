@@ -1,4 +1,4 @@
-// Converted from faq.html (~/workspace/nextrade-old-html/) — all 10
+// Converted from faq.html (~/workspace/nextrade-old-html/) - all 10
 // questions and answers verbatim, rendered with <FaqAccordion>. Answers
 // that contain a link use JSX with <Link>; plain-text answers are strings.
 import { Link } from 'react-router-dom';
@@ -20,14 +20,14 @@ const items = [
     q: 'What is the minimum deposit?',
     a: (
       <>
-        $100 on every account type — Standard, ECN, PRO, VIP and Islamic. The minimum withdrawal is also $100. See the full comparison on{' '}
+        $100 on every account type - Standard, ECN, PRO, VIP and Islamic. The minimum withdrawal is also $100. See the full comparison on{' '}
         <Link to="/accounts">Account Types</Link>.
       </>
     ),
   },
   {
     q: 'What is the minimum trade size?',
-    a: '0.01 lots on forex, metals and energies — 0.10 lots on indices. That keeps gold and forex accessible from a small account.',
+    a: '0.01 lots on forex, metals and energies - 0.10 lots on indices. That keeps gold and forex accessible from a small account.',
   },
   {
     q: 'Can I use Expert Advisors?',
@@ -49,13 +49,13 @@ const items = [
   },
   {
     q: 'Can I change my leverage?',
-    a: 'Yes, from your client area at any time. Lower leverage means more margin per trade — most traders use less than the maximum.',
+    a: 'Yes, from your client area at any time. Lower leverage means more margin per trade - most traders use less than the maximum.',
   },
   {
     q: 'Is there a demo account?',
     a: (
       <>
-        Yes — $10,000 virtual funds, live prices, full MT5, no time limit. See{' '}
+        Yes - $10,000 virtual funds, live prices, full MT5, no time limit. See{' '}
         <Link to="/demo-account">Demo Account</Link>.
       </>
     ),
@@ -73,21 +73,21 @@ const items = [
     q: 'Which platform do you offer?',
     a: (
       <>
-        MetaTrader 5 only — desktop, web and mobile. See{' '}
+        MetaTrader 5 only - desktop, web and mobile. See{' '}
         <Link to="/platforms-mt5">MT5 Platform</Link>.
       </>
     ),
   },
   {
     q: 'What is the maximum leverage?',
-    a: 'Up to 1:1000 on every account type — Standard, ECN, PRO, VIP and Islamic — subject to the account, instrument and trading conditions. Higher leverage magnifies losses as well as gains.',
+    a: 'Up to 1:1000 on every account type - Standard, ECN, PRO, VIP and Islamic - subject to the account, instrument and trading conditions. Higher leverage magnifies losses as well as gains.',
   },
   {
     q: 'What promotions are available?',
     a: (
       <>
         A 30% bonus on your first deposit, a 10% bonus on every re-deposit, and swap-free trading
-        for your first week. Bonus terms, eligibility and trading requirements apply — see{' '}
+        for your first week. Bonus terms, eligibility and trading requirements apply - see{' '}
         <Link to="/promotions">Promotions</Link>.
       </>
     ),
@@ -115,7 +115,7 @@ export default function Faq() {
         title="Frequently asked questions"
         intro={
           <>
-            Straight answers. Anything else — ask us on{' '}
+            Straight answers. Anything else - ask us on{' '}
             <Link to="/contact" style={{ color: '#fff', fontWeight: 700 }}>
               Contact Us
             </Link>

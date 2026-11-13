@@ -1,20 +1,20 @@
-// Homepage hero — verbatim port of the <section class="hero …"> block in
+// Homepage hero - verbatim port of the <section class="hero …"> block in
 // the old index.html, with the heroBackground behaviour from script.js
 // (~lines 357-388): reduced motion or viewport <=760px pauses the video
 // and shows the poster still; a video error does the same. Autoplay is
 // native (attributes on the <video>); JS retries until it is actually
 // playing (see the effect below) because some browsers block the initial
-// autoplay — the QA browser froze the hero on its first frame even with a
+// autoplay - the QA browser froze the hero on its first frame even with a
 // one-shot retry. NOTE: the YouTube video Dawood picked
-// (EEX0EHTTePE) was removed 12 Nov — YouTube refuses it in embedded
+// (EEX0EHTTePE) was removed 12 Nov - YouTube refuses it in embedded
 // players (Error 153). No iframe / API code here, ever.
-// The hero proof row is STATIC in the old markup (no data-count) — only
+// The hero proof row is STATIC in the old markup (no data-count) - only
 // the StatsBand counts up. The XAU/USD glass card is live via usePrices.
 // The <video> element is STABLE across re-renders: same position in the
 // tree, no key, and every prop (autoPlay/muted/loop/playsInline/preload/
 // poster/src) is identical on every render (asset() is a pure string
 // concat), so React never touches the DOM node when usePrices ticks every
-// 15s — playback is never reset by a price update.
+// 15s - playback is never reset by a price update.
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { asset } from '../../lib/asset';
@@ -34,7 +34,7 @@ export default function Hero() {
     setPosterOnly(true);
   };
 
-  // Play if the browser lets us — used by onCanPlay. Sets muted
+  // Play if the browser lets us - used by onCanPlay. Sets muted
   // imperatively first (see the effect for why React's muted prop is not
   // enough on its own).
   const tryPlay = () => {
@@ -42,7 +42,7 @@ export default function Hero() {
     if (!v || posterOnlyRef.current || !v.paused) return;
     v.muted = true;
     v.play().catch(() => {
-      /* blocked for now — the retry loop tries again */
+      /* blocked for now - the retry loop tries again */
     });
   };
 
@@ -50,7 +50,7 @@ export default function Hero() {
     const video = videoRef.current;
     if (!video) return;
     // React sets the `muted` ATTRIBUTE, but Chrome's autoplay policy checks
-    // the muted PROPERTY — and the property is only initialised from the
+    // the muted PROPERTY - and the property is only initialised from the
     // attribute at element creation, before React sets it (long-standing
     // React gotcha). Set it imperatively the moment the element exists, so
     // the native autoplay evaluation sees a muted video.
@@ -64,7 +64,7 @@ export default function Hero() {
       return;
     }
     // Autoplay is native (attributes on the <video>), but some browsers
-    // block the initial autoplay — the QA browser froze the hero on its
+    // block the initial autoplay - the QA browser froze the hero on its
     // first frame even with a one-shot retry. Retry until it is actually
     // playing: immediately, then every 500ms for up to ~5s. The loop
     // clears itself the moment playback starts, and on unmount.
@@ -99,7 +99,7 @@ export default function Hero() {
     tick();
     timer = setInterval(tick, 500);
     return stop;
-    // Run once on mount — the video element is stable across re-renders.
+    // Run once on mount - the video element is stable across re-renders.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -112,7 +112,7 @@ export default function Hero() {
       {/* Poster frame as the container background: the <video> poster
           attribute does not reliably paint while an autoplaying video
           buffers (Chrome shows black), so the chart still is the backdrop
-          itself — visible instantly, covered by the video once it plays. */}
+          itself - visible instantly, covered by the video once it plays. */}
       <div className="hero-bg" aria-hidden="true" style={{ backgroundImage: `url(${asset('hero-poster.jpg')})`, backgroundSize: 'cover', backgroundPosition: '50% 22%' }}>
         <video
           ref={videoRef}

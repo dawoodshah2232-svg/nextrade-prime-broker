@@ -1,7 +1,7 @@
-// Dashboard — converted from dashboard.html (~/workspace/nextrade-old-html/).
+// Dashboard - converted from dashboard.html (~/workspace/nextrade-old-html/).
 // The old page had NO page hero, so the placeholder's PageHero is dropped;
 // the section below is the whole page, as before.
-// All figures are the old page's SIMULATED demo data, copied verbatim —
+// All figures are the old page's SIMULATED demo data, copied verbatim -
 // nothing invented, nothing live. The old dashboard had no data-count
 // elements, so no CountUp; its "Current" prices are static demo values,
 // not the live feed, so no usePrices.
@@ -9,7 +9,7 @@
 // the auth-aware header already shows "Hi, <name>" + Log Out.
 // NOTE: the old script.js REMOVED the demo-note banner once a user was
 // logged in. It is kept here verbatim per the conversion spec ("keep the
-// DEMO labelling the old page had") — the page is only reachable logged in,
+// DEMO labelling the old page had") - the page is only reachable logged in,
 // so without it the demo labelling would be gone entirely.
 import { Link, Navigate } from 'react-router-dom';
 import { getUser } from '../lib/auth';
@@ -24,7 +24,7 @@ export default function Dashboard() {
     <section className="section soft">
       <div className="container">
         <div className="demo-note">
-          <b>DEMO CLIENT AREA — SIMULATED DATA ONLY.</b> No real money, no real positions. Log in
+          <b>DEMO CLIENT AREA - SIMULATED DATA ONLY.</b> No real money, no real positions. Log in
           from{' '}
           <Link to="/login" style={{ fontWeight: 700 }}>
             login
@@ -141,7 +141,7 @@ export default function Dashboard() {
                   <td>
                     <b>NT-102482</b>
                   </td>
-                  <td>Demo — $10,000 virtual</td>
+                  <td>Demo - $10,000 virtual</td>
                   <td>$9,860.00</td>
                   <td>1:1000</td>
                   <td>MT5</td>

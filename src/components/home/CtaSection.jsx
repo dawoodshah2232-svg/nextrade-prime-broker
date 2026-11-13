@@ -1,4 +1,4 @@
-// Final CTA band — verbatim port of the old index.html closing section.
+// Final CTA band - verbatim port of the old index.html closing section.
 import { Link } from 'react-router-dom';
 
 export default function CtaSection() {

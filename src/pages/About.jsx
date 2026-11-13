@@ -1,9 +1,9 @@
-// Converted from about.html (~/workspace/nextrade-old-html/) — copy, sections
+// Converted from about.html (~/workspace/nextrade-old-html/) - copy, sections
 // and classes verbatim. TWO client-supplied additions (via Kailash, 12 Nov):
 // (a) the company motto "PAYOUT SPEED ABOVE ALL" as a gold motto line in
 // the intro section (same .eyebrow style the footer uses for the motto);
-// (b) a "Corporate Presence" section with one card — United Kingdom /
-// "Corporate entity incorporated in England and Wales." — using only the
+// (b) a "Corporate Presence" section with one card - United Kingdom /
+// "Corporate entity incorporated in England and Wales." - using only the
 // text the client shared. No company name, registration number, address or
 // licence is invented anywhere. The stats are plain text in the old page
 // (no data-count), so no CountUp here. The split image is an external
@@ -21,7 +21,7 @@ export default function About() {
           { label: 'About' },
         ]}
         title="About NexTrade Prime"
-        intro="A broker built by traders, for traders — with pricing you can read, execution you can feel, and support that answers."
+        intro="A broker built by traders, for traders - with pricing you can read, execution you can feel, and support that answers."
       />
 
       <section className="section">
@@ -42,7 +42,7 @@ export default function About() {
                     <path d="M4 12l5 5L20 6" />
                   </svg>
                   <span>
-                    <b>Published spreads</b> — the spread on the account page is the spread you
+                    <b>Published spreads</b> - the spread on the account page is the spread you
                     get. No asterisks.
                   </span>
                 </li>
@@ -51,7 +51,7 @@ export default function About() {
                     <path d="M4 12l5 5L20 6" />
                   </svg>
                   <span>
-                    <b>Execution in milliseconds</b> — market orders filled at market, with no
+                    <b>Execution in milliseconds</b> - market orders filled at market, with no
                     requotes.
                   </span>
                 </li>
@@ -60,7 +60,7 @@ export default function About() {
                     <path d="M4 12l5 5L20 6" />
                   </svg>
                   <span>
-                    <b>Withdrawals the same day</b> — your money is yours, and it moves when you
+                    <b>Withdrawals the same day</b> - your money is yours, and it moves when you
                     ask it to.
                   </span>
                 </li>
@@ -69,7 +69,7 @@ export default function About() {
                     <path d="M4 12l5 5L20 6" />
                   </svg>
                   <span>
-                    <b>Education, not hype</b> — free courses and live sessions that teach risk
+                    <b>Education, not hype</b> - free courses and live sessions that teach risk
                     first.
                   </span>
                 </li>

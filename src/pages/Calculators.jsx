@@ -1,4 +1,4 @@
-// Converted from calculators.html in ~/workspace/nextrade-old-html/ —
+// Converted from calculators.html in ~/workspace/nextrade-old-html/ -
 // verbatim copy, forms and labels. The pip-value and margin calculators
 // are ported from the old assets/script.js (lines ~304-324) as React form
 // state, with the formulas and result wording unchanged:

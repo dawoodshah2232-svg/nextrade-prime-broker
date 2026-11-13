@@ -1,7 +1,7 @@
-// Reusable FAQ accordion — same markup and behaviour as the old site:
+// Reusable FAQ accordion - same markup and behaviour as the old site:
 // each item toggles its own .open class independently (multiple items may
 // be open at once; the old script.js just toggled the clicked item).
-// items: [{ q, a }] — q is plain text; a may be a string of HTML copied
+// items: [{ q, a }] - q is plain text; a may be a string of HTML copied
 // verbatim from the old page (rendered as-is) or a React node (use JSX
 // with <Link> for any links inside the answer).
 import { useState } from 'react';
@@ -17,7 +17,7 @@ export default function FaqAccordion({ items }) {
     });
   };
   // No .reveal on the items: React rewrites className on every toggle, which
-  // wiped the .visible class the reveal observer adds — so an opened item
+  // wiped the .visible class the reveal observer adds - so an opened item
   // faded back to opacity 0 and the FAQ looked empty. The parent section
   // still animates in.
   return (

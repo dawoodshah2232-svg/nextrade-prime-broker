@@ -1,7 +1,7 @@
-// Four promo cards overlapping the hero base — the client's headline offers
+// Four promo cards overlapping the hero base - the client's headline offers
 // (fast withdrawals, 30% first-deposit bonus, 10% re-deposit bonus,
 // swap-free first week). The icons are inlined verbatim (stroke
-// #e8c766 inside .promo-ico) — MIcon would be wrong here: it renders a
+// #e8c766 inside .promo-ico) - MIcon would be wrong here: it renders a
 // .m-ico wrapper with a #c9a227 stroke, which is the header's styling,
 // not the promo cards'.
 import { Link } from 'react-router-dom';
@@ -23,7 +23,7 @@ const CARDS = [
       </svg>
     ),
     title: 'Fast withdrawals',
-    text: 'Payout speed above all — a simple, secure withdrawal process. Minimum withdrawal $100.',
+    text: 'Payout speed above all - a simple, secure withdrawal process. Minimum withdrawal $100.',
     link: 'How it works →',
   },
   {

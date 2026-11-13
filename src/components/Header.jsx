@@ -1,8 +1,8 @@
-// Site header — markup ported exactly from the old index.html
+// Site header - markup ported exactly from the old index.html
 // (<header class="site-header">), links converted to <Link> and pointed at
 // the canonical routes (/markets/forex, not the /markets-forex alias).
 //
-// Behaviour — ported from the old script.js (lines ~14-72), as React state:
+// Behaviour - ported from the old script.js (lines ~14-72), as React state:
 //  - Desktop (>1020px): menus open on :hover/:focus-within (CSS). Clicking a
 //    parent item toggles: hover opens the menu before the first click, so
 //    the first click only "claims" it, the second closes it (via
@@ -18,7 +18,7 @@
 //
 // Header actions: logged out, they are the index.html original (Login /
 // Get Started). Logged in, they are the dashboard.html original
-// ("Hi, <name>" + Log Out) — the old dashboard was the only page with that
+// ("Hi, <name>" + Log Out) - the old dashboard was the only page with that
 // variant; in the SPA it follows the login state on every page.
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -137,7 +137,7 @@ export default function Header() {
     document.body.classList.remove('menus-suppressed');
   }, []);
 
-  // Close menus on navigation (skip the first render — nothing is open yet).
+  // Close menus on navigation (skip the first render - nothing is open yet).
   useEffect(() => {
     if (firstRenderRef.current) {
       firstRenderRef.current = false;
@@ -199,7 +199,7 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <Link className="brand" to="/" aria-label="NexTrade Prime — home">
+        <Link className="brand" to="/" aria-label="NexTrade Prime - home">
           <img src={asset('logo-dark.png')} alt="NexTrade Prime" />
         </Link>
         <button className="menu-toggle" type="button" aria-label="Open menu" onClick={onToggle}>

@@ -1,4 +1,4 @@
-// Signup — converted from signup.html (~/workspace/nextrade-old-html/).
+// Signup - converted from signup.html (~/workspace/nextrade-old-html/).
 // The old page had NO page hero: the split auth layout IS the page, so the
 // placeholder's PageHero is dropped. The overlay heading "Start trading
 // today." lives in the auth visual, as in the old page.
@@ -39,7 +39,7 @@ export default function Signup() {
         />
         <div className="overlay">
           <h2>Start trading today.</h2>
-          <p>Register in two minutes, verify, deposit from $100 — and trade on MT5.</p>
+          <p>Register in two minutes, verify, deposit from $100 - and trade on MT5.</p>
         </div>
       </div>
       <div className="auth-form">
@@ -49,7 +49,7 @@ export default function Signup() {
             Free to open. No deposit needed to register.
           </p>
           <div className="demo-note">
-            Demo only — no real account is created. Use any name, email and a password of 6+
+            Demo only - no real account is created. Use any name, email and a password of 6+
             characters.
           </div>
           {error && (
@@ -98,7 +98,7 @@ export default function Signup() {
                 <option>PRO</option>
                 <option>VIP</option>
                 <option>Islamic (swap-free)</option>
-                <option>Demo — $10,000 virtual</option>
+                <option>Demo - $10,000 virtual</option>
               </select>
             </div>
             <button className="btn btn-gold" type="submit" style={{ width: '100%', justifyContent: 'center' }}>
@@ -110,7 +110,7 @@ export default function Signup() {
             <Link to="/regulation" style={{ fontWeight: 700, color: 'var(--ink)' }}>
               Regulation
             </Link>{' '}
-            page. CFDs are leveraged products — capital at risk.
+            page. CFDs are leveraged products - capital at risk.
           </p>
           <p className="form-note">
             Already have an account?{' '}

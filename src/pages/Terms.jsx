@@ -1,4 +1,4 @@
-// Converted from terms.html (~/workspace/nextrade-old-html/) — copy,
+// Converted from terms.html (~/workspace/nextrade-old-html/) - copy,
 // sections and classes verbatim.
 import PageHero from '../components/PageHero';
 

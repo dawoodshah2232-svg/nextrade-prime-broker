@@ -1,6 +1,6 @@
 // Full conversion of markets/indices.html from ~/workspace/nextrade-old-html/
 // (the folder copy is canonical; the flat markets-indices.html is
-// byte-for-byte identical in body content — verified by diff, modulo ../
+// byte-for-byte identical in body content - verified by diff, modulo ../
 // path prefixes).
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
@@ -15,7 +15,7 @@ export default function MarketsIndices() {
           { label: 'Indices' },
         ]}
         title="Indices trading"
-        intro="Trade the whole market in a single position — US30, US500, NAS100, GER40, UK100 and more, on MT5."
+        intro="Trade the whole market in a single position - US30, US500, NAS100, GER40, UK100 and more, on MT5."
       />
 
       <section className="section">
@@ -41,7 +41,7 @@ export default function MarketsIndices() {
                 </tr>
                 <tr>
                   <td>
-                    <b>US30</b> — Dow Jones
+                    <b>US30</b> - Dow Jones
                   </td>
                   <td>2.0 points</td>
                   <td>1:200</td>
@@ -49,7 +49,7 @@ export default function MarketsIndices() {
                 </tr>
                 <tr>
                   <td>
-                    <b>US500</b> — S&amp;P 500
+                    <b>US500</b> - S&amp;P 500
                   </td>
                   <td>0.4 points</td>
                   <td>1:200</td>
@@ -57,7 +57,7 @@ export default function MarketsIndices() {
                 </tr>
                 <tr>
                   <td>
-                    <b>NAS100</b> — Nasdaq 100
+                    <b>NAS100</b> - Nasdaq 100
                   </td>
                   <td>1.5 points</td>
                   <td>1:200</td>
@@ -65,7 +65,7 @@ export default function MarketsIndices() {
                 </tr>
                 <tr>
                   <td>
-                    <b>GER40</b> — DAX
+                    <b>GER40</b> - DAX
                   </td>
                   <td>1.5 points</td>
                   <td>1:200</td>
@@ -73,7 +73,7 @@ export default function MarketsIndices() {
                 </tr>
                 <tr>
                   <td>
-                    <b>UK100</b> — FTSE 100
+                    <b>UK100</b> - FTSE 100
                   </td>
                   <td>1.5 points</td>
                   <td>1:200</td>
@@ -81,7 +81,7 @@ export default function MarketsIndices() {
                 </tr>
                 <tr>
                   <td>
-                    <b>JPN225</b> — Nikkei 225
+                    <b>JPN225</b> - Nikkei 225
                   </td>
                   <td>8.0 points</td>
                   <td>1:200</td>
@@ -110,7 +110,7 @@ export default function MarketsIndices() {
             </div>
             <div className="card reveal">
               <h3>Trade both ways</h3>
-              <p>Go long in a rally or short in a sell-off — CFDs work in both directions.</p>
+              <p>Go long in a rally or short in a sell-off - CFDs work in both directions.</p>
             </div>
           </div>
           <p style={{ marginTop: '28px' }}>

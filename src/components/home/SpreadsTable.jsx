@@ -1,7 +1,7 @@
-// Spreads table — verbatim port of the old index.html #spreads section.
+// Spreads table - verbatim port of the old index.html #spreads section.
 // Flag image URLs are copied verbatim (flagcdn); XAU/BTC use the inline
 // SVG/glyph discs from the old markup. The values are DEMO-typical
-// published minimums — the caption and footnote say so exactly, and the
+// published minimums - the caption and footnote say so exactly, and the
 // figures are never presented as live data.
 export default function SpreadsTable() {
   return (
@@ -177,13 +177,13 @@ export default function SpreadsTable() {
           </table>
         </div>
         <p className="small muted reveal" style={{ marginTop: 14 }}>
-          Typical spreads — demo. The figures shown are each account type's published minimum
+          Typical spreads - demo. The figures shown are each account type's published minimum
           spread; actual spreads vary by instrument and market conditions. Forex is quoted in
           pips, gold and crypto in dollars, and indices in points. ECN accounts pay $3.50
           per side, per lot; Standard and PRO pay no commission.
         </p>
         <p className="reveal" style={{ marginTop: 18 }}>
-          <span className="tag gold">Every account</span>&nbsp; Negative balance protection — your
+          <span className="tag gold">Every account</span>&nbsp; Negative balance protection - your
           balance can never go below zero, whatever the market does.
         </p>
       </div>

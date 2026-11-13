@@ -1,18 +1,18 @@
-// "One account. Every market." — five tabs with split panels, verbatim
+// "One account. Every market." - five tabs with split panels, verbatim
 // port of the old index.html #markets section. Tab switching is React
-// state (the old script.js toggled .active / hidden — same result).
+// state (the old script.js toggled .active / hidden - same result).
 // Snapshot rows are driven by usePrices: the value is formatPrice(p, d),
 // the % change shows an em dash when pct is null (never fabricated), and
 // the LIVE/SIM tag tracks the real feed state per symbol. Tab icons are
 // inlined verbatim (stroke currentColor on the buttons, #e8c766 in the
-// snapshot headers) — MIcon's .m-ico wrapper and #c9a227 stroke would
+// snapshot headers) - MIcon's .m-ico wrapper and #c9a227 stroke would
 // restyle them.
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { formatPrice, usePrices } from '../../lib/prices';
 
 // Icon path fragments, verbatim from the old markup (same paths, different
-// stroke colour per context — buttons use currentColor, snapshot headers
+// stroke colour per context - buttons use currentColor, snapshot headers
 // use #e8c766).
 const PATHS = {
   forex: <path d="M4 7h13M17 4l3 3-3 3M20 17H7M7 14l-3 3 3 3" />,
@@ -110,7 +110,7 @@ const TABS = [
   {
     id: 'metals',
     label: 'Metals',
-    text: 'Gold and silver against the dollar — the classic hedge, traded around the clock with no expiry.',
+    text: 'Gold and silver against the dollar - the classic hedge, traded around the clock with no expiry.',
     chips: ['XAU/USD', 'XAG/USD'],
     linkTo: '/markets/metals',
     linkLabel: 'Explore Metals',
@@ -123,7 +123,7 @@ const TABS = [
   {
     id: 'indices',
     label: 'Indices',
-    text: 'Trade whole markets in one position — US, UK and European benchmarks, cash indices with no expiry.',
+    text: 'Trade whole markets in one position - US, UK and European benchmarks, cash indices with no expiry.',
     chips: ['US30', 'US500', 'NAS100', 'UK100', 'GER40'],
     linkTo: '/markets/indices',
     linkLabel: 'Explore Indices',
@@ -137,7 +137,7 @@ const TABS = [
   {
     id: 'crypto',
     label: 'Crypto',
-    text: 'Bitcoin, Ethereum and more as CFDs — long or short, 24/7, without a wallet.',
+    text: 'Bitcoin, Ethereum and more as CFDs - long or short, 24/7, without a wallet.',
     chips: ['BTC/USD', 'ETH/USD', 'LTC/USD', 'XRP/USD'],
     linkTo: '/markets/crypto',
     linkLabel: 'Explore Crypto',
@@ -152,7 +152,7 @@ const TABS = [
   {
     id: 'energies',
     label: 'Energies',
-    text: 'Oil and natural gas — the markets that move on supply, weather and geopolitics.',
+    text: 'Oil and natural gas - the markets that move on supply, weather and geopolitics.',
     chips: ['USOil', 'UKOil', 'NGAS'],
     linkTo: '/markets/energies',
     linkLabel: 'Explore Energies',
@@ -166,7 +166,7 @@ const TABS = [
 ];
 
 // % change only ever comes from a real previous close: pct === null means
-// no previous close, so the slot shows an em dash — never a fabricated %.
+// no previous close, so the slot shows an em dash - never a fabricated %.
 function chgOf(s) {
   if (s.pct !== null && s.pct !== undefined && isFinite(s.pct)) {
     return {
@@ -174,7 +174,7 @@ function chgOf(s) {
       cls: 'chg ' + (s.pct >= 0 ? 'up' : 'down'),
     };
   }
-  return { text: '—', cls: 'chg na' };
+  return { text: '-', cls: 'chg na' };
 }
 
 export default function MarketsTabs() {

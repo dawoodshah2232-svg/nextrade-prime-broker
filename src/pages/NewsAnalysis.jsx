@@ -1,4 +1,4 @@
-// Converted from news-analysis.html in ~/workspace/nextrade-old-html/ —
+// Converted from news-analysis.html in ~/workspace/nextrade-old-html/ -
 // verbatim copy, cards and dates; internal links are <Link> routes.
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
@@ -13,7 +13,7 @@ export default function NewsAnalysis() {
           { label: 'News & Analysis' },
         ]}
         title="News & analysis"
-        intro="What moved, why it moved, and what to watch next — plain language, every trading day."
+        intro="What moved, why it moved, and what to watch next - plain language, every trading day."
       />
 
       <section className="section">
@@ -24,7 +24,7 @@ export default function NewsAnalysis() {
               <h3>Gold holds above $4,200 as rate-cut bets build</h3>
               <p>
                 XAU/USD stays supported after softer US inflation data. The next test is the
-                $4,300 area — watch the dollar for direction.
+                $4,300 area - watch the dollar for direction.
               </p>
               <p style={{ marginTop: '10px', color: 'var(--muted)', fontSize: '.9rem' }}>
                 11 November 2026 · Market analysis
@@ -56,7 +56,7 @@ export default function NewsAnalysis() {
               <span className="tag">Crypto</span>
               <h3>Bitcoin steadies near $97,000</h3>
               <p>
-                BTC is consolidating after a volatile month. Volatility is compressing — the
+                BTC is consolidating after a volatile month. Volatility is compressing - the
                 next directional move usually follows.
               </p>
               <p style={{ marginTop: '10px', color: 'var(--muted)', fontSize: '.9rem' }}>

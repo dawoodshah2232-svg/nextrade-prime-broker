@@ -1,14 +1,14 @@
 // The three brand pillars from the client brief, directly under the price
 // strip: Instant Withdrawal, Secure & Registered, Transparency.
 // Wording rules (brief §2): no processing-time promise beyond what the
-// Deposits & Withdrawals page already states, and no licence/regulator claim —
+// Deposits & Withdrawals page already states, and no licence/regulator claim -
 // only the verified fact that the company is registered in England and Wales.
 import { Link } from 'react-router-dom';
 
 const PILLARS = [
   {
     title: 'Instant Withdrawal',
-    text: 'Payout speed is our first priority. Request a withdrawal from your client area and it goes straight into processing — back to the method you deposited with. Minimum withdrawal $100.',
+    text: 'Payout speed is our first priority. Request a withdrawal from your client area and it goes straight into processing - back to the method you deposited with. Minimum withdrawal $100.',
     to: '/deposits-withdrawals',
     link: 'How withdrawals work',
     icon: <path d="M13 2L4 14h7l-1 8 9-12h-7z" />,
@@ -27,7 +27,7 @@ const PILLARS = [
   },
   {
     title: 'Transparency',
-    text: 'Account conditions, trading costs, deposit and withdrawal requirements and risk disclosures — published plainly, easy to find, with no hidden fees from us.',
+    text: 'Account conditions, trading costs, deposit and withdrawal requirements and risk disclosures - published plainly, easy to find, with no hidden fees from us.',
     to: '/accounts',
     link: 'Compare accounts',
     icon: (
@@ -47,7 +47,7 @@ export default function Pillars() {
           <span className="eyebrow">Payout speed above all</span>
           <h2 style={{ marginTop: 10 }}>Built around getting you paid</h2>
           <p className="sub">
-            Three promises that shape every part of NexTrade Prime — from the account you open to the
+            Three promises that shape every part of NexTrade Prime - from the account you open to the
             moment you withdraw.
           </p>
         </div>

@@ -2,7 +2,7 @@
 // <section class="page-hero"><div class="container">
 //   <p class="breadcrumb">…</p><h1>…</h1><p>…intro…</p>
 // </div></section>
-// crumbs: [{ label, to? }] — Home always links to '/'; the last crumb is
+// crumbs: [{ label, to? }] - Home always links to '/'; the last crumb is
 // plain text. Omit crumbs on pages that had no breadcrumb (home, auth,
 // dashboard). title and intro may be strings or JSX (the home h1 has a
 // gold <span>; some intros contain a Contact link).

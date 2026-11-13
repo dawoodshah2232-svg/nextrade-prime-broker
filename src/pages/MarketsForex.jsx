@@ -1,6 +1,6 @@
 // Full conversion of markets/forex.html from ~/workspace/nextrade-old-html/
 // (the folder copy is canonical; the flat markets-forex.html is byte-for-byte
-// identical in body content — verified by diff, modulo ../ path prefixes).
+// identical in body content - verified by diff, modulo ../ path prefixes).
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 
@@ -14,7 +14,7 @@ export default function MarketsForex() {
           { label: 'Forex' },
         ]}
         title="Forex trading"
-        intro="60+ currency pairs on MT5. Majors, minors and exotics — trade 24 hours a day, five days a week."
+        intro="60+ currency pairs on MT5. Majors, minors and exotics - trade 24 hours a day, five days a week."
       />
 
       <section className="section">
@@ -126,18 +126,18 @@ export default function MarketsForex() {
             <div className="card reveal">
               <h3>Majors</h3>
               <p>
-                EUR/USD, GBP/USD, USD/JPY and the other most-traded pairs — deepest liquidity,
+                EUR/USD, GBP/USD, USD/JPY and the other most-traded pairs - deepest liquidity,
                 tightest spreads.
               </p>
             </div>
             <div className="card reveal">
               <h3>Minors</h3>
-              <p>EUR/GBP, EUR/JPY, GBP/JPY and more — cross pairs with no US dollar leg.</p>
+              <p>EUR/GBP, EUR/JPY, GBP/JPY and more - cross pairs with no US dollar leg.</p>
             </div>
             <div className="card reveal">
               <h3>Exotics</h3>
               <p>
-                USD/ZAR, USD/TRY, USD/MXN and others — bigger moves, wider spreads, smaller
+                USD/ZAR, USD/TRY, USD/MXN and others - bigger moves, wider spreads, smaller
                 sizes.
               </p>
             </div>

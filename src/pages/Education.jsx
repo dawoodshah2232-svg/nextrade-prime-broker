@@ -1,6 +1,6 @@
-// Converted from education.html in ~/workspace/nextrade-old-html/ —
+// Converted from education.html in ~/workspace/nextrade-old-html/ -
 // verbatim copy, sections and classes; internal links are <Link> routes.
-// The live-sessions heading keeps id="live" — the header links to
+// The live-sessions heading keeps id="live" - the header links to
 // /education#live. The table gains an explicit <tbody> (the browser
 // inserts one in the old page's DOM anyway, so the rendered output is
 // identical; it only silences React's DOM-nesting warning).
@@ -17,7 +17,7 @@ export default function Education() {
           { label: 'Education' },
         ]}
         title="Learning centre"
-        intro="Free courses, live sessions and guides — from your first trade to advanced risk management."
+        intro="Free courses, live sessions and guides - from your first trade to advanced risk management."
       />
 
       <section className="section">
@@ -37,7 +37,7 @@ export default function Education() {
               <h3>Your first trade on MT5</h3>
               <p>
                 Open MT5, find EUR/USD, set your lot size, place a market order and set a stop
-                loss — step by step.
+                loss - step by step.
               </p>
             </div>
             <div className="card reveal">
@@ -60,7 +60,7 @@ export default function Education() {
               <span className="tag">Intermediate</span>
               <h3>Trading the news</h3>
               <p>
-                NFP, CPI and rate decisions — how to read the{' '}
+                NFP, CPI and rate decisions - how to read the{' '}
                 <Link to="/economic-calendar" style={{ fontWeight: 700, color: 'var(--ink)' }}>
                   economic calendar
                 </Link>{' '}
@@ -82,7 +82,7 @@ export default function Education() {
           </h2>
           <p className="sub reveal">
             Live market sessions and webinars every week, hosted by our analysts. Bring your
-            questions — the chat is open during every session.
+            questions - the chat is open during every session.
           </p>
           <div className="table-wrap reveal" style={{ marginTop: '24px' }}>
             <table>
@@ -94,7 +94,7 @@ export default function Education() {
                 </tr>
                 <tr>
                   <td>
-                    <b>Market open briefing</b> — the week ahead
+                    <b>Market open briefing</b> - the week ahead
                   </td>
                   <td>Mondays, 09:00 GMT</td>
                   <td>All levels</td>
@@ -108,14 +108,14 @@ export default function Education() {
                 </tr>
                 <tr>
                   <td>
-                    <b>Gold in focus</b> — XAU/USD technicals
+                    <b>Gold in focus</b> - XAU/USD technicals
                   </td>
                   <td>Wednesdays, 13:00 GMT</td>
                   <td>Intermediate</td>
                 </tr>
                 <tr>
                   <td>
-                    <b>Risk clinic</b> — position sizing live
+                    <b>Risk clinic</b> - position sizing live
                   </td>
                   <td>Thursdays, 15:00 GMT</td>
                   <td>All levels</td>

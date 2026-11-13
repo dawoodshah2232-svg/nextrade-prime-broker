@@ -1,4 +1,4 @@
-// Converted from platforms.html in ~/workspace/nextrade-old-html/ —
+// Converted from platforms.html in ~/workspace/nextrade-old-html/ -
 // verbatim copy, sections and classes; internal links are <Link> routes.
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
@@ -37,26 +37,26 @@ export default function Platforms() {
             <div className="reveal">
               <h2>MetaTrader 5</h2>
               <p className="lead" style={{ marginBottom: '16px' }}>
-                The platform professional traders already know — advanced charting, 80+ indicators,
+                The platform professional traders already know - advanced charting, 80+ indicators,
                 depth of market and automated trading, on desktop, web and mobile.
               </p>
               <ul className="check-list">
                 <li>
                   <Check />
                   <span>
-                    <b>Desktop</b> — the full MT5 terminal for Windows and Mac.
+                    <b>Desktop</b> - the full MT5 terminal for Windows and Mac.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>Web terminal</b> — trade from any browser, nothing to install.
+                    <b>Web terminal</b> - trade from any browser, nothing to install.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>Mobile</b> — iOS and Android apps with the same account and charts.
+                    <b>Mobile</b> - iOS and Android apps with the same account and charts.
                   </span>
                 </li>
               </ul>

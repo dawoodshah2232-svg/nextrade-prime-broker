@@ -64,7 +64,7 @@ export default function DepositsWithdrawals() {
           </div>
           <h2 style={{ marginTop: '48px' }}>Withdrawals</h2>
           <p className="reveal">
-            Withdraw to the same method you deposited with — this is an anti-fraud rule that
+            Withdraw to the same method you deposited with - this is an anti-fraud rule that
             protects your account. Requests submitted before the daily cut-off are processed
             the same business day; card and e-wallet withdrawals usually arrive within 24
             hours, bank transfers within 1–3 business days depending on your bank. The minimum
@@ -75,7 +75,7 @@ export default function DepositsWithdrawals() {
               <b>Request</b> a withdrawal from your client area.
             </li>
             <li>
-              <b>Review</b> — we check it against your verified details the same business day.
+              <b>Review</b> - we check it against your verified details the same business day.
             </li>
             <li>
               <b>Paid</b> back to the method you deposited with.

@@ -1,6 +1,6 @@
 // Full conversion of markets/crypto.html from ~/workspace/nextrade-old-html/
 // (the folder copy is canonical; the flat markets-crypto.html is
-// byte-for-byte identical in body content — verified by diff, modulo ../
+// byte-for-byte identical in body content - verified by diff, modulo ../
 // path prefixes).
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
@@ -15,7 +15,7 @@ export default function MarketsCrypto() {
           { label: 'Crypto' },
         ]}
         title="Crypto trading"
-        intro="Bitcoin, Ethereum and major altcoins as CFDs — no wallet, no exchange account, just your MT5 login. Trade 24/7."
+        intro="Bitcoin, Ethereum and major altcoins as CFDs - no wallet, no exchange account, just your MT5 login. Trade 24/7."
       />
 
       <section className="section">
@@ -42,7 +42,7 @@ export default function MarketsCrypto() {
                 </tr>
                 <tr>
                   <td>
-                    <b>BTC/USD</b> — Bitcoin
+                    <b>BTC/USD</b> - Bitcoin
                   </td>
                   <td>$25</td>
                   <td>1:20</td>
@@ -51,7 +51,7 @@ export default function MarketsCrypto() {
                 </tr>
                 <tr>
                   <td>
-                    <b>ETH/USD</b> — Ethereum
+                    <b>ETH/USD</b> - Ethereum
                   </td>
                   <td>$2.50</td>
                   <td>1:20</td>
@@ -60,7 +60,7 @@ export default function MarketsCrypto() {
                 </tr>
                 <tr>
                   <td>
-                    <b>LTC/USD</b> — Litecoin
+                    <b>LTC/USD</b> - Litecoin
                   </td>
                   <td>$0.80</td>
                   <td>1:20</td>
@@ -69,7 +69,7 @@ export default function MarketsCrypto() {
                 </tr>
                 <tr>
                   <td>
-                    <b>XRP/USD</b> — Ripple
+                    <b>XRP/USD</b> - Ripple
                   </td>
                   <td>$0.01</td>
                   <td>1:20</td>
@@ -78,7 +78,7 @@ export default function MarketsCrypto() {
                 </tr>
                 <tr>
                   <td>
-                    <b>SOL/USD</b> — Solana
+                    <b>SOL/USD</b> - Solana
                   </td>
                   <td>$0.40</td>
                   <td>1:20</td>
@@ -107,7 +107,7 @@ export default function MarketsCrypto() {
               <h3>Size it small</h3>
               <p>
                 0.01 lots and 1:20 leverage keep crypto's big moves manageable. Use a stop on
-                every trade — crypto gaps.
+                every trade - crypto gaps.
               </p>
             </div>
           </div>

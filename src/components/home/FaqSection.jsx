@@ -1,4 +1,4 @@
-// "Questions, answered" — the six homepage FAQs, verbatim from the old
+// "Questions, answered" - the six homepage FAQs, verbatim from the old
 // index.html, rendered through the shared FaqAccordion. Answers with
 // links use JSX with <Link>; plain answers are verbatim strings.
 import { Link } from 'react-router-dom';
@@ -13,14 +13,14 @@ const ITEMS = [
     q: 'What is the minimum deposit?',
     a: (
       <>
-        $100 on every account type — Standard, ECN, PRO, VIP and Islamic. The minimum withdrawal is also $100. See the full comparison on{' '}
+        $100 on every account type - Standard, ECN, PRO, VIP and Islamic. The minimum withdrawal is also $100. See the full comparison on{' '}
         <Link to="/accounts">Account Types</Link>.
       </>
     ),
   },
   {
     q: 'What is the minimum trade size?',
-    a: '0.01 lots on forex, metals and energies — 0.10 lots on indices. That keeps gold and forex accessible from a small account.',
+    a: '0.01 lots on forex, metals and energies - 0.10 lots on indices. That keeps gold and forex accessible from a small account.',
   },
   {
     q: 'How long do withdrawals take?',
@@ -36,7 +36,7 @@ const ITEMS = [
     q: 'Is there a demo account?',
     a: (
       <>
-        Yes — $10,000 virtual funds, live prices, full MT5, no time limit. See{' '}
+        Yes - $10,000 virtual funds, live prices, full MT5, no time limit. See{' '}
         <Link to="/demo-account">Demo Account</Link>.
       </>
     ),
@@ -45,7 +45,7 @@ const ITEMS = [
     q: 'Which platform do you offer?',
     a: (
       <>
-        MetaTrader 5 only — desktop, web and mobile. See{' '}
+        MetaTrader 5 only - desktop, web and mobile. See{' '}
         <Link to="/platforms/mt5">MT5 Platform</Link>.
       </>
     ),

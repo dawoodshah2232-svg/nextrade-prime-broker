@@ -1,4 +1,4 @@
-// "Support & resources" — three photo-top cards, verbatim port of the
+// "Support & resources" - three photo-top cards, verbatim port of the
 // old index.html section. The first photo is the Wikimedia URL from the
 // old markup; Help Centre and Education photos are local assets via
 // asset(). Icon SVGs copied verbatim.
@@ -63,7 +63,7 @@ export default function SupportCards() {
             </div>
             <h3>Help Centre</h3>
             <p>
-              Answers to the questions traders actually ask — accounts, funding, verification and
+              Answers to the questions traders actually ask - accounts, funding, verification and
               the platform.
             </p>
             <Link className="btn btn-gold btn-sm" style={{ marginTop: 16 }} to="/help-centre">
@@ -74,7 +74,7 @@ export default function SupportCards() {
             <div className="fund-photo">
               <img
                 src={asset('education.jpg')}
-                alt="Student learning online — taking notes at a laptop with earphones in"
+                alt="Student learning online - taking notes at a laptop with earphones in"
                 loading="lazy"
               />
             </div>
@@ -97,7 +97,7 @@ export default function SupportCards() {
             </div>
             <h3>Education</h3>
             <p>
-              Courses for every level, live sessions and market notes — learn how markets move
+              Courses for every level, live sessions and market notes - learn how markets move
               before you risk a cent.
             </p>
             <Link className="btn btn-gold" style={{ marginTop: 16 }} to="/education">

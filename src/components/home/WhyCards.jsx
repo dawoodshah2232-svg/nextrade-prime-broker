@@ -1,4 +1,4 @@
-// "Why traders choose NexTrade Prime" — three photo-top cards, verbatim
+// "Why traders choose NexTrade Prime" - three photo-top cards, verbatim
 // port of the old index.html section. Photo URLs and icon SVGs (including
 // the 80x80 gold-disc icons) are copied verbatim from the old markup.
 import { Link } from 'react-router-dom';
@@ -14,7 +14,7 @@ export default function WhyCards() {
             <div className="fund-photo">
               <img
                 src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=1200&q=80"
-                alt="Classical bank building — client funds held in segregated accounts"
+                alt="Classical bank building - client funds held in segregated accounts"
                 loading="lazy"
               />
             </div>
@@ -42,7 +42,7 @@ export default function WhyCards() {
             <div className="fund-photo">
               <img
                 src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80"
-                alt="Candlestick chart close-up — tight spreads on every account"
+                alt="Candlestick chart close-up - tight spreads on every account"
                 loading="lazy"
               />
             </div>
@@ -61,7 +61,7 @@ export default function WhyCards() {
             </div>
             <h3>Tight spreads</h3>
             <p>
-              Spreads from 0.0 pips on ECN accounts and from 1.0 pip on Standard — published
+              Spreads from 0.0 pips on ECN accounts and from 1.0 pip on Standard - published
               on every account page, not hidden in a footnote.
             </p>
             <Link className="card-link" to="/accounts">
@@ -72,7 +72,7 @@ export default function WhyCards() {
             <div className="fund-photo">
               <img
                 src="https://images.unsplash.com/photo-1716279083176-60af7a63cb03?auto=format&fit=crop&w=1200&q=80"
-                alt="Trader at a desk with a candlestick chart and order book — orders executed in milliseconds"
+                alt="Trader at a desk with a candlestick chart and order book - orders executed in milliseconds"
                 loading="lazy"
               />
             </div>

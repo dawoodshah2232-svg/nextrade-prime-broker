@@ -22,7 +22,7 @@ export default function IslamicAccounts() {
           { label: 'Islamic Accounts' },
         ]}
         title="Islamic accounts"
-        intro="Swap-free trading with no overnight interest — available on every account type, at no extra cost — with leverage up to 1:1000."
+        intro="Swap-free trading with no overnight interest - available on every account type, at no extra cost - with leverage up to 1:1000."
       />
 
       <section className="section">
@@ -38,28 +38,28 @@ export default function IslamicAccounts() {
                 <li>
                   <Check />
                   <span>
-                    <b>No swap charges</b> — positions held overnight carry no interest, in
+                    <b>No swap charges</b> - positions held overnight carry no interest, in
                     either direction.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>Same spreads and leverage</b> — identical trading conditions to the
+                    <b>Same spreads and leverage</b> - identical trading conditions to the
                     equivalent standard account.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>All instruments</b> — forex, gold, indices, crypto and energies, all
+                    <b>All instruments</b> - forex, gold, indices, crypto and energies, all
                     swap-free.
                   </span>
                 </li>
                 <li>
                   <Check />
                   <span>
-                    <b>Free to enable</b> — request swap-free status from your client area or by
+                    <b>Free to enable</b> - request swap-free status from your client area or by
                     contacting support.
                   </span>
                 </li>
@@ -76,7 +76,7 @@ export default function IslamicAccounts() {
             </div>
           </div>
           <p style={{ marginTop: '28px' }}>
-            Already have a live account? Ask support to convert it — see{' '}
+            Already have a live account? Ask support to convert it - see{' '}
             <Link to="/contact" style={{ fontWeight: 700, color: 'var(--ink)' }}>
               Contact Us
             </Link>{' '}

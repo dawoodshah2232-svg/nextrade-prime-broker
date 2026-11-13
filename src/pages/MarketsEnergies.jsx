@@ -1,6 +1,6 @@
 // Full conversion of markets/energies.html from ~/workspace/nextrade-old-html/
 // (the folder copy is canonical; the flat markets-energies.html is
-// byte-for-byte identical in body content — verified by diff, modulo ../
+// byte-for-byte identical in body content - verified by diff, modulo ../
 // path prefixes).
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
@@ -15,7 +15,7 @@ export default function MarketsEnergies() {
           { label: 'Energies' },
         ]}
         title="Energies trading"
-        intro="WTI and Brent crude oil and natural gas — trade supply, demand and the inventory reports that move them, on MT5."
+        intro="WTI and Brent crude oil and natural gas - trade supply, demand and the inventory reports that move them, on MT5."
       />
 
       <section className="section">
@@ -41,7 +41,7 @@ export default function MarketsEnergies() {
                 </tr>
                 <tr>
                   <td>
-                    <b>WTI</b> — US crude oil
+                    <b>WTI</b> - US crude oil
                   </td>
                   <td>0.03</td>
                   <td>1:200</td>
@@ -49,7 +49,7 @@ export default function MarketsEnergies() {
                 </tr>
                 <tr>
                   <td>
-                    <b>Brent</b> — Brent crude oil
+                    <b>Brent</b> - Brent crude oil
                   </td>
                   <td>0.03</td>
                   <td>1:200</td>
@@ -57,7 +57,7 @@ export default function MarketsEnergies() {
                 </tr>
                 <tr>
                   <td>
-                    <b>NGAS</b> — Natural gas
+                    <b>NGAS</b> - Natural gas
                   </td>
                   <td>0.01</td>
                   <td>1:200</td>
@@ -71,7 +71,7 @@ export default function MarketsEnergies() {
               <h3>WTI vs Brent</h3>
               <p>
                 WTI tracks US supply; Brent tracks the global market. Watch the spread between
-                them — it tells you where the pressure is.
+                them - it tells you where the pressure is.
               </p>
             </div>
             <div className="card reveal">
@@ -85,7 +85,7 @@ export default function MarketsEnergies() {
               <h3>Trade the range</h3>
               <p>
                 Oil spends long stretches in a range. Range traders buy support and sell
-                resistance — with a stop, always.
+                resistance - with a stop, always.
               </p>
             </div>
           </div>
