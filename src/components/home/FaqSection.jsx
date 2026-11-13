@@ -54,17 +54,20 @@ const ITEMS = [
 
 export default function FaqSection() {
   return (
-    <section className="section">
+    <section className="section faq-section">
       <div className="container">
-        <h2 className="reveal">Questions, answered</h2>
-        <p className="sub reveal">
-          The six questions every new trader asks. More in the{' '}
-          <Link to="/faq" style={{ fontWeight: 700, color: 'var(--ink)' }}>
-            full FAQ
-          </Link>
-          .
-        </p>
-        <div style={{ marginTop: 32, maxWidth: 820 }}>
+        <div className="center">
+          <span className="eyebrow">FAQ</span>
+          <h2 style={{ marginTop: 10 }}>Frequently Asked Questions</h2>
+          <p className="sub">
+            The six questions every new trader asks. More in the{' '}
+            <Link to="/faq" style={{ fontWeight: 700, color: 'var(--ink)' }}>
+              full FAQ
+            </Link>
+            .
+          </p>
+        </div>
+        <div className="faq-wrap">
           <FaqAccordion items={ITEMS} />
         </div>
       </div>

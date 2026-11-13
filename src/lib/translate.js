@@ -11,22 +11,22 @@
 //   "restore original" is unreliable inside a React app.
 
 export const LANGS = [
-  { code: "en", label: "English" },
-  { code: "ar", label: "العربية" },
-  { code: "es", label: "Español" },
-  { code: "fr", label: "Français" },
-  { code: "de", label: "Deutsch" },
-  { code: "it", label: "Italiano" },
-  { code: "pt", label: "Português" },
-  { code: "ru", label: "Русский" },
-  { code: "tr", label: "Türkçe" },
-  { code: "zh-CN", label: "中文 (简体)" },
-  { code: "ja", label: "日本語" },
-  { code: "ko", label: "한국어" },
-  { code: "vi", label: "Tiếng Việt" },
-  { code: "th", label: "ไทย" },
-  { code: "id", label: "Bahasa Indonesia" },
-  { code: "ms", label: "Bahasa Melayu" },
+  { code: "en", flag: "gb", label: "English" },
+  { code: "ar", flag: "sa", label: "العربية" },
+  { code: "es", flag: "es", label: "Español" },
+  { code: "fr", flag: "fr", label: "Français" },
+  { code: "de", flag: "de", label: "Deutsch" },
+  { code: "it", flag: "it", label: "Italiano" },
+  { code: "pt", flag: "pt", label: "Português" },
+  { code: "ru", flag: "ru", label: "Русский" },
+  { code: "tr", flag: "tr", label: "Türkçe" },
+  { code: "zh-CN", flag: "cn", label: "中文 (简体)" },
+  { code: "ja", flag: "jp", label: "日本語" },
+  { code: "ko", flag: "kr", label: "한국어" },
+  { code: "vi", flag: "vn", label: "Tiếng Việt" },
+  { code: "th", flag: "th", label: "ไทย" },
+  { code: "id", flag: "id", label: "Bahasa Indonesia" },
+  { code: "ms", flag: "my", label: "Bahasa Melayu" },
 ];
 
 const CODES = LANGS.map((l) => l.code);
