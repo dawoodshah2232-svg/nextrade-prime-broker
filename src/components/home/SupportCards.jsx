@@ -1,6 +1,6 @@
 // "Support & resources" - three photo-top cards, verbatim port of the
 // old index.html section. All three photos are local assets via asset()
-// (24/7 support photo: Olha Ruskykh on Pexels, Pexels licence).
+// (24/7 support photo: Mikhail Nilov on Pexels, Pexels licence).
 // Icon SVGs copied verbatim.
 import { Link } from 'react-router-dom';
 import { asset } from '../../lib/asset';
@@ -16,8 +16,9 @@ export default function SupportCards() {
             <div className="fund-photo">
               <img
                 src={asset('support-247.jpg')}
-                alt="Smiling support agent wearing a headset, helping a client at his laptop"
+                alt="Smiling support agent wearing a headset, working at a laptop"
                 loading="lazy"
+                style={{ objectPosition: '50% 12%' }}
               />
             </div>
             <div className="icon3d">
@@ -100,7 +101,7 @@ export default function SupportCards() {
               Courses for every level, live sessions and market notes - learn how markets move
               before you risk a cent.
             </p>
-            <Link className="btn btn-gold" style={{ marginTop: 16 }} to="/education">
+            <Link className="btn btn-gold btn-sm" style={{ marginTop: 16 }} to="/education">
               Start Learning
             </Link>
           </div>

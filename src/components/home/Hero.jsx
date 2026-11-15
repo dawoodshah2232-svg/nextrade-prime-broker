@@ -16,7 +16,7 @@
 // poster/src) is identical on every render (asset() is a pure string
 // concat), and prices re-render only inside LiveMarkets, so React never
 // touches the video node - playback is never reset by a price tick.
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { asset } from '../../lib/asset';
 import LiveMarkets from './LiveMarkets';
@@ -107,6 +107,10 @@ export default function Hero() {
     <section className="hero hero-blend hero-video">
       <div className="orb orb-1"></div>
       <div className="orb orb-2"></div>
+      <div className="hero-fx" aria-hidden="true">
+        <span className="hero-beam" />
+        <span className="hero-beam b2" />
+      </div>
       {/* Poster frame as the container background: the <video> poster
           attribute does not reliably paint while an autoplaying video
           buffers (Chrome shows black), so the chart still is the backdrop
@@ -138,16 +142,30 @@ export default function Hero() {
       </div>
       <div className="container hero-grid">
         <div className="hero-copy">
-          <span className="eyebrow">NexTrade Prime · MetaTrader 5</span>
-          <h1>
-            Payout speed <span className="gold">above all.</span>
+          <span className="hero-pill">
+            <i aria-hidden="true" />
+            NexTrade Prime · MetaTrader 5
+          </span>
+          <h1 aria-label="Payout speed above all.">
+            {['Payout', 'speed'].map((wd, i) => (
+              <Fragment key={wd}>
+                <span className="hw" aria-hidden="true">
+                  <span style={{ animationDelay: `${0.1 + i * 0.09}s` }}>{wd}</span>
+                </span>{' '}
+              </Fragment>
+            ))}
+            <span className="hw" aria-hidden="true">
+              <span className="gold" style={{ animationDelay: '0.28s' }}>
+                above all.
+              </span>
+            </span>
           </h1>
           <p className="lead">
             Fast withdrawals, a secure and transparent process, and leverage up to 1:1000 on every
             account. Trade forex, gold, indices and crypto on MetaTrader 5.
           </p>
           <div className="hero-cta">
-            <Link className="btn btn-gold btn-lg" to="/signup">
+            <Link className="btn btn-gold btn-lg btn-shine" to="/signup">
               Open an Account
             </Link>
             <Link className="btn btn-outline-light btn-lg" to="/deposits-withdrawals">

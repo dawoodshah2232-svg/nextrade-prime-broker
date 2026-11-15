@@ -1,9 +1,10 @@
 // "One account. Every market." - five tabs with split panels, verbatim
 // port of the old index.html #markets section. Tab switching is React
 // state (the old script.js toggled .active / hidden - same result).
-// Snapshot rows are driven by usePrices: the value is formatPrice(p, d),
-// the % change shows an em dash when pct is null (never fabricated), and
-// the LIVE/SIM tag tracks the real feed state per symbol. Tab icons are
+// Snapshot rows are driven by usePrices (TradingView live quotes): the
+// value is formatPrice(p, d), the % change shows an em dash when pct is
+// null (never fabricated), and the LIVE / 10M (delayed) / SIM tag tracks
+// the real feed state per symbol. Tab icons are
 // inlined verbatim (stroke currentColor on the buttons, #e8c766 in the
 // snapshot headers) - MIcon's .m-ico wrapper and #c9a227 stroke would
 // restyle them.
@@ -234,7 +235,7 @@ export default function MarketsTabs() {
                 </span>
                 <div>
                   <b>{t.snapshot}</b>
-                  <span>Prices update every 15 seconds</span>
+                  <span>Live prices · updated every few seconds</span>
                 </div>
               </div>
               {t.rows.map((r) => {
@@ -251,14 +252,18 @@ export default function MarketsTabs() {
                     <span className="mp-sym">{r.symbol}</span>
                     <b className="val">{formatPrice(s.p, s.d)}</b>
                     <span className={chg.cls}>{chg.text}</span>
-                    <span className={s.live ? 'mp-tag live' : 'mp-tag'}>
-                      {s.live ? 'LIVE' : 'SIM'}
+                    <span
+                      className={s.live ? (s.delayed ? 'mp-tag delayed' : 'mp-tag live') : 'mp-tag'}
+                      title={s.delayed ? 'Exchange feed, delayed 10 minutes' : undefined}
+                    >
+                      {s.live ? (s.delayed ? '10M' : 'LIVE') : 'SIM'}
                     </span>
                   </div>
                 );
               })}
               <p className="tab-side-note">
-                LIVE = live feed connected. SIM = simulated price until the feed connects.
+                LIVE = real-time quote. 10M = exchange feed delayed 10 minutes. SIM = shown until
+                the feed connects.
               </p>
             </aside>
           </div>

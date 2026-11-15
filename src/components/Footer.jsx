@@ -1,5 +1,5 @@
-// Site footer (light theme): link columns, then the risk warning directly
-// above the copyright line - visible on every page.
+// Site footer (light theme): link columns, the copyright / legal-links
+// line, then the risk warning as the last block - visible on every page.
 import { Link } from 'react-router-dom';
 import { asset } from '../lib/asset';
 import { FIcon } from './icons';
@@ -79,13 +79,6 @@ export default function Footer() {
             </div>
           ))}
         </div>
-        <p className="risk">
-          <b>Risk Warning:</b> Contracts for Difference (CFDs) are complex leveraged financial
-          products and carry a high risk of losing money rapidly due to leverage. Trading may not be
-          suitable for all investors. You should carefully consider your financial circumstances,
-          investment objectives, level of experience and risk tolerance before trading. Do not trade
-          with funds you cannot afford to lose. Bonuses and promotions are subject to their terms.
-        </p>
         <div className="footer-bottom">
           <span>© 2026 NexTrade. All rights reserved.</span>
           <span className="footer-legal">
@@ -95,6 +88,13 @@ export default function Footer() {
             <Link to="/terms">Terms &amp; Conditions</Link>
           </span>
         </div>
+        <p className="risk">
+          <b>Risk Warning:</b> Contracts for Difference (CFDs) are complex leveraged financial
+          products and carry a high risk of losing money rapidly due to leverage. Trading may not be
+          suitable for all investors. You should carefully consider your financial circumstances,
+          investment objectives, level of experience and risk tolerance before trading. Do not trade
+          with funds you cannot afford to lose. Bonuses and promotions are subject to their terms.
+        </p>
       </div>
     </footer>
   );

@@ -4,9 +4,10 @@
 // state, with the formulas and result wording unchanged:
 //   pip value: XAU/USD $1, BTC/USD $0.10, otherwise $10 per lot
 //   margin = lots × 100,000 × price / leverage
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import { usePrices } from '../lib/prices';
 
 export default function Calculators() {
   const [pipPair, setPipPair] = useState('EUR/USD');
@@ -14,6 +15,14 @@ export default function Calculators() {
   const [pipResult, setPipResult] = useState(null);
   const [mgLots, setMgLots] = useState('1');
   const [mgPrice, setMgPrice] = useState('1.1637');
+  const [mgPriceEdited, setMgPriceEdited] = useState(false);
+  const { prices } = usePrices();
+  const eur = prices['EUR/USD'];
+  // Pre-fill the margin calculator with the live EUR/USD price until the
+  // visitor types their own.
+  useEffect(() => {
+    if (!mgPriceEdited && eur.live) setMgPrice(eur.p.toFixed(5));
+  }, [eur.p, eur.live, mgPriceEdited]);
   const [mgLev, setMgLev] = useState('1000');
   const [marginResult, setMarginResult] = useState(null);
 
@@ -121,10 +130,13 @@ export default function Calculators() {
                   <input
                     id="mg-price"
                     type="number"
-                    step="0.0001"
+                    step="0.00001"
                     min="0"
                     value={mgPrice}
-                    onChange={(e) => setMgPrice(e.target.value)}
+                    onChange={(e) => {
+                      setMgPriceEdited(true);
+                      setMgPrice(e.target.value);
+                    }}
                   />
                 </div>
                 <div className="field">

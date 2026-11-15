@@ -39,7 +39,7 @@ export default function DepositsWithdrawals() {
                   <td>
                     <b>Bank transfer</b>
                   </td>
-                  <td>1–2 business days</td>
+                  <td>Up to 2 hours</td>
                   <td>$100</td>
                   <td>None</td>
                 </tr>
@@ -53,9 +53,9 @@ export default function DepositsWithdrawals() {
                 </tr>
                 <tr>
                   <td>
-                    <b>USDT (TRC20)</b>
+                    <b>USDT</b>
                   </td>
-                  <td>Up to 1 hour</td>
+                  <td>Instant</td>
                   <td>$100</td>
                   <td>None</td>
                 </tr>

@@ -2,7 +2,7 @@
 // order: hero, promo cards, price strip, spreads, why, stats, markets
 // tabs, video, steps, accounts, MT5, duo, FAQ, support, final CTA.
 // The price strip (ticker) lives on the homepage ONLY - it is built here
-// from usePrices(), with the 7-quote list duplicated once for the
+// from usePrices(), with the quote list duplicated once for the
 // seamless marquee loop, exactly as the old script.js did.
 import Hero from '../components/home/Hero';
 import PromoCards from '../components/home/PromoCards';
@@ -21,7 +21,18 @@ import SupportCards from '../components/home/SupportCards';
 import CtaSection from '../components/home/CtaSection';
 import { formatPrice, priceNote, usePrices } from '../lib/prices';
 
-const TICKER_SYMBOLS = ['EUR/USD', 'GBP/USD', 'XAU/USD', 'BTC/USD', 'ETH/USD', 'USD/JPY', 'US30'];
+const TICKER_SYMBOLS = [
+  'EUR/USD',
+  'GBP/USD',
+  'XAU/USD',
+  'XAG/USD',
+  'BTC/USD',
+  'ETH/USD',
+  'USD/JPY',
+  'US30',
+  'NAS100',
+  'USOil',
+];
 
 // % change only ever comes from a real previous close: pct === null means
 // no previous close, so the slot shows an em dash - never a fabricated %.

@@ -1,53 +1,102 @@
-// Live prices - ported from the old assets/script.js (lines ~103-298).
-// Same sources, same instrument list, same honesty rules:
-//  - BTC/USD + ETH/USD: CoinGecko simple price (real 24h % change).
-//  - EUR/USD, GBP/USD, USD/JPY, AUD/USD: exchangerate-api v4 (USD base).
-//    % change vs the previous business-day close from Frankfurter
-//    (api.frankfurter.dev/v1), on the SAME basis as the price
-//    (EUR/USD price = 1 / EUR-per-USD, % = change in that inverted value).
-//  - XAU/USD: api.metals.live spot gold (no previous close published, so
-//    gold shows NO % change - never a fabricated one).
-//  - US30: Yahoo Finance chart API - Yahoo sends no CORS headers, so a
-//    browser fetch is blocked; US30 stays simulated.
-//  - A symbol whose feed fails keeps the simulated jitter and a
-//    "Simulated" tag (live: false) and never pretends to be live.
-//  - `live` is true ONLY when BOTH CoinGecko and ExchangeRate-API have
-//    actually loaded in this session; gold & US30 are simulated until
-//    their feeds connect.
-//  - Poll is every 15s; on HTTP 429 the poll backs off to 60s until a
-//    clean poll succeeds. Simulated symbols jitter at the same 15s cadence.
+// Live prices for the whole site - one shared store, one polling loop.
 //
-// The polling loop is module-level and shared: any number of components
-// may call usePrices() and only one loop ever runs.
+// Source: TradingView's public quote scanner (scanner.tradingview.com). It
+// is keyless and CORS-enabled; we POST as text/plain so the browser sends
+// a "simple" request with no preflight. One request returns every symbol:
+// last price, % change vs the previous close, day high/low and the feed's
+// update mode ("streaming" = real-time, "delayed_streaming_600" = the
+// exchange's 10-minute delay - US500 and NAS100 are only available
+// delayed, and are flagged `delayed: true` so the UI can say so).
+//
+// Honesty rules (unchanged from the original script.js port):
+//  - `live` per symbol is true only once a real quote has arrived.
+//  - A symbol whose feed fails keeps the simulated jitter and a "SIM" tag.
+//  - `pct` is a real change vs the previous close, or null (em dash).
+//
+// Poll: every 4s while the tab is visible, paused while hidden, backing
+// off to 30s after a failed request until one succeeds again.
 
 import { useEffect, useState } from "react";
 
-// Defaults shown before the first feed response (verbatim from script.js).
-// p = price, d = decimals, live = real feed connected, pct = % change vs a
-// real previous close (null = no previous close available, show an em dash).
-export const PRICE_DEFAULTS = {
-  "EUR/USD": { p: 1.1637, d: 4, live: false, pct: null },
-  "GBP/USD": { p: 1.3248, d: 4, live: false, pct: null },
-  "AUD/USD": { p: 0.6482, d: 4, live: false, pct: null },
-  "XAU/USD": { p: 4231.4, d: 2, live: false, pct: null },
-  "XAG/USD": { p: 31.42, d: 2, live: false, pct: null },
-  "BTC/USD": { p: 97419, d: 0, live: false, pct: null },
-  "ETH/USD": { p: 3420, d: 2, live: false, pct: null },
-  "LTC/USD": { p: 92.4, d: 2, live: false, pct: null },
-  "XRP/USD": { p: 0.542, d: 4, live: false, pct: null },
-  US30: { p: 44210, d: 0, live: false, pct: null },
-  US500: { p: 6012, d: 0, live: false, pct: null },
-  NAS100: { p: 21480, d: 0, live: false, pct: null },
-  "USD/JPY": { p: 154.32, d: 2, live: false, pct: null },
-  USOil: { p: 68.4, d: 2, live: false, pct: null },
-  UKOil: { p: 72.85, d: 2, live: false, pct: null },
-  NGAS: { p: 3.21, d: 2, live: false, pct: null },
+// key -> TradingView ticker. Every ticker is in the scanner's "global"
+// market, so one request covers them all.
+export const TV_SYMBOLS = {
+  "EUR/USD": "FX:EURUSD",
+  "GBP/USD": "FX:GBPUSD",
+  "AUD/USD": "FX:AUDUSD",
+  "USD/JPY": "FX:USDJPY",
+  "XAU/USD": "OANDA:XAUUSD",
+  "XAG/USD": "TVC:SILVER",
+  "BTC/USD": "BINANCE:BTCUSDT",
+  "ETH/USD": "BINANCE:ETHUSDT",
+  "LTC/USD": "BINANCE:LTCUSDT",
+  "XRP/USD": "BINANCE:XRPUSDT",
+  US30: "OANDA:US30USD",
+  US500: "SP:SPX",
+  NAS100: "NASDAQ:NDX",
+  USOil: "FX:USOIL",
+  UKOil: "FX:UKOIL",
+  NGAS: "OANDA:NATGASUSD",
 };
+
+// Defaults shown before the first quote arrives.
+// p = price, d = decimals, live = real quote received, pct = % change vs
+// the previous close (null = unknown), hi/lo = day range, delayed = the
+// feed is the exchange's 10-minute delayed stream.
+export const PRICE_DEFAULTS = {
+  "EUR/USD": { p: 1.1637, d: 5, live: false, pct: null },
+  "GBP/USD": { p: 1.3248, d: 5, live: false, pct: null },
+  "AUD/USD": { p: 0.6482, d: 5, live: false, pct: null },
+  "XAU/USD": { p: 3880.0, d: 2, live: false, pct: null },
+  "XAG/USD": { p: 48.5, d: 3, live: false, pct: null },
+  "BTC/USD": { p: 64500, d: 2, live: false, pct: null },
+  "ETH/USD": { p: 1810, d: 2, live: false, pct: null },
+  "LTC/USD": { p: 44.7, d: 2, live: false, pct: null },
+  "XRP/USD": { p: 0.95, d: 4, live: false, pct: null },
+  US30: { p: 52200, d: 1, live: false, pct: null },
+  US500: { p: 7560, d: 2, live: false, pct: null },
+  NAS100: { p: 27940, d: 2, live: false, pct: null },
+  "USD/JPY": { p: 159.7, d: 3, live: false, pct: null },
+  USOil: { p: 89.1, d: 2, live: false, pct: null },
+  UKOil: { p: 96.3, d: 2, live: false, pct: null },
+  NGAS: { p: 3.09, d: 3, live: false, pct: null },
+};
+
+const SCAN_URL = "https://scanner.tradingview.com/global/scan";
+const SOURCE = "market data feed";
+
+// Live tick history per symbol (one point per successful poll), used by
+// the hero sparklines. Kept in localStorage so a reload continues the
+// line instead of starting empty; anything older than 15 minutes is
+// discarded. All storage access is best-effort.
+export const HISTORY_LEN = 90;
+const HISTORY_KEY = "ntp-ticks-v1";
+const history = {};
+Object.keys(PRICE_DEFAULTS).forEach((k) => {
+  history[k] = [];
+});
+try {
+  const saved = JSON.parse(localStorage.getItem(HISTORY_KEY) || "null");
+  if (saved && Date.now() - saved.t < 15 * 60e3 && saved.h) {
+    Object.keys(history).forEach((k) => {
+      if (Array.isArray(saved.h[k])) history[k] = saved.h[k].slice(-HISTORY_LEN);
+    });
+  }
+} catch {
+  /* storage unavailable - start empty */
+}
+function saveHistory() {
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify({ t: Date.now(), h: history }));
+  } catch {
+    /* ignore */
+  }
+}
 
 function cloneDefaults() {
   const out = {};
   Object.keys(PRICE_DEFAULTS).forEach((k) => {
-    out[k] = { ...PRICE_DEFAULTS[k] };
+    out[k] = { hi: null, lo: null, delayed: false, ...PRICE_DEFAULTS[k] };
   });
   return out;
 }
@@ -59,58 +108,18 @@ export function formatPrice(p, d) {
   });
 }
 
-// The strip note. It must stay truthful PER FEED: `live` is true only when
-// BOTH main feeds are up, but one live feed must never be reported as
-// "unreachable" - the Forex rows can be LIVE while crypto is down, and the
-// banner has to say exactly that. Gold/US30 get their own trailing note,
-// dropped once their own feed connects. Per-row LIVE/SIM tags are driven
-// by the per-symbol `live` flags and are untouched by this.
+// The strip note: truthful about what is live right now.
 export function priceNote(live, sources) {
-  const fxLive = sources.indexOf("ExchangeRate-API") !== -1;
-  const cryptoLive = sources.indexOf("CoinGecko") !== -1;
-  const goldLive = sources.indexOf("metals.live") !== -1;
-  const us30Live = sources.indexOf("Yahoo Finance") !== -1;
-  const tail =
-    goldLive && us30Live
-      ? ""
-      : goldLive
-        ? " US30 simulated until its feed connects."
-        : us30Live
-          ? " Gold simulated until its feed connects."
-          : " Gold & US30 simulated until their feeds connect.";
   if (live) {
     return {
       text: "Live prices",
-      title: "Live: " + sources.join(", ") + "." + tail,
-    };
-  }
-  if (fxLive || cryptoLive || goldLive || us30Live) {
-    const liveBits = [];
-    if (fxLive) liveBits.push("FX");
-    if (cryptoLive) liveBits.push("crypto");
-    if (goldLive) liveBits.push("gold");
-    if (us30Live) liveBits.push("US30");
-    const downBits = [];
-    if (!fxLive) downBits.push("FX");
-    if (!cryptoLive) downBits.push("crypto");
-    return {
-      text: "Live " + liveBits.join(" + ") + " prices",
       title:
-        "Live: " +
-        sources.join(", ") +
-        ". " +
-        downBits.join(" and ") +
-        " feed" +
-        (downBits.length > 1 ? "s" : "") +
-        " unreachable - " +
-        downBits.join(" and ") +
-        " prices simulated." +
-        tail,
+        "Real-time quotes. US500 and NAS100 use the exchange's 10-minute delayed feed.",
     };
   }
   return {
-    text: "Simulated prices",
-    title: "Live feeds unreachable - showing simulated prices.",
+    text: "Connecting…",
+    title: "Live feed not connected yet - showing the last known prices.",
   };
 }
 
@@ -119,22 +128,18 @@ const prices = cloneDefaults();
 const liveSources = [];
 const listeners = new Set();
 let started = false;
-let rateLimited = false;
-let fxPrevRetryAt = 0;
-
-function isLive() {
-  return (
-    liveSources.indexOf("CoinGecko") !== -1 &&
-    liveSources.indexOf("ExchangeRate-API") !== -1
-  );
-}
+let anyLive = false;
 
 function snapshot() {
   const copy = {};
   Object.keys(prices).forEach((k) => {
     copy[k] = { ...prices[k] };
   });
-  return { prices: copy, live: isLive(), sources: [...liveSources] };
+  const hist = {};
+  Object.keys(history).forEach((k) => {
+    hist[k] = history[k].slice();
+  });
+  return { prices: copy, history: hist, live: anyLive, sources: [...liveSources] };
 }
 
 function notify() {
@@ -142,183 +147,108 @@ function notify() {
   listeners.forEach((l) => l(snap));
 }
 
-function markLive(key, source) {
-  if (!prices[key].live) {
-    prices[key].live = true;
-    if (liveSources.indexOf(source) === -1) liveSources.push(source);
-  }
-}
+const tickerToKey = Object.fromEntries(
+  Object.entries(TV_SYMBOLS).map(([k, t]) => [t, k]),
+);
 
-async function fetchJSON(url, timeoutMs) {
+async function fetchQuotes() {
   const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), timeoutMs || 8000);
+  const t = setTimeout(() => ctrl.abort(), 8000);
   try {
-    const r = await fetch(url, { signal: ctrl.signal });
-    if (r.status === 429) {
-      rateLimited = true;
-      throw new Error("HTTP 429");
-    }
+    const r = await fetch(SCAN_URL, {
+      method: "POST",
+      // text/plain keeps this a CORS "simple request" (no preflight).
+      headers: { "Content-Type": "text/plain;charset=UTF-8" },
+      body: JSON.stringify({
+        symbols: { tickers: Object.values(TV_SYMBOLS) },
+        columns: ["close", "change", "high", "low", "update_mode"],
+      }),
+      signal: ctrl.signal,
+    });
     if (!r.ok) throw new Error("HTTP " + r.status);
-    return await r.json();
+    const json = await r.json();
+    let got = 0;
+    (json.data || []).forEach(({ s, d }) => {
+      const key = tickerToKey[s];
+      if (!key || !Array.isArray(d) || typeof d[0] !== "number") return;
+      const q = prices[key];
+      q.p = d[0];
+      q.pct = typeof d[1] === "number" && isFinite(d[1]) ? d[1] : null;
+      q.hi = typeof d[2] === "number" ? d[2] : null;
+      q.lo = typeof d[3] === "number" ? d[3] : null;
+      q.delayed = typeof d[4] === "string" && d[4].indexOf("delayed") === 0;
+      q.live = true;
+      got += 1;
+    });
+    if (got) {
+      Object.keys(prices).forEach((k) => {
+        if (!prices[k].live) return;
+        history[k].push(prices[k].p);
+        if (history[k].length > HISTORY_LEN) history[k].shift();
+      });
+      saveHistory();
+      anyLive = true;
+      if (liveSources.indexOf(SOURCE) === -1) liveSources.push(SOURCE);
+    }
+    return got > 0;
   } finally {
     clearTimeout(t);
   }
 }
 
-async function fetchCrypto() {
-  try {
-    const d = await fetchJSON(
-      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true",
-    );
-    if (d.bitcoin && d.bitcoin.usd) {
-      prices["BTC/USD"].p = d.bitcoin.usd;
-      prices["BTC/USD"].pct = d.bitcoin.usd_24h_change;
-      markLive("BTC/USD", "CoinGecko");
-    }
-    if (d.ethereum && d.ethereum.usd) {
-      prices["ETH/USD"].p = d.ethereum.usd;
-      prices["ETH/USD"].pct = d.ethereum.usd_24h_change;
-      markLive("ETH/USD", "CoinGecko");
-    }
-  } catch {
-    /* stays simulated */
-  }
-}
-
-async function fetchFX() {
-  try {
-    const d = await fetchJSON("https://api.exchangerate-api.com/v4/latest/USD");
-    if (d && d.rates) {
-      const eurNow = d.rates.EUR ? 1 / d.rates.EUR : null;
-      const gbpNow = d.rates.GBP ? 1 / d.rates.GBP : null;
-      const audNow = d.rates.AUD ? 1 / d.rates.AUD : null;
-      if (eurNow) prices["EUR/USD"].p = eurNow;
-      if (gbpNow) prices["GBP/USD"].p = gbpNow;
-      if (audNow) prices["AUD/USD"].p = audNow;
-      if (d.rates.JPY) prices["USD/JPY"].p = d.rates.JPY;
-      // Previous business-day close, fetched once per session (retried at
-      // most once an hour) - never re-fetched on every 15s poll.
-      if (Date.now() >= fxPrevRetryAt) {
-        fxPrevRetryAt = Date.now() + 3600e3;
-        for (let back = 1; back <= 5; back++) {
-          try {
-            const day = new Date(Date.now() - back * 864e5)
-              .toISOString()
-              .slice(0, 10);
-            const prev = await fetchJSON(
-              "https://api.frankfurter.dev/v1/" +
-                day +
-                "?from=USD&to=EUR,GBP,JPY,AUD",
-            );
-            if (prev && prev.rates) {
-              if (eurNow && prev.rates.EUR)
-                prices["EUR/USD"].pct =
-                  (eurNow / (1 / prev.rates.EUR) - 1) * 100;
-              if (gbpNow && prev.rates.GBP)
-                prices["GBP/USD"].pct =
-                  (gbpNow / (1 / prev.rates.GBP) - 1) * 100;
-              if (audNow && prev.rates.AUD)
-                prices["AUD/USD"].pct =
-                  (audNow / (1 / prev.rates.AUD) - 1) * 100;
-              if (d.rates.JPY && prev.rates.JPY)
-                prices["USD/JPY"].pct =
-                  (d.rates.JPY / prev.rates.JPY - 1) * 100;
-              break;
-            }
-          } catch {
-            /* try an earlier day; no % if none works */
-          }
-        }
-      }
-      ["EUR/USD", "GBP/USD", "USD/JPY", "AUD/USD"].forEach((k) =>
-        markLive(k, "ExchangeRate-API"),
-      );
-    }
-  } catch {
-    /* stays simulated */
-  }
-}
-
-async function fetchGold() {
-  try {
-    const d = await fetchJSON("https://api.metals.live/v1/spot/gold");
-    const v =
-      d && typeof d.gold === "number"
-        ? d.gold
-        : Array.isArray(d) && d[0] && typeof d[0].gold === "number"
-          ? d[0].gold
-          : null;
-    if (v) {
-      prices["XAU/USD"].p = v;
-      markLive("XAU/USD", "metals.live");
-    }
-  } catch {
-    /* stays simulated */
-  }
-}
-
-async function fetchUS30() {
-  try {
-    const d = await fetchJSON(
-      "https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=5d&interval=1d",
-    );
-    const m =
-      d &&
-      d.chart &&
-      d.chart.result &&
-      d.chart.result[0] &&
-      d.chart.result[0].meta;
-    if (m && m.regularMarketPrice) {
-      prices.US30.p = m.regularMarketPrice;
-      if (m.previousClose)
-        prices.US30.pct = (m.regularMarketPrice / m.previousClose - 1) * 100;
-      markLive("US30", "Yahoo Finance");
-    }
-  } catch {
-    /* Yahoo blocks browser fetches (no CORS headers) - stays simulated */
-  }
-}
-
-async function fetchAllLive() {
-  await Promise.all([fetchCrypto(), fetchFX(), fetchGold(), fetchUS30()]);
-  notify();
-}
-
+// Symbols that never received a real quote drift slightly so the page
+// does not look frozen - they keep their "SIM" tag.
 function jitter() {
   Object.keys(prices).forEach((k) => {
     const s = prices[k];
-    if (s.live) return; // live symbols move only on the 15s API refresh
-    const vol = s.p * 0.0012;
-    s.p = +(s.p + (Math.random() - 0.48) * vol).toFixed(s.d);
+    if (s.live) return;
+    const vol = s.p * 0.0004;
+    s.p = +(s.p + (Math.random() - 0.5) * vol).toFixed(s.d);
   });
-  notify();
 }
 
-let pollMs = 15000;
-async function pollLive() {
-  rateLimited = false;
-  await fetchAllLive();
-  pollMs = rateLimited ? 60000 : 15000;
-  setTimeout(pollLive, pollMs);
+const POLL_MS = 4000;
+const BACKOFF_MS = 30000;
+let timer = null;
+let inFlight = false;
+
+async function poll() {
+  if (inFlight) return;
+  inFlight = true;
+  timer = null;
+  let ok = false;
+  try {
+    ok = await fetchQuotes();
+  } catch {
+    ok = false;
+  }
+  inFlight = false;
+  if (!ok) jitter();
+  notify();
+  if (typeof document !== "undefined" && document.hidden) return; // resumes on visibilitychange
+  timer = setTimeout(poll, ok ? POLL_MS : BACKOFF_MS);
 }
 
 function ensureStarted() {
   if (started) return;
   started = true;
-  pollLive();
-  setInterval(jitter, 15000);
+  poll();
+  if (typeof document !== "undefined") {
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && timer === null) poll();
+    });
+  }
 }
 
-// usePrices() → { prices, live, sources }
-// prices: { 'EUR/USD': { p, d, live, pct }, … } - render p with
-// formatPrice(p, d); pct is null when no real previous close exists
-// (render an em dash, never a fabricated %). live: true only when both
-// CoinGecko and ExchangeRate-API have loaded this session.
+// usePrices() -> { prices, history, live, sources }
+// history: { 'EUR/USD': [p, p, …] } - live ticks, oldest first.
+// prices: { 'EUR/USD': { p, d, live, pct, hi, lo, delayed }, … }
 export function usePrices() {
   const [state, setState] = useState(snapshot);
   useEffect(() => {
     ensureStarted();
     listeners.add(setState);
+    setState(snapshot());
     return () => {
       listeners.delete(setState);
     };

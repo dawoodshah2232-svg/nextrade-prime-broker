@@ -1,225 +1,194 @@
-// Hero "Live markets" panel - real tick-by-tick prices over Binance's public
-// market-data WebSocket (no API key, CORS-free). Sparklines are seeded from
-// the last 24h of 30-minute candles (REST) and extended by every live tick.
-//   XAU/USD  <- PAXGUSDT (PAX Gold: 1 token = 1 troy oz of LBMA gold, so it
-//              tracks spot gold; the tooltip says so - never passed off as
-//              an interbank quote)
-//   EUR/USD  <- EURUSDT
-//   BTC/USD  <- BTCUSDT
-//   ETH/USD  <- ETHUSDT
-// % change is Binance's rolling 24h change. If the socket cannot connect the
-// cards show the last REST snapshot with a "Delayed" tag, and reconnect with
-// backoff. One socket per mounted panel; closed on unmount.
-import { useEffect, useRef, useState } from 'react';
+// Hero "Live markets" panel.
+//  - Prices + tick history come from the shared live store (usePrices),
+//    the same numbers as the ticker and the markets tabs.
+//  - The chart is our own SVG: one point per live tick (every few
+//    seconds), drawn across a fixed time window so the line grows
+//    left-to-right, with a dashed previous-close reference when it falls
+//    inside the visible range. No third-party widget or branding.
+//  - Watchlist rows are buttons: clicking one makes it the featured
+//    instrument. Prices flash green/red on every change.
+import { useEffect, useId, useRef, useState } from 'react';
+import { formatPrice, usePrices, HISTORY_LEN } from '../../lib/prices';
 
-const MARKETS = [
-  { sym: 'PAXGUSDT', label: 'XAU/USD', name: 'Gold', d: 2, prefix: '$', note: 'Gold price via the PAXG/USDT live feed' },
-  { sym: 'EURUSDT', label: 'EUR/USD', name: 'Euro', d: 4, prefix: '', note: 'EUR/USDT live feed' },
-  { sym: 'BTCUSDT', label: 'BTC/USD', name: 'Bitcoin', d: 0, prefix: '$', note: 'BTC/USDT live feed' },
-  { sym: 'ETHUSDT', label: 'ETH/USD', name: 'Ethereum', d: 2, prefix: '$', note: 'ETH/USDT live feed' },
+const WATCH = [
+  { key: 'XAU/USD', name: 'Gold', ico: 'Au', cls: 'au' },
+  { key: 'EUR/USD', name: 'Euro / Dollar', ico: '€', cls: 'fx' },
+  { key: 'GBP/USD', name: 'Pound / Dollar', ico: '£', cls: 'fx' },
+  { key: 'US30', name: 'Wall Street 30', ico: '30', cls: 'ix' },
+  { key: 'BTC/USD', name: 'Bitcoin', ico: '₿', cls: 'btc' },
+  { key: 'USOil', name: 'WTI Crude Oil', ico: 'OIL', cls: 'oil' },
 ];
 
-const REST = 'https://data-api.binance.vision/api/v3';
-const WS = 'wss://data-stream.binance.vision/stream?streams=';
-const MAX_POINTS = 60;
+// Flash class for 700ms whenever `value` changes.
+function useFlash(value) {
+  const prev = useRef(value);
+  const [flash, setFlash] = useState('');
+  useEffect(() => {
+    if (prev.current === value) return undefined;
+    setFlash(value > prev.current ? 'tick-up' : 'tick-down');
+    prev.current = value;
+    const t = setTimeout(() => setFlash(''), 700);
+    return () => clearTimeout(t);
+  }, [value]);
+  return flash;
+}
 
-const fmt = (p, d) =>
-  p.toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d });
-
-function Sparkline({ points, up }) {
-  if (points.length < 2) return <svg className="lm-spark" viewBox="0 0 100 32" aria-hidden="true" />;
-  const min = Math.min(...points);
-  const max = Math.max(...points);
-  const span = max - min || 1;
-  const xy = points.map((v, i) => [
-    (i / (points.length - 1)) * 100,
-    30 - ((v - min) / span) * 28,
-  ]);
-  const line = xy.map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(2)} ${y.toFixed(2)}`).join(' ');
-  const area = `${line} L100 32 L0 32 Z`;
-  const id = up ? 'lmUp' : 'lmDown';
-  const [lx, ly] = xy[xy.length - 1];
+function Chg({ pct }) {
+  if (pct == null) return <span className="lm-chg">-</span>;
+  const up = pct >= 0;
   return (
-    <svg className="lm-spark" viewBox="0 0 100 32" preserveAspectRatio="none" aria-hidden="true">
-      <defs>
-        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={up ? '#2ecc8f' : '#ef5350'} stopOpacity="0.35" />
-          <stop offset="100%" stopColor={up ? '#2ecc8f' : '#ef5350'} stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={area} fill={`url(#${id})`} />
-      <path className="lm-line" d={line} fill="none" vectorEffect="non-scaling-stroke" />
-      <circle className="lm-dot" cx={lx} cy={ly} r="1.6" />
-    </svg>
+    <span className={`lm-chg ${up ? 'up' : 'down'}`}>
+      {up ? '▲' : '▼'} {Math.abs(pct).toFixed(2)}%
+    </span>
   );
 }
 
-function Card({ m, q, i }) {
-  const prev = useRef(q.price);
-  const [flash, setFlash] = useState('');
-  useEffect(() => {
-    if (q.price == null || prev.current == null) {
-      prev.current = q.price;
-      return;
-    }
-    if (q.price !== prev.current) {
-      setFlash(q.price > prev.current ? 'tick-up' : 'tick-down');
-      prev.current = q.price;
-      const t = setTimeout(() => setFlash(''), 700);
-      return () => clearTimeout(t);
-    }
-  }, [q.price]);
+// Live tick chart. W x H viewBox; x = slot in a HISTORY_LEN-wide window.
+function TickChart({ points, prevClose, up }) {
+  const gid = useId().replace(/:/g, '');
+  const W = 300;
+  const H = 78;
+  const pts = points.length ? points : [];
+  let min = Math.min(...pts);
+  let max = Math.max(...pts);
+  if (!pts.length) {
+    min = 0;
+    max = 1;
+  }
+  // Pad the range so a flat market is a centred line, not a border.
+  const pad = Math.max((max - min) * 0.18, Math.abs(max) * 0.00015, 1e-9);
+  min -= pad;
+  max += pad;
+  const y = (v) => H - 6 - ((v - min) / (max - min)) * (H - 12);
+  // The window starts at 16 slots and widens with each tick up to
+  // HISTORY_LEN, so a fresh visit fills the chart within about a minute.
+  const slots = Math.min(HISTORY_LEN, Math.max(16, pts.length));
+  const step = W / (slots - 1);
+  const xy = pts.map((v, i) => [i * step, y(v)]);
+  const line = xy.map(([x, yy], i) => `${i ? 'L' : 'M'}${x.toFixed(1)} ${yy.toFixed(1)}`).join(' ');
+  const last = xy[xy.length - 1];
+  const area = last ? `${line} L${last[0].toFixed(1)} ${H} L0 ${H} Z` : '';
+  const showPrev = prevClose != null && prevClose > min && prevClose < max;
+  const color = up ? '#2ecc8f' : '#ef5350';
 
-  const up = (q.pct ?? 0) >= 0;
   return (
-    <div className={`lm-card ${up ? 'is-up' : 'is-down'}`} style={{ animationDelay: `${0.45 + i * 0.12}s` }} title={m.note}>
-      <div className="lm-head">
-        <span className="lm-sym">{m.label}</span>
-        <span className="lm-name">{m.name}</span>
-        <span className={`lm-chg ${up ? 'up' : 'down'}`}>
-          {q.pct == null ? '-' : `${up ? '▲' : '▼'} ${Math.abs(q.pct).toFixed(2)}%`}
+    <div className="lm-chart">
+      <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id={`a${gid}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={color} stopOpacity="0.32" />
+            <stop offset="100%" stopColor={color} stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        {[0.25, 0.5, 0.75].map((f) => (
+          <line key={f} className="lm-grid" x1="0" x2={W} y1={H * f} y2={H * f} />
+        ))}
+        {showPrev && (
+          <line className="lm-prev" x1="0" x2={W} y1={y(prevClose)} y2={y(prevClose)} />
+        )}
+        {pts.length > 1 && (
+          <>
+            <path d={area} fill={`url(#a${gid})`} className="lm-area" />
+            <path d={line} fill="none" stroke={color} className="lm-line" pathLength="1" />
+          </>
+        )}
+      </svg>
+      {last && (
+        <span
+          className="lm-head"
+          style={{
+            left: `${(last[0] / W) * 100}%`,
+            top: `${(last[1] / H) * 100}%`,
+            '--c': color,
+          }}
+        />
+      )}
+      {pts.length < 2 && <span className="lm-wait">Streaming live ticks…</span>}
+    </div>
+  );
+}
+
+function Feature({ w, q, points }) {
+  const flash = useFlash(q.p);
+  const hasRange = q.hi != null && q.lo != null && q.hi > q.lo;
+  const pos = hasRange ? Math.min(100, Math.max(0, ((q.p - q.lo) / (q.hi - q.lo)) * 100)) : 50;
+  const prevClose = q.pct != null ? q.p / (1 + q.pct / 100) : null;
+  return (
+    <div className="lm-feature">
+      <div className="lm-f-head">
+        <span className={`lm-ico lg ${w.cls}`}>{w.ico}</span>
+        <span className="lm-id">
+          <b>{w.key}</b>
+          <small>
+            {w.name}
+            {q.delayed ? ' · 10 min delay' : ''}
+          </small>
         </span>
+        <Chg pct={q.pct} />
       </div>
-      <div className="lm-row">
-        <span className={`lm-price ${flash}`}>
-          {q.price == null ? <span className="lm-skel" /> : `${m.prefix}${fmt(q.price, m.d)}`}
-        </span>
-        <Sparkline points={q.spark} up={up} />
+      <div className={`lm-f-price ${flash}`}>{formatPrice(q.p, q.d)}</div>
+      <TickChart points={points} prevClose={prevClose} up={(q.pct ?? 0) >= 0} />
+      <div className="lm-range" aria-label="Day range">
+        <span>L {hasRange ? formatPrice(q.lo, q.d) : '-'}</span>
+        <div className="lm-range-bar">
+          <i style={{ left: `${pos}%` }} />
+        </div>
+        <span>H {hasRange ? formatPrice(q.hi, q.d) : '-'}</span>
       </div>
     </div>
   );
 }
 
-export default function LiveMarkets() {
-  const [quotes, setQuotes] = useState(() =>
-    Object.fromEntries(MARKETS.map((m) => [m.sym, { price: null, pct: null, spark: [] }])),
+function Row({ w, q, active, onSelect, i }) {
+  const flash = useFlash(q.p);
+  return (
+    <button
+      type="button"
+      className={`lm-row ${active ? 'active' : ''}`}
+      onClick={onSelect}
+      aria-pressed={active}
+      style={{ animationDelay: `${0.7 + i * 0.07}s` }}
+    >
+      <span className={`lm-ico ${w.cls}`}>{w.ico}</span>
+      <span className="lm-id">
+        <b>{w.key}</b>
+        <small>{w.name}</small>
+      </span>
+      <span className={`lm-px ${flash}`}>{formatPrice(q.p, q.d)}</span>
+      <Chg pct={q.pct} />
+    </button>
   );
-  const [status, setStatus] = useState('connecting'); // connecting | live | delayed
+}
 
-  useEffect(() => {
-    let ws = null;
-    let alive = true;
-    let retry = 0;
-    let retryTimer = null;
-    // Throttle React updates to one paint per animation frame.
-    const pending = {};
-    let raf = 0;
-    const flush = () => {
-      raf = 0;
-      const batch = { ...pending };
-      Object.keys(pending).forEach((k) => delete pending[k]);
-      setQuotes((prev) => {
-        const next = { ...prev };
-        Object.entries(batch).forEach(([sym, t]) => {
-          const cur = next[sym];
-          const spark = cur.spark.length ? [...cur.spark.slice(0, -1), t.price] : [t.price];
-          next[sym] = { price: t.price, pct: t.pct, spark };
-        });
-        return next;
-      });
-    };
-
-    // Seed: 24h snapshot + 30m candles for the sparklines.
-    const seed = async () => {
-      try {
-        const syms = encodeURIComponent(JSON.stringify(MARKETS.map((m) => m.sym)));
-        const [tick, ...klines] = await Promise.all([
-          fetch(`${REST}/ticker/24hr?symbols=${syms}`).then((r) => r.json()),
-          ...MARKETS.map((m) =>
-            fetch(`${REST}/klines?symbol=${m.sym}&interval=30m&limit=48`).then((r) => r.json()),
-          ),
-        ]);
-        if (!alive || !Array.isArray(tick)) return;
-        setQuotes((prev) => {
-          const next = { ...prev };
-          MARKETS.forEach((m, i) => {
-            const t = tick.find((x) => x.symbol === m.sym);
-            const spark = Array.isArray(klines[i]) ? klines[i].map((k) => +k[4]) : [];
-            if (t) {
-              const price = +t.lastPrice;
-              next[m.sym] = {
-                price: prev[m.sym].price ?? price,
-                pct: prev[m.sym].pct ?? +t.priceChangePercent,
-                spark: spark.length ? [...spark, price] : [price],
-              };
-            }
-          });
-          return next;
-        });
-      } catch {
-        /* the socket may still connect */
-      }
-    };
-
-    const connect = () => {
-      if (!alive) return;
-      const streams = MARKETS.map((m) => `${m.sym.toLowerCase()}@miniTicker`).join('/');
-      ws = new WebSocket(WS + streams);
-      ws.onopen = () => {
-        retry = 0;
-        setStatus('live');
-      };
-      ws.onmessage = (e) => {
-        try {
-          const { data } = JSON.parse(e.data);
-          if (!data || !data.s) return;
-          const c = +data.c;
-          const o = +data.o;
-          pending[data.s] = { price: c, pct: o ? ((c - o) / o) * 100 : null };
-          if (!raf) raf = requestAnimationFrame(flush);
-        } catch {
-          /* ignore malformed frame */
-        }
-      };
-      ws.onclose = () => {
-        if (!alive) return;
-        setStatus('delayed');
-        retry += 1;
-        retryTimer = setTimeout(connect, Math.min(30000, 1500 * 2 ** retry));
-      };
-      ws.onerror = () => ws && ws.close();
-    };
-
-    seed();
-    connect();
-
-    // Extend sparklines: every 30s push the latest price as a new point.
-    const grow = setInterval(() => {
-      setQuotes((prev) => {
-        const next = { ...prev };
-        Object.keys(next).forEach((k) => {
-          const q = next[k];
-          if (q.price != null) next[k] = { ...q, spark: [...q.spark, q.price].slice(-MAX_POINTS) };
-        });
-        return next;
-      });
-    }, 30000);
-
-    return () => {
-      alive = false;
-      clearInterval(grow);
-      clearTimeout(retryTimer);
-      if (raf) cancelAnimationFrame(raf);
-      if (ws) {
-        ws.onclose = null;
-        ws.close();
-      }
-    };
-  }, []);
+export default function LiveMarkets() {
+  const { prices, history, live } = usePrices();
+  const [sel, setSel] = useState(WATCH[0].key);
+  const w = WATCH.find((x) => x.key === sel);
 
   return (
     <aside className="live-markets" aria-label="Live market prices">
       <div className="lm-top">
         <span className="lm-title">Live markets</span>
-        <span className={`lm-status ${status}`}>
+        <span className={`lm-status ${live ? 'live' : ''}`}>
           <i />
-          {status === 'live' ? 'Live' : status === 'delayed' ? 'Delayed' : 'Connecting'}
+          {live ? 'Live' : 'Connecting'}
         </span>
       </div>
-      {MARKETS.map((m, i) => (
-        <Card key={m.sym} m={m} q={quotes[m.sym]} i={i} />
-      ))}
-      <div className="lm-foot">Real-time quotes · 24h change</div>
+
+      <Feature key={sel} w={w} q={prices[sel]} points={history[sel] || []} />
+
+      <div className="lm-list">
+        {WATCH.map((x, i) => (
+          <Row
+            key={x.key}
+            w={x}
+            q={prices[x.key]}
+            i={i}
+            active={x.key === sel}
+            onSelect={() => setSel(x.key)}
+          />
+        ))}
+      </div>
     </aside>
   );
 }
