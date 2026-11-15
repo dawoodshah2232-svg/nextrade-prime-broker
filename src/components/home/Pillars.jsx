@@ -15,7 +15,7 @@ const PILLARS = [
   },
   {
     title: 'Secure & Registered',
-    text: 'NexTrade Ltd is a company registered in England and Wales (company number 17435407). Accounts are protected with identity verification and same-method withdrawals.',
+    text: 'NexTrade is a company registered in England and Wales. Accounts are protected with identity verification and same-method withdrawals.',
     to: '/regulation',
     link: 'How we protect your funds',
     icon: (

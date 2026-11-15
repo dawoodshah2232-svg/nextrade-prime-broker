@@ -41,7 +41,7 @@ export default function Terms() {
             <h2>Platform</h2>
             <p style={{ marginBottom: 16 }}>
               Trading on NexTrade Prime accounts is offered on MetaTrader 5, a platform of
-              MetaQuotes Ltd. MetaTrader 5 is a third-party product; NexTrade Prime does not own
+              MetaQuotes. MetaTrader 5 is a third-party product; NexTrade Prime does not own
               it.
             </p>
             <h2>Eligibility</h2>

@@ -1,6 +1,5 @@
-// Site footer (light theme): link columns, risk warning, then a distinct
-// "Important" corporate block (company registration, England and Wales)
-// above the copyright line - per the client brief, visible on every page.
+// Site footer (light theme): link columns, then the risk warning directly
+// above the copyright line - visible on every page.
 import { Link } from 'react-router-dom';
 import { asset } from '../lib/asset';
 import { FIcon } from './icons';
@@ -87,17 +86,8 @@ export default function Footer() {
           investment objectives, level of experience and risk tolerance before trading. Do not trade
           with funds you cannot afford to lose. Bonuses and promotions are subject to their terms.
         </p>
-        <div className="footer-important">
-          <p>
-            <b>Important:</b> NexTrade is operated by <b>NexTrade Ltd</b>, a company registered in{' '}
-            <b>England and Wales</b> under company number <b>17435407</b>. Services are not offered
-            in jurisdictions where such distribution or use would be contrary to applicable laws or
-            regulations.
-          </p>
-          <p className="footer-corp">The corporate entity is incorporated in England and Wales.</p>
-        </div>
         <div className="footer-bottom">
-          <span>© 2026 NexTrade Ltd. All rights reserved.</span>
+          <span>© 2026 NexTrade. All rights reserved.</span>
           <span className="footer-legal">
             <Link to="/regulation">Regulation</Link>
             <Link to="/contact">Contact</Link>

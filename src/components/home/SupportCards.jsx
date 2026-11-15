@@ -1,7 +1,7 @@
 // "Support & resources" - three photo-top cards, verbatim port of the
-// old index.html section. The first photo is the Wikimedia URL from the
-// old markup; Help Centre and Education photos are local assets via
-// asset(). Icon SVGs copied verbatim.
+// old index.html section. All three photos are local assets via asset()
+// (24/7 support photo: Olha Ruskykh on Pexels, Pexels licence).
+// Icon SVGs copied verbatim.
 import { Link } from 'react-router-dom';
 import { asset } from '../../lib/asset';
 
@@ -15,8 +15,8 @@ export default function SupportCards() {
           <div className="card reveal fund-card why-card">
             <div className="fund-photo">
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Call_center_PV.jpg"
-                alt="Support agent wearing a headset with a microphone, helping a customer at her desk"
+                src={asset('support-247.jpg')}
+                alt="Smiling support agent wearing a headset, helping a client at his laptop"
                 loading="lazy"
               />
             </div>

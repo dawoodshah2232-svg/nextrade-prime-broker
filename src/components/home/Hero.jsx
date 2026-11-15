@@ -9,19 +9,19 @@
 // (EEX0EHTTePE) was removed 12 Nov - YouTube refuses it in embedded
 // players (Error 153). No iframe / API code here, ever.
 // The hero proof row is STATIC in the old markup (no data-count) - only
-// the StatsBand counts up. The XAU/USD glass card is live via usePrices.
+// the StatsBand counts up. The right-hand "Live markets" panel streams real
+// ticks over a WebSocket (see LiveMarkets.jsx).
 // The <video> element is STABLE across re-renders: same position in the
 // tree, no key, and every prop (autoPlay/muted/loop/playsInline/preload/
 // poster/src) is identical on every render (asset() is a pure string
-// concat), so React never touches the DOM node when usePrices ticks every
-// 15s - playback is never reset by a price update.
+// concat), and prices re-render only inside LiveMarkets, so React never
+// touches the video node - playback is never reset by a price tick.
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { asset } from '../../lib/asset';
-import { formatPrice, usePrices } from '../../lib/prices';
+import LiveMarkets from './LiveMarkets';
 
 export default function Hero() {
-  const { prices } = usePrices();
   const videoRef = useRef(null);
   const [posterOnly, setPosterOnly] = useState(false);
   // Ref mirror of posterOnly: the retry loop and the onCanPlay handler run
@@ -103,8 +103,6 @@ export default function Hero() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const xau = prices['XAU/USD'];
-
   return (
     <section className="hero hero-blend hero-video">
       <div className="orb orb-1"></div>
@@ -169,19 +167,9 @@ export default function Hero() {
               <b>10%</b>
               <span>Re-deposit bonus</span>
             </div>
-            <div>
-              <b>$100</b>
-              <span>Minimum deposit</span>
-            </div>
           </div>
         </div>
-        <div className="glass-card glass-1">
-          <div className="gc-label">XAU/USD</div>
-          <div className="gc-value" id="hero-xau">
-            ${formatPrice(xau.p, xau.d)}
-          </div>
-          <div className="gc-sub">Gold · MT5</div>
-        </div>
+        <LiveMarkets />
       </div>
     </section>
   );
