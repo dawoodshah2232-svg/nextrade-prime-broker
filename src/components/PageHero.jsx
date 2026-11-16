@@ -8,9 +8,9 @@
 // gold <span>; some intros contain a Contact link).
 import { Link } from 'react-router-dom';
 
-export default function PageHero({ crumbs, title, intro }) {
+export default function PageHero({ crumbs, title, intro, className = '' }) {
   return (
-    <section className="page-hero">
+    <section className={`page-hero ${className}`.trim()}>
       <div className="container">
         {crumbs && crumbs.length > 0 && (
           <p className="breadcrumb">
