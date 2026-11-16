@@ -62,10 +62,6 @@ export default function Footer() {
             <div className="eyebrow" style={{ marginBottom: 12 }}>
               PAYOUT SPEED ABOVE ALL
             </div>
-            <p>
-              Trade forex, gold, indices and crypto on MetaTrader 5 - with fast payouts, leverage
-              up to 1:1000 and support that answers.
-            </p>
           </div>
           {COLUMNS.map((col) => (
             <div key={col.title}>

@@ -4308,3 +4308,97 @@ body.drawer-open { overflow: hidden; }
     opacity: 1;
   }
 }
+/* Regulation page: company incorporation details */
+.corp-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.corp-details > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid var(--line-soft);
+  border-left: 3px solid var(--gold);
+  box-shadow: 0 6px 18px rgba(11, 26, 51, 0.05);
+}
+.corp-details span {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.corp-details b {
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+/* Hero live panel: flush to the right edge of the screen (desktop) */
+@media (min-width: 1021px) {
+  .hero.hero-video .hero-copy {
+    max-width: min(660px, calc(100vw - 420px - 72px));
+  }
+  .hero-side {
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    right: 0;
+    bottom: 64px; /* keep clear of the promo cards' overlap */
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+  }
+  .hero-side .live-markets {
+    pointer-events: auto;
+    width: 400px;
+    border-radius: 22px 0 0 22px;
+    border-right: 0;
+  }
+  .hero-side .live-markets::before {
+    border-radius: 22px 0 0 22px;
+  }
+}
+@media (max-width: 1020px) {
+  .hero.hero-video {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-side {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    max-width: 1200px;
+    margin: 36px auto 0;
+    padding: 0 24px;
+  }
+  .hero-side .live-markets {
+    width: 100%;
+    max-width: 560px;
+  }
+}
+@media (min-width: 1021px) {
+  .hero-side .live-markets {
+    animation:
+      lmDockIn 0.9s var(--ease) both 0.3s,
+      panelFloat 7s ease-in-out 1.4s infinite;
+  }
+}
+@keyframes lmDockIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-side .live-markets {
+    animation: none;
+  }
+}

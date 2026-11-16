@@ -187,6 +187,10 @@ export default function Hero() {
             </div>
           </div>
         </div>
+      </div>
+      {/* Outside the container: on desktop the panel sits flush against the
+          right edge of the screen (see .hero-side). */}
+      <div className="hero-side">
         <LiveMarkets />
       </div>
     </section>

@@ -34,11 +34,9 @@ export default function Privacy() {
             </p>
             <h2>Cookies and analytics</h2>
             <p style={{ marginBottom: 16 }}>
-              This demo does not set tracking cookies and does not run analytics. Prices shown on
-              the homepage are fetched live in your browser from free public market-data APIs
-              (CoinGecko, ExchangeRate-API and Frankfurter); gold and US30 show simulated prices
-              because their free feeds do not connect from a browser. Those services receive your
-              request directly, as any public website visitor would.
+              This website does not set tracking cookies and does not run analytics. Market prices
+              shown on the site are fetched live in your browser from a public market-data feed,
+              which receives your request directly, as it would from any website visitor.
             </p>
             <h2>Contact</h2>
             <p>
