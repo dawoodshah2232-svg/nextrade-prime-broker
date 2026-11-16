@@ -9,8 +9,11 @@
 // (EEX0EHTTePE) was removed 12 Nov - YouTube refuses it in embedded
 // players (Error 153). No iframe / API code here, ever.
 // The hero proof row is STATIC in the old markup (no data-count) - only
-// the StatsBand counts up. The right-hand "Live markets" panel streams real
-// ticks over a WebSocket (see LiveMarkets.jsx).
+// the StatsBand counts up. The right-hand "Live markets" panel shows the
+// shared live prices (see LiveMarkets.jsx).
+// Background video: a live order book with prices ticking (Pexels 14003675,
+// Pexels licence), played at PLAYBACK_RATE for a faster, "money moving"
+// feel. hero-payout-poster.jpg is a still from the same clip.
 // The <video> element is STABLE across re-renders: same position in the
 // tree, no key, and every prop (autoPlay/muted/loop/playsInline/preload/
 // poster/src) is identical on every render (asset() is a pure string
@@ -20,6 +23,12 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { asset } from '../../lib/asset';
 import LiveMarkets from './LiveMarkets';
+
+const PLAYBACK_RATE = 1.5;
+const setRate = (e) => {
+  e.currentTarget.defaultPlaybackRate = PLAYBACK_RATE;
+  e.currentTarget.playbackRate = PLAYBACK_RATE;
+};
 
 export default function Hero() {
   const videoRef = useRef(null);
@@ -115,7 +124,7 @@ export default function Hero() {
           attribute does not reliably paint while an autoplaying video
           buffers (Chrome shows black), so the chart still is the backdrop
           itself - visible instantly, covered by the video once it plays. */}
-      <div className="hero-bg" aria-hidden="true" style={{ backgroundImage: `url(${asset('hero-poster.jpg')})`, backgroundSize: 'cover', backgroundPosition: '50% 22%' }}>
+      <div className="hero-bg" aria-hidden="true" style={{ backgroundImage: `url(${asset('hero-payout-poster.jpg')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <video
           ref={videoRef}
           id="hero-video"
@@ -124,8 +133,10 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
-          poster={asset('hero-poster.jpg')}
-          src={asset('hero-market.mp4')}
+          poster={asset('hero-payout-poster.jpg')}
+          src={asset('hero-payout.mp4')}
+          onLoadedMetadata={setRate}
+          onPlay={setRate}
           onCanPlay={tryPlay}
           onError={showPoster}
           style={posterOnly ? { display: 'none' } : undefined}
@@ -133,7 +144,7 @@ export default function Hero() {
         <img
           className="poster"
           id="hero-poster"
-          src={asset('hero-trader.jpg')}
+          src={asset('hero-payout-poster.jpg')}
           alt=""
           loading="eager"
           fetchPriority="high"
