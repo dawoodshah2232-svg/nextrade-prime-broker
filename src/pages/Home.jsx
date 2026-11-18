@@ -7,6 +7,7 @@
 import Hero from '../components/home/Hero';
 import PromoCards from '../components/home/PromoCards';
 import Pillars from '../components/home/Pillars';
+import PartnersPreview from '../components/home/PartnersPreview';
 import SpreadsTable from '../components/home/SpreadsTable';
 import WhyCards from '../components/home/WhyCards';
 import StatsBand from '../components/home/StatsBand';
@@ -91,6 +92,7 @@ export default function Home() {
       <PromoCards />
       <PriceStrip />
       <Pillars />
+      <PartnersPreview />
       <SpreadsTable />
       <WhyCards />
       <StatsBand />

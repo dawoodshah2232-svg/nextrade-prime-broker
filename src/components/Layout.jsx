@@ -50,7 +50,7 @@ export default function Layout() {
             <a className="topstrip-email" href="mailto:info@nextradeprime.com">
               info@nextradeprime.com
             </a>
-            <Link to="/help-centre">Help Centre</Link>
+            {/* <Link to="/help-centre">Help Centre</Link> */}
           </span>
         </div>
       </div>

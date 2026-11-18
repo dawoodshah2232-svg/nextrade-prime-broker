@@ -377,7 +377,7 @@ export default function Partners() {
               <Link to="/">Home</Link>&nbsp;/&nbsp; Company&nbsp;/&nbsp; Partners &amp; IBs
             </p>
             <h1 data-aos="fade-up">
-              Partner with NexTrade Prime. <span className="gold-amp">Earn twice</span> on every lot.
+              Partner with NexTrade Prime. <span className="gold-amp">Earn twice</span>
             </h1>
             <p data-aos="fade-up" data-aos-delay="100">
               Our Introducing Broker programme pays a volume rebate on every lot your clients trade,
