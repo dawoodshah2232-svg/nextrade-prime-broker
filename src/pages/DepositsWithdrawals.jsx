@@ -43,7 +43,7 @@ const DEPOSITS = [
 ];
 
 const WITHDRAWALS = [
-  { icon: 'bank', method: 'Bank Transfer', time: 'Up to 24 Hours' },
+  { icon: 'bank', method: 'Bank Wire Transfer', time: 'Within 24 Hours' },
   { icon: 'wallet', method: 'E-Wallets', time: 'Instant' },
   { icon: 'crypto', method: 'Crypto (USDT)', time: 'Instant' },
 ];
@@ -140,10 +140,10 @@ export default function DepositsWithdrawals() {
           </ol>
           <div className="grid3" style={{ marginTop: '28px' }}>
             <div className="card reveal">
-              <h3>Fast payouts</h3>
+              <h3>Wire transfers in 24 hours</h3>
               <p>
-                E-wallet and crypto withdrawals are instant; bank transfers arrive within 24
-                hours.
+                E-wallet and crypto withdrawals are instant; bank wire transfer withdrawals are
+                completed within 24 hours.
               </p>
             </div>
             <div className="card reveal">

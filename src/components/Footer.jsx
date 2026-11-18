@@ -37,6 +37,7 @@ const COLUMNS = [
     links: [
       { to: '/about', icon: 'about', label: 'About' },
       { to: '/regulation', icon: 'regulation', label: 'Regulation' },
+      { to: '/partners', icon: 'partners', label: 'Partners & IBs' },
       { to: '/contact', icon: 'contact', label: 'Contact Us' },
       { to: '/faq', icon: 'faq', label: 'FAQ' },
     ],

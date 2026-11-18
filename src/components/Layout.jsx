@@ -2,7 +2,10 @@
 // The top strip carries the motto and the language selector (visible on
 // desktop and mobile). useReveal(pathname) re-runs the scroll-reveal
 // observer after every navigation, so newly mounted sections animate in.
+import { useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Header from './Header';
 import Footer from './Footer';
 import LanguageSelect from './LanguageSelect';
@@ -11,6 +14,22 @@ import { useReveal } from '../hooks/useReveal';
 export default function Layout() {
   const { pathname } = useLocation();
   useReveal(pathname);
+
+  // AOS drives the [data-aos] animations on newer pages (e.g. /partners).
+  // Init once; on every navigation refreshHard() re-scans the new route's
+  // DOM so freshly mounted elements get their offsets.
+  useEffect(() => {
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 60,
+      disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    });
+  }, []);
+  useEffect(() => {
+    AOS.refreshHard();
+  }, [pathname]);
   return (
     <>
       <div className="topstrip">

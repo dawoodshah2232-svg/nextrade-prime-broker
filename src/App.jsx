@@ -19,6 +19,7 @@ import EconomicCalendar from './pages/EconomicCalendar';
 import Calculators from './pages/Calculators';
 import NewsAnalysis from './pages/NewsAnalysis';
 import Promotions from './pages/Promotions';
+import Partners from './pages/Partners';
 import About from './pages/About';
 import Regulation from './pages/Regulation';
 import Contact from './pages/Contact';
@@ -82,6 +83,8 @@ export default function App() {
           <Route path="/calculators" element={<Calculators />} />
           <Route path="/news-analysis" element={<NewsAnalysis />} />
           <Route path="/promotions" element={<Promotions />} />
+          <Route path="/partners" element={<Partners />} />
+          <Route path="/ib" element={<Navigate to="/partners" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/regulation" element={<Regulation />} />
           <Route path="/contact" element={<Contact />} />

@@ -26,8 +26,8 @@ const ITEMS = [
     q: 'How long do withdrawals take?',
     a: (
       <>
-        Requests are processed the same business day. Card and e-wallet withdrawals usually arrive
-        within 24 hours; bank transfers take 1–3 business days. Details on{' '}
+        E-wallet and crypto (USDT) withdrawals are instant, and bank wire transfer withdrawals
+        are completed within 24 hours. Details on{' '}
         <Link to="/deposits-withdrawals">Deposits &amp; Withdrawals</Link>.
       </>
     ),

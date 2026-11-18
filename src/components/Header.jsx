@@ -207,6 +207,12 @@ const MENUS = [
             desc: "How we protect your funds",
           },
           {
+            to: "/partners",
+            icon: "partners",
+            title: "Partners & IBs",
+            desc: "Earn rebates + commission",
+          },
+          {
             to: "/contact",
             icon: "contact",
             title: "Contact Us",

@@ -11,7 +11,11 @@ export function useReveal(dep) {
       .querySelectorAll(
         "section:not(.hero), .card, .split-img, .footer-grid > div",
       )
-      .forEach((el) => el.classList.add("reveal"));
+      // Pages animated with AOS mark their root with [data-aos-page] - skip
+      // them here, or both systems fight over opacity/transform.
+      .forEach((el) => {
+        if (!el.closest("[data-aos-page]")) el.classList.add("reveal");
+      });
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((en) => {
