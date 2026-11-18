@@ -12,7 +12,9 @@ concurrency:
 jobs:
   deploy:
     name: Build and deploy
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest is moving to Ubuntu 26 (from 19 Oct 2026) and
+    # deploys started failing at the SSH step around that switch.
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout
@@ -47,7 +49,17 @@ jobs:
           if [ -n "$CPANEL_SSH_PASSPHRASE" ]; then
             ssh-keygen -p -P "$CPANEL_SSH_PASSPHRASE" -N '' -f ~/.ssh/cpanel_key >/dev/null
           fi
-          ssh-keyscan -p "$CPANEL_PORT" "$CPANEL_HOST" >> ~/.ssh/known_hosts
+          # Host key: retry with a longer timeout (cPanel hosts can be slow to
+          # answer and ssh-keyscan fails silently). Not fatal on its own - the
+          # upload step uses accept-new, so a real connection problem shows up
+          # there as a readable ssh error instead of a bare "exit code 1".
+          for i in 1 2 3; do
+            if ssh-keyscan -T 20 -p "$CPANEL_PORT" "$CPANEL_HOST" >> ~/.ssh/known_hosts 2>/dev/null \
+              && [ -s ~/.ssh/known_hosts ]; then
+              echo "Host key added"; break
+            fi
+            echo "ssh-keyscan attempt $i failed"; sleep 5
+          done
 
       - name: Upload build to cPanel
         env:
@@ -64,7 +76,7 @@ jobs:
             --exclude '/.well-known/' \
             --exclude '/cgi-bin/' \
             --exclude '/.user.ini' \
-            -e "ssh -i ~/.ssh/cpanel_key -p $CPANEL_PORT" \
+            -e "ssh -i ~/.ssh/cpanel_key -p $CPANEL_PORT -o StrictHostKeyChecking=accept-new -o ConnectTimeout=30 -o ServerAliveInterval=15" \
             dist/ "$CPANEL_USER@$CPANEL_HOST:$CPANEL_TARGET/"
 
       - name: Clean up key
