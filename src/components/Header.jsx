@@ -21,9 +21,9 @@
 // ("Hi, <name>" + Log Out) - the old dashboard was the only page with that
 // variant; in the SPA it follows the login state on every page.
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { asset } from "../lib/asset";
-import { getUser, logout } from "../lib/auth";
+import { LOGIN_URL, REGISTER_URL } from "../lib/links";
 import { MIcon } from "./icons";
 import LanguageSelect from "./LanguageSelect";
 
@@ -187,6 +187,12 @@ const MENUS = [
     to: "/promotions",
   },
   {
+    id: "partners",
+    label: "Partners",
+    icon: "partners",
+    to: "/partners",
+  },
+  {
     id: "company",
     label: "Company",
     icon: "company",
@@ -205,12 +211,6 @@ const MENUS = [
             icon: "regulation",
             title: "Regulation",
             desc: "How we protect your funds",
-          },
-          {
-            to: "/partners",
-            icon: "partners",
-            title: "Partners & IBs",
-            desc: "Earn rebates + commission",
           },
           {
             to: "/contact",
@@ -244,8 +244,6 @@ export default function Header() {
   const navRef = useRef(null);
   const firstRenderRef = useRef(true);
   const location = useLocation();
-  const navigate = useNavigate();
-  const user = getUser();
 
   const suppressMenus = useCallback(() => {
     document.body.classList.add("menus-suppressed");
@@ -350,10 +348,6 @@ export default function Header() {
     unsuppressMenus();
   };
 
-  const onLogout = () => {
-    logout();
-    navigate("/login");
-  };
 
   return (
     <>
@@ -418,31 +412,14 @@ export default function Header() {
             )}
           </ul>
           <div className="header-actions">
-            {user ? (
-              <>
-                <span style={{ fontWeight: 700, color: "var(--ink)" }}>
-                  Hi, <span>{user.name || user.email}</span>
-                </span>
-                <button
-                  className="btn btn-dark"
-                  type="button"
-                  onClick={onLogout}
-                >
-                  Log Out
-                </button>
-              </>
-            ) : (
-              <>
-                <Link className="login-link" to="/login">
-                  <MIcon name="login" />
-                  Login
-                </Link>
-                <Link className="btn btn-dark" to="/signup">
-                  <MIcon name="arrow" />
-                  Get Started
-                </Link>
-              </>
-            )}
+            <a className="login-link" href={LOGIN_URL}>
+              <MIcon name="login" />
+              Login
+            </a>
+            <a className="btn btn-dark" href={REGISTER_URL}>
+              <MIcon name="arrow" />
+              Get Started
+            </a>
           </div>
           <button
             className={"menu-toggle" + (mobileOpen ? " is-open" : "")}
@@ -561,23 +538,14 @@ export default function Header() {
 
         <div className="drawer-foot">
           <LanguageSelect variant="drawer" />
-          {user ? (
-            <div className="drawer-ctas">
-              <span className="drawer-hi">Hi, {user.name || user.email}</span>
-              <button className="btn btn-dark" type="button" onClick={onLogout}>
-                Log Out
-              </button>
-            </div>
-          ) : (
-            <div className="drawer-ctas">
-              <Link className="btn drawer-login" to="/login">
-                Login
-              </Link>
-              <Link className="btn btn-gold" to="/signup">
-                Get Started
-              </Link>
-            </div>
-          )}
+          <div className="drawer-ctas">
+            <a className="btn drawer-login" href={LOGIN_URL}>
+              Login
+            </a>
+            <a className="btn btn-gold" href={REGISTER_URL}>
+              Get Started
+            </a>
+          </div>
         </div>
       </aside>
     </>

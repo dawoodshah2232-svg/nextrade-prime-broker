@@ -6,6 +6,7 @@
 // from the old page (not part of the gold icon set in ../components/icons.jsx).
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import { REGISTER_URL } from '../lib/links';
 
 function Check() {
   return (
@@ -122,9 +123,9 @@ export default function MarketsMetals() {
                   </span>
                 </li>
               </ul>
-              <Link className="btn btn-gold" style={{ marginTop: '18px' }} to="/signup">
+              <a className="btn btn-gold" style={{ marginTop: '18px' }} href={REGISTER_URL}>
                 Trade Gold Now
-              </Link>
+              </a>
             </div>
           </div>
         </div>

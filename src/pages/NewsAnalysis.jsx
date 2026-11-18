@@ -2,6 +2,7 @@
 // verbatim copy, cards and dates; internal links are <Link> routes.
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import { REGISTER_URL } from '../lib/links';
 
 export default function NewsAnalysis() {
   return (
@@ -88,9 +89,9 @@ export default function NewsAnalysis() {
           </div>
           <p style={{ marginTop: '32px' }}>
             Trade what you read about:{' '}
-            <Link to="/signup" style={{ fontWeight: 700, color: 'var(--ink)' }}>
+            <a href={REGISTER_URL} style={{ fontWeight: 700, color: 'var(--ink)' }}>
               open an account
-            </Link>{' '}
+            </a>{' '}
             or practice on a{' '}
             <Link to="/demo-account" style={{ fontWeight: 700, color: 'var(--ink)' }}>
               demo

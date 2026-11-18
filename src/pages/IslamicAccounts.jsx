@@ -3,6 +3,7 @@
 // not part of the gold icon set in ../components/icons.jsx).
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import { REGISTER_URL } from '../lib/links';
 
 function Check() {
   return (
@@ -64,9 +65,9 @@ export default function IslamicAccounts() {
                   </span>
                 </li>
               </ul>
-              <Link className="btn btn-gold" style={{ marginTop: '20px' }} to="/signup">
+              <a className="btn btn-gold" style={{ marginTop: '20px' }} href={REGISTER_URL}>
                 Open an Islamic Account
-              </Link>
+              </a>
             </div>
             <div className="split-img reveal">
               <img

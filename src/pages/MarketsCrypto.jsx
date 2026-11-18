@@ -4,6 +4,7 @@
 // path prefixes).
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import { REGISTER_URL } from '../lib/links';
 
 export default function MarketsCrypto() {
   return (
@@ -112,9 +113,9 @@ export default function MarketsCrypto() {
             </div>
           </div>
           <p style={{ marginTop: '28px' }}>
-            <Link className="btn btn-gold" to="/signup">
+            <a className="btn btn-gold" href={REGISTER_URL}>
               Trade Crypto Now
-            </Link>
+            </a>
           </p>
         </div>
       </section>

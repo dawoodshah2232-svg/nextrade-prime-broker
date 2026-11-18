@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { LOGIN_URL, REGISTER_URL } from './lib/links';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Accounts from './pages/Accounts';
@@ -27,9 +28,6 @@ import HelpCentre from './pages/HelpCentre';
 import Faq from './pages/Faq';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 
 // The old site was separate HTML files, so every navigation started at the
@@ -47,6 +45,14 @@ function ScrollToTop() {
     }
     window.scrollTo(0, 0);
   }, [pathname, hash]);
+  return null;
+}
+
+// Full-page redirect to the client portal (replace: no back-button loop).
+function ExternalRedirect({ to }) {
+  useEffect(() => {
+    window.location.replace(to);
+  }, [to]);
   return null;
 }
 
@@ -92,9 +98,12 @@ export default function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          {/* Register / login / client area live on the secure portal. Old
+              links and bookmarks to these paths are sent there. */}
+          <Route path="/login" element={<ExternalRedirect to={LOGIN_URL} />} />
+          <Route path="/signup" element={<ExternalRedirect to={REGISTER_URL} />} />
+          <Route path="/register" element={<ExternalRedirect to={REGISTER_URL} />} />
+          <Route path="/dashboard" element={<ExternalRedirect to={LOGIN_URL} />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

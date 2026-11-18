@@ -23,6 +23,7 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { asset } from '../../lib/asset';
 import LiveMarkets from './LiveMarkets';
+import { REGISTER_URL } from '../../lib/links';
 
 const PLAYBACK_RATE = 1.5;
 const setRate = (e) => {
@@ -176,9 +177,9 @@ export default function Hero() {
             account. Trade forex, gold, indices and crypto on MetaTrader 5.
           </p>
           <div className="hero-cta">
-            <Link className="btn btn-gold btn-lg btn-shine" to="/signup">
+            <a className="btn btn-gold btn-lg btn-shine" href={REGISTER_URL}>
               Open an Account
-            </Link>
+            </a>
             <Link className="btn btn-outline-light btn-lg" to="/deposits-withdrawals">
               How Withdrawals Work
             </Link>

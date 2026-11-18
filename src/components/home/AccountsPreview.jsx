@@ -3,6 +3,7 @@
 // or leverage tier: one shared note covers leverage (1:1000) and $100 minimum.
 import { Link } from 'react-router-dom';
 import { ACCOUNTS, ACCOUNT_NOTE } from '../../lib/accounts';
+import { REGISTER_URL } from '../../lib/links';
 
 export default function AccountsPreview() {
   return (
@@ -25,13 +26,18 @@ export default function AccountsPreview() {
                 <b>{a.spread}</b>
                 <span>{a.commission}</span>
               </p>
-              <Link className="btn btn-gold btn-sm" to="/accounts">
-                Compare
-              </Link>
+              <a className="btn btn-gold btn-sm" href={REGISTER_URL}>
+                Open {a.name}
+              </a>
             </div>
           ))}
         </div>
-        <p className="acct-note">{ACCOUNT_NOTE}</p>
+        <p className="acct-note">
+          {ACCOUNT_NOTE}{' '}
+          <Link to="/accounts" style={{ fontWeight: 700, color: 'var(--ink)' }}>
+            Compare all accounts →
+          </Link>
+        </p>
       </div>
     </section>
   );

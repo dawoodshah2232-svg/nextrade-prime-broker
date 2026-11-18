@@ -4,13 +4,14 @@
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import FaqAccordion from '../components/FaqAccordion';
+import { REGISTER_URL } from '../lib/links';
 
 const items = [
   {
     q: 'How do I open an account?',
     a: (
       <>
-        Register on the <Link to="/signup">sign-up page</Link>, verify your identity with an ID
+        Register on the <a href={REGISTER_URL}>sign-up page</a>, verify your identity with an ID
         and proof of address, then deposit from $100. Most accounts are verified within a few
         hours.
       </>

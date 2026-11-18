@@ -5,6 +5,7 @@
 // promotion terms, which the company must confirm before publishing figures.
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import { REGISTER_URL } from '../lib/links';
 
 const PROMOS = [
   {
@@ -14,7 +15,7 @@ const PROMOS = [
     text: 'Boost your trading power with a 30% bonus on your first deposit into a live account.',
     terms: 'Minimum deposit $100 · one first-deposit bonus per client · eligibility, caps, expiry and trading requirements apply',
     cta: 'Claim 30% Bonus',
-    to: '/signup',
+    href: REGISTER_URL,
     gold: true,
   },
   {
@@ -24,7 +25,7 @@ const PROMOS = [
     text: 'Earn a 10% bonus on every subsequent deposit you make into your live account.',
     terms: 'Applies to deposits after your first · eligibility, caps, expiry and trading requirements apply',
     cta: 'Open an Account',
-    to: '/signup',
+    href: REGISTER_URL,
   },
   {
     big: '0',
@@ -67,9 +68,15 @@ export default function Promotions() {
                 <h3>{p.title}</h3>
                 <p>{p.text}</p>
                 <p className="promo-terms">Terms: {p.terms}</p>
-                <Link className={'btn ' + (p.gold ? 'btn-gold' : 'btn-dark')} to={p.to}>
-                  {p.cta}
-                </Link>
+                {p.href ? (
+                  <a className={'btn ' + (p.gold ? 'btn-gold' : 'btn-dark')} href={p.href}>
+                    {p.cta}
+                  </a>
+                ) : (
+                  <Link className={'btn ' + (p.gold ? 'btn-gold' : 'btn-dark')} to={p.to}>
+                    {p.cta}
+                  </Link>
+                )}
               </div>
             ))}
           </div>

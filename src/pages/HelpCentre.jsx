@@ -3,6 +3,7 @@
 // <Link> to canonical routes.
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import { LOGIN_URL } from '../lib/links';
 
 const linkStyle = { fontWeight: 700, color: 'var(--ink)' };
 
@@ -114,9 +115,9 @@ export default function HelpCentre() {
               <h3>Still need help?</h3>
               <p>
                 Live chat is available 24/7 after you{' '}
-                <Link to="/login" style={linkStyle}>
+                <a href={LOGIN_URL} style={linkStyle}>
                   log in
-                </Link>
+                </a>
                 , or send a message via{' '}
                 <Link to="/contact" style={linkStyle}>
                   Contact Us

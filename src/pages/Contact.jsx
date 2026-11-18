@@ -7,6 +7,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import { LOGIN_URL } from '../lib/links';
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
@@ -76,9 +77,9 @@ export default function Contact() {
                 <p>
                   Available 24/7 from any page - look for the chat button in your client area after
                   you{' '}
-                  <Link to="/login" style={{ fontWeight: 700, color: 'var(--ink)' }}>
+                  <a href={LOGIN_URL} style={{ fontWeight: 700, color: 'var(--ink)' }}>
                     log in
-                  </Link>
+                  </a>
                   .
                 </p>
               </div>

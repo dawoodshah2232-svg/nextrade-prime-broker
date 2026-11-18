@@ -6,6 +6,7 @@
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import { ACCOUNTS, ACCOUNT_NOTE } from '../lib/accounts';
+import { REGISTER_URL } from '../lib/links';
 
 const ROWS = [
   { label: 'Spreads', get: (a) => <b>{a.spread}</b> },
@@ -54,9 +55,9 @@ export default function Accounts() {
                     <span>{a.swap}</span>
                   </li>
                 </ul>
-                <Link className="btn btn-gold btn-sm" to="/signup">
+                <a className="btn btn-gold btn-sm" href={REGISTER_URL}>
                   Open {a.name}
-                </Link>
+                </a>
               </div>
             ))}
           </div>
@@ -110,9 +111,9 @@ export default function Accounts() {
               Registration takes about two minutes. Deposit from $100, get a 30% first-deposit
               bonus, and trade on MT5.
             </p>
-            <Link className="btn btn-gold" to="/signup">
+            <a className="btn btn-gold" href={REGISTER_URL}>
               Open an Account
-            </Link>
+            </a>
           </div>
         </div>
       </section>

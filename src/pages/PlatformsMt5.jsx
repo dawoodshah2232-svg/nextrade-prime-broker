@@ -4,6 +4,7 @@
 // asset URLs (verified by diff - body copy is identical).
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import { REGISTER_URL } from '../lib/links';
 
 // Green check mark from the old site's check-list items (verbatim SVG).
 function Check() {
@@ -116,9 +117,9 @@ export default function PlatformsMt5() {
             </div>
           </div>
           <p style={{ marginTop: '28px' }}>
-            <Link className="btn btn-gold" to="/signup">
+            <a className="btn btn-gold" href={REGISTER_URL}>
               Open an MT5 Account
-            </Link>
+            </a>
             &nbsp;&nbsp;
             <Link className="btn btn-ghost" to="/demo-account">
               Try MT5 on Demo

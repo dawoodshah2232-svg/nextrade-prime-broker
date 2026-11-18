@@ -10,6 +10,7 @@
 // Unsplash URL, copied verbatim.
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import { REGISTER_URL } from '../lib/links';
 
 export default function About() {
   return (
@@ -141,9 +142,9 @@ export default function About() {
               Talk to us →
             </Link>{' '}
             &nbsp;·&nbsp; Ready to start?{' '}
-            <Link to="/signup" style={{ fontWeight: 700, color: 'var(--ink)' }}>
+            <a href={REGISTER_URL} style={{ fontWeight: 700, color: 'var(--ink)' }}>
               Open an account →
-            </Link>
+            </a>
           </p>
         </div>
       </section>
