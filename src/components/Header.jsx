@@ -20,7 +20,7 @@
 // Get Started). Logged in, they are the dashboard.html original
 // ("Hi, <name>" + Log Out) - the old dashboard was the only page with that
 // variant; in the SPA it follows the login state on every page.
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { asset } from "../lib/asset";
 import { getUser, logout } from "../lib/auth";
@@ -290,23 +290,31 @@ export default function Header() {
     };
   }, [suppressMenus]);
 
-  // Home page: the header floats transparent over the dark video hero
-  // (light logo + light nav) and turns solid white once the page scrolls.
+  // Any page that opens with a dark hero band (home video hero or the
+  // inner-page .page-hero): the header floats transparent over it (light
+  // logo + light nav) and turns solid white once the page scrolls. Pages
+  // without one (login, signup, dashboard) keep the white header.
+  // Detected from the DOM after the route renders, so new pages just work.
   // body.header-overlay lets the hero slide up underneath the sticky bar.
-  const isHome = location.pathname === "/";
+  const [hasHero, setHasHero] = useState(false);
+  useLayoutEffect(() => {
+    const first = document.querySelector("main section");
+    const dark =
+      !!first &&
+      (first.classList.contains("hero") || first.classList.contains("page-hero"));
+    setHasHero(dark);
+    document.body.classList.toggle("header-overlay", dark);
+    return () => document.body.classList.remove("header-overlay");
+  }, [location.pathname]);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    if (!isHome) return;
+    if (!hasHero) return;
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome]);
-  useEffect(() => {
-    document.body.classList.toggle("header-overlay", isHome);
-    return () => document.body.classList.remove("header-overlay");
-  }, [isHome]);
-  const overlay = isHome && !scrolled && !mobileOpen;
+  }, [hasHero]);
+  const overlay = hasHero && !scrolled && !mobileOpen;
 
   // Off-canvas drawer: lock page scroll while it is open.
   useEffect(() => {
@@ -350,7 +358,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={"site-header" + (isHome ? " is-overlay" : "") + (overlay ? " on-hero" : "")}
+        className={"site-header" + (hasHero ? " is-overlay" : "") + (overlay ? " on-hero" : "")}
       >
         <div className="container header-inner">
           <Link className="brand" to="/" aria-label="NexTrade Prime - home">

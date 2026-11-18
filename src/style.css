@@ -5243,14 +5243,19 @@ body.drawer-open { overflow: hidden; }
 .site-header.on-hero .header-actions .login-link:hover {
   color: #e8c766;
 }
+/* Get Started on the dark hero: gold by default, white only on hover. */
 .site-header.on-hero .header-actions .btn-dark {
+  background: #e8c766;
+  color: #0a1633;
+  box-shadow: 0 8px 22px rgba(201, 162, 39, 0.3);
+}
+.site-header.on-hero .header-actions .btn-dark:hover {
   background: #fff;
   color: #0a1633;
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
 }
-.site-header.on-hero .header-actions .btn-dark:hover {
-  background: #e8c766;
-  color: #0a1633;
+.site-header.on-hero .header-actions .btn-dark .m-ico svg {
+  stroke: #0a1633;
 }
 .site-header.on-hero .menu-toggle {
   background: rgba(255, 255, 255, 0.08);
@@ -5275,6 +5280,21 @@ body.header-overlay .hero.hero-video {
 @media (max-width: 760px) {
   body.header-overlay .hero.hero-video {
     padding-top: calc(40px + 69px);
+  }
+}
+/* Inner pages: the dark .page-hero band slides up under the transparent
+   header too. A transparent top border (the band's background paints
+   under it) adds the header's height without touching each hero
+   variant's own padding. */
+body.header-overlay .page-hero {
+  margin-top: -77px;
+  border-top: 77px solid transparent;
+  background-origin: border-box;
+}
+@media (max-width: 1020px) {
+  body.header-overlay .page-hero {
+    margin-top: -69px;
+    border-top-width: 69px;
   }
 }
 
