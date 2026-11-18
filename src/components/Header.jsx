@@ -26,6 +26,8 @@ import { asset } from "../lib/asset";
 import { LOGIN_URL, REGISTER_URL } from "../lib/links";
 import { MIcon } from "./icons";
 import LanguageSelect from "./LanguageSelect";
+import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "../lib/theme";
 
 const MENUS = [
   {
@@ -313,6 +315,10 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [hasHero]);
   const overlay = hasHero && !scrolled && !mobileOpen;
+  // Light logo on any dark surface: the transparent hero overlay, or the
+  // whole header in the dark theme.
+  const theme = useTheme();
+  const lightLogo = overlay || theme === "dark";
 
   // Off-canvas drawer: lock page scroll while it is open.
   useEffect(() => {
@@ -357,7 +363,7 @@ export default function Header() {
         <div className="container header-inner">
           <Link className="brand" to="/" aria-label="NexTrade Prime - home">
             <img
-              src={asset(overlay ? "logo-light.png" : "logo-dark.png")}
+              src={asset(lightLogo ? "logo-light.png" : "logo-dark.png")}
               alt="NexTrade Prime"
             />
           </Link>
@@ -412,6 +418,7 @@ export default function Header() {
             )}
           </ul>
           <div className="header-actions">
+            <ThemeToggle />
             <a className="login-link" href={LOGIN_URL}>
               <MIcon name="login" />
               Login
@@ -454,7 +461,10 @@ export default function Header() {
       >
         <div className="drawer-head">
           <Link className="brand" to="/" aria-label="NexTrade Prime - home">
-            <img src={asset("logo-dark.png")} alt="NexTrade Prime" />
+            <img
+              src={asset(theme === "dark" ? "logo-light.png" : "logo-dark.png")}
+              alt="NexTrade Prime"
+            />
           </Link>
           <button
             className="drawer-close"
@@ -537,6 +547,10 @@ export default function Header() {
         </nav>
 
         <div className="drawer-foot">
+          <div className="drawer-theme">
+            <span>Theme</span>
+            <ThemeToggle />
+          </div>
           <LanguageSelect variant="drawer" />
           <div className="drawer-ctas">
             <a className="btn drawer-login" href={LOGIN_URL}>

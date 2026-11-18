@@ -10,6 +10,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FaqAccordion from '../components/FaqAccordion';
+import CountUp from '../components/CountUp';
 
 const ECN_COMMISSION_RT = 7; // $3.50 per side x 2 sides, per standard lot
 
@@ -166,16 +167,28 @@ const TOOLS = [
   },
 ];
 
+// Key facts strip under the hero - only verifiable, programme-level facts
+// (no invented partner counts or payout totals).
+const FACTS = [
+  { n: 2, suffix: '', label: 'Income streams on one trade', sub: 'Rebate + commission share' },
+  { n: 24, suffix: 'h', label: 'Max. wire payout time', sub: 'E-wallet & crypto: instant' },
+  { n: 0, prefix: '$', suffix: '', label: 'Fee from us on payouts', sub: 'Same rails as client withdrawals' },
+  { n: 5, suffix: '', label: 'Account types that pay', sub: 'Standard, ECN, PRO, VIP, Islamic' },
+];
+
 const PARTNER_TYPES = [
   {
+    i: 'link',
     t: 'Introducing Broker',
     d: 'You bring traders directly - from your office, community or personal network - and earn on their volume.',
   },
   {
+    i: 'network',
     t: 'Master IB',
     d: 'You recruit and manage sub-IBs. You earn on your own clients plus an override on your network.',
   },
   {
+    i: 'materials',
     t: 'Educators & signal providers',
     d: 'You teach or publish analysis. Your students trade with us and you earn from the volume they trade.',
   },
@@ -415,6 +428,25 @@ export default function Partners() {
         </div>
       </section>
 
+      {/* Key facts */}
+      <section className="ib-facts">
+        <div className="container ib-facts-grid">
+          {FACTS.map((f, i) => (
+            <div key={f.label} className="ib-fact" data-aos="fade-up" data-aos-delay={i * 90}>
+              <b>
+                {f.n === 0 ? (
+                  (f.prefix || '') + '0'
+                ) : (
+                  <CountUp end={f.n} prefix={f.prefix || ''} suffix={f.suffix} duration={1200} />
+                )}
+              </b>
+              <span>{f.label}</span>
+              <small>{f.sub}</small>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Two income streams */}
       <section className="section ib-streams">
         <div className="container">
@@ -495,13 +527,21 @@ export default function Partners() {
       {/* Partner types + tools */}
       <section className="section soft">
         <div className="container ib-types-wrap">
-          <div className="ib-types" data-aos="fade-right">
+          <div className="ib-types">
             <span className="eyebrow">Who it's for</span>
             <h2>One programme, three ways to partner</h2>
-            {PARTNER_TYPES.map((p) => (
-              <div key={p.t} className="ib-type">
-                <h3>{p.t}</h3>
-                <p>{p.d}</p>
+            {PARTNER_TYPES.map((p, i) => (
+              <div
+                key={p.t}
+                className="ib-type"
+                data-aos="fade-right"
+                data-aos-delay={100 + i * 100}
+              >
+                <span className="ib-type-ico">{ICONS[p.i]}</span>
+                <div>
+                  <h3>{p.t}</h3>
+                  <p>{p.d}</p>
+                </div>
               </div>
             ))}
           </div>

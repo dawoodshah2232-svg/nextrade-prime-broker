@@ -4,6 +4,18 @@
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Theme before first paint (dark default; the visitor's choice is
+          saved by the header toggle - see src/lib/theme.js). -->
+     <script>
+          (function () {
+               var t = 'dark';
+               try { t = localStorage.getItem('ntp-theme') || 'dark'; } catch (e) {}
+               if (t !== 'light') t = 'dark';
+               document.documentElement.setAttribute('data-theme', t);
+               document.documentElement.style.colorScheme = t;
+          })();
+     </script>
+     <meta name="theme-color" content="#05070c">
      <title>NexTrade Prime - Trade Forex, Gold, Indices & Crypto on MT5</title>
      <meta name="description"
           content="NexTrade Prime - trade forex, gold, indices, crypto and energies on MetaTrader 5. Spreads from 0.0 pips, leverage up to 1:500, accounts from $10.">
