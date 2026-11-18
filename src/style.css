@@ -5283,12 +5283,17 @@ body.header-overlay .hero.hero-video {
    border), which read as a cut-off card. Now it sits inside the container's
    right edge with all four corners and borders. */
 @media (min-width: 1021px) {
+  /* Panel sits in the right corner of the screen with a small gutter;
+     the copy may use everything up to 48px left of it. */
   .hero.hero-video .hero-copy {
-    max-width: min(660px, calc(min(1180px, 92vw) - 48px - 400px - 48px));
+    max-width: min(
+      660px,
+      calc(100vw - (100vw - min(1180px, 92vw)) / 2 - 24px - var(--lm-w, 400px) - var(--lm-gap, 32px) - 48px)
+    );
   }
   .hero-side {
     top: 77px;
-    right: calc((100vw - min(1180px, 92vw)) / 2 + 24px);
+    right: var(--lm-gap, 32px);
   }
   .hero-side .live-markets {
     width: 400px;
@@ -5309,11 +5314,17 @@ body.header-overlay .hero.hero-video {
     }
   }
 }
-@media (min-width: 1021px) and (max-width: 1180px) {
+@media (min-width: 1021px) {
+  .hero.hero-video {
+    --lm-w: 400px;
+    --lm-gap: clamp(20px, 2.2vw, 40px);
+  }
+}
+@media (min-width: 1021px) and (max-width: 1280px) {
+  .hero.hero-video {
+    --lm-w: 360px;
+  }
   .hero-side .live-markets {
     width: 360px;
-  }
-  .hero.hero-video .hero-copy {
-    max-width: calc(92vw - 48px - 360px - 40px);
   }
 }
