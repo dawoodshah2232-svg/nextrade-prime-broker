@@ -86,8 +86,15 @@ export default function Contact() {
               <div className="card" style={{ marginTop: 16 }}>
                 <h3>Email</h3>
                 <p>
-                  Use the contact form below and our team will reply - for account, payment and
-                  platform questions.
+                  Write to{' '}
+                  <a
+                    href="mailto:info@nextradeprime.com"
+                    style={{ fontWeight: 700, color: 'var(--ink)' }}
+                  >
+                    info@nextradeprime.com
+                  </a>{' '}
+                  or use the contact form - our team will reply about account, payment and platform
+                  questions.
                 </p>
               </div>
               <div className="card" style={{ marginTop: 16 }}>

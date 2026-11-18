@@ -3,7 +3,6 @@
 import { Link } from 'react-router-dom';
 import { asset } from '../lib/asset';
 import { FIcon } from './icons';
-import { useTheme } from '../lib/theme';
 
 const COLUMNS = [
   {
@@ -55,16 +54,19 @@ const COLUMNS = [
 ];
 
 export default function Footer() {
-  const theme = useTheme();
   return (
     <footer className="site-footer">
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <img src={asset(theme === 'dark' ? 'logo-light.png' : 'logo-dark.png')} alt="NexTrade Prime" />
+            <img src={asset('logo-dark.png')} alt="NexTrade Prime" />
             <div className="eyebrow" style={{ marginBottom: 12 }}>
               PAYOUT SPEED ABOVE ALL
             </div>
+            <a className="footer-email" href="mailto:info@nextradeprime.com">
+              <FIcon name="contact" />
+              info@nextradeprime.com
+            </a>
           </div>
           {COLUMNS.map((col) => (
             <div key={col.title}>
