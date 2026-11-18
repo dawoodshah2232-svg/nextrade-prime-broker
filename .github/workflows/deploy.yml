@@ -72,12 +72,20 @@ jobs:
           test -n "$CPANEL_TARGET" || { echo "CPANEL_TARGET secret is missing"; exit 1; }
           # Only the contents of dist/ go live. --delete removes stale build
           # files, but never touches cPanel/SSL folders that live alongside.
-          rsync -az --delete \
-            --exclude '/.well-known/' \
-            --exclude '/cgi-bin/' \
-            --exclude '/.user.ini' \
-            -e "ssh -i ~/.ssh/cpanel_key -p $CPANEL_PORT -o StrictHostKeyChecking=accept-new -o ConnectTimeout=30 -o ServerAliveInterval=15" \
-            dist/ "$CPANEL_USER@$CPANEL_HOST:$CPANEL_TARGET/"
+          # The host drops an SSH connection now and then (exit 255) - retry
+          # a few times before failing the deploy.
+          for i in 1 2 3 4; do
+            if rsync -az --delete \
+              --exclude '/.well-known/' \
+              --exclude '/cgi-bin/' \
+              --exclude '/.user.ini' \
+              -e "ssh -i ~/.ssh/cpanel_key -p $CPANEL_PORT -o StrictHostKeyChecking=accept-new -o ConnectTimeout=30 -o ServerAliveInterval=15" \
+              dist/ "$CPANEL_USER@$CPANEL_HOST:$CPANEL_TARGET/"; then
+              echo "Deployed on attempt $i"; exit 0
+            fi
+            echo "Upload attempt $i failed, retrying in $((i * 15))s"; sleep $((i * 15))
+          done
+          exit 1
 
       - name: Clean up key
         if: always()
