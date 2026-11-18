@@ -290,6 +290,24 @@ export default function Header() {
     };
   }, [suppressMenus]);
 
+  // Home page: the header floats transparent over the dark video hero
+  // (light logo + light nav) and turns solid white once the page scrolls.
+  // body.header-overlay lets the hero slide up underneath the sticky bar.
+  const isHome = location.pathname === "/";
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    if (!isHome) return;
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
+  useEffect(() => {
+    document.body.classList.toggle("header-overlay", isHome);
+    return () => document.body.classList.remove("header-overlay");
+  }, [isHome]);
+  const overlay = isHome && !scrolled && !mobileOpen;
+
   // Off-canvas drawer: lock page scroll while it is open.
   useEffect(() => {
     document.body.classList.toggle("drawer-open", mobileOpen);
@@ -331,10 +349,15 @@ export default function Header() {
 
   return (
     <>
-      <header className="site-header">
+      <header
+        className={"site-header" + (isHome ? " is-overlay" : "") + (overlay ? " on-hero" : "")}
+      >
         <div className="container header-inner">
           <Link className="brand" to="/" aria-label="NexTrade Prime - home">
-            <img src={asset("logo-dark.png")} alt="NexTrade Prime" />
+            <img
+              src={asset(overlay ? "logo-light.png" : "logo-dark.png")}
+              alt="NexTrade Prime"
+            />
           </Link>
           <ul
             className="main-nav"

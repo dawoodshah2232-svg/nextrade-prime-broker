@@ -5214,3 +5214,106 @@ body.drawer-open { overflow: hidden; }
     width: 100%;
   }
 }
+
+/* ---------- Home: transparent header over the video hero ----------
+   Header.jsx adds .is-overlay on "/" and .on-hero until the page scrolls
+   24px; body.header-overlay pulls the hero up underneath the sticky bar so
+   the dark video runs all the way to the top strip. */
+.site-header.is-overlay {
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    backdrop-filter 0.35s ease;
+}
+.site-header.on-hero {
+  background: transparent;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.site-header.on-hero .main-nav > li > a,
+.site-header.on-hero .main-nav > li > button,
+.site-header.on-hero .header-actions .login-link {
+  color: #eef2f9;
+}
+.site-header.on-hero .main-nav > li > a:hover,
+.site-header.on-hero .main-nav > li > button:hover,
+.site-header.on-hero .header-actions .login-link:hover {
+  color: #e8c766;
+}
+.site-header.on-hero .header-actions .btn-dark {
+  background: #fff;
+  color: #0a1633;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+.site-header.on-hero .header-actions .btn-dark:hover {
+  background: #e8c766;
+  color: #0a1633;
+}
+.site-header.on-hero .menu-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: none;
+}
+.site-header.on-hero .menu-toggle span:not(:nth-child(2)) {
+  background: #fff;
+}
+body.header-overlay .hero.hero-video {
+  margin-top: -77px;
+  padding-top: calc(32px + 77px);
+  min-height: max(560px, calc(100svh - 46px));
+}
+@media (max-width: 1020px) {
+  body.header-overlay .hero.hero-video {
+    margin-top: -69px;
+    padding-top: calc(56px + 69px);
+    min-height: 0;
+  }
+}
+@media (max-width: 760px) {
+  body.header-overlay .hero.hero-video {
+    padding-top: calc(40px + 69px);
+  }
+}
+
+/* ---------- Hero live panel: a complete floating card ----------
+   Was docked flush to the screen edge (square right side, no right
+   border), which read as a cut-off card. Now it sits inside the container's
+   right edge with all four corners and borders. */
+@media (min-width: 1021px) {
+  .hero.hero-video .hero-copy {
+    max-width: min(660px, calc(min(1180px, 92vw) - 48px - 400px - 48px));
+  }
+  .hero-side {
+    top: 77px;
+    right: calc((100vw - min(1180px, 92vw)) / 2 + 24px);
+  }
+  .hero-side .live-markets {
+    width: 400px;
+    border-radius: 22px;
+    border-right: 1px solid rgba(201, 162, 39, 0.28);
+  }
+  .hero-side .live-markets::before {
+    border-radius: 22px;
+  }
+  @keyframes lmDockIn {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+@media (min-width: 1021px) and (max-width: 1180px) {
+  .hero-side .live-markets {
+    width: 360px;
+  }
+  .hero.hero-video .hero-copy {
+    max-width: calc(92vw - 48px - 360px - 40px);
+  }
+}
