@@ -63,7 +63,7 @@ export default function PartnersPreview() {
             Partners &amp; IBs
           </span>
           <h2 data-aos="fade-up" data-aos-delay="60">
-            Refer traders. <span className="pp-gold">Earn twice</span> on every lot.
+            Refer traders. <span className="pp-gold">Earn twice.</span>
           </h2>
           <p className="pp-lead" data-aos="fade-up" data-aos-delay="120">
             Our Introducing Broker programme pays a volume rebate on every lot your clients trade,

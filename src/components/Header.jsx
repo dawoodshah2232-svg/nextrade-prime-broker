@@ -188,7 +188,7 @@ const MENUS = [
   },
   {
     id: "partners",
-    label: "Partners",
+    label: "Partnerships",
     icon: "partners",
     to: "/partners",
   },
